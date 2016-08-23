@@ -41,6 +41,10 @@ NOTE:
 Examples
 ========
 
+--------------
+Height Profile
+--------------
+
 .. code-block:: bash
 
     import pyhwm14
@@ -49,6 +53,10 @@ Examples
     
 .. image:: graphics/figure_1.png
     :scale: 100 %
+
+----------------------
+Geog. Latitude Profile
+----------------------
 
 .. code-block:: bash
 
@@ -59,6 +67,10 @@ Examples
 .. image:: graphics/figure_2.png
     :scale: 100 %
 
+------------------
+Local Time Profile
+------------------
+
 .. code-block:: bash
 
     import pyhwm14
@@ -67,6 +79,10 @@ Examples
 
 .. image:: graphics/figure_3.png
     :scale: 100 %
+
+-----------------------
+Geog. Longitude Profile
+-----------------------
 
 .. code-block:: bash
 
