@@ -11,7 +11,7 @@ Wrapping Fortran code
 1. The first step is to ask 'f2py' to write the signature of the routine (hwm14.f90) to 
 a description file
 
-    $ f2py hwm14.f90 -m hwm14 -h hwm14.pyf
+    > f2py hwm14.f90 -m hwm14 -h hwm14.pyf
     
 The '-m' flag gives the name the python module should have (hwm14). The '-h' flag tells 
 'f2py' in which file should write the signature (see file 'hwm14.pyf').
