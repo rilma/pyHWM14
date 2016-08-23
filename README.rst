@@ -50,6 +50,12 @@ Examples
 .. image:: graphics/figure_3.png
     :scale: 100 %
 
+.. code-block:: bash
+
+    import pyhwm14
+    hwm14Obj = pyhwm14.HWM14( altlim=[0, 200], altstp=5., glat=-12., glon=283.13, option=4, verbose=False )
+    hwm14Gbj = pyhwm14.HWM14Plot( profObj=hwm14Obj )
+
 .. image:: graphics/figure_4.png
     :scale: 100 %
 
