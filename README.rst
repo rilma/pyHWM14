@@ -1,5 +1,5 @@
 ======
-HWM 14
+pyHWM14
 ======
 Python interface for the Horizontal Wind Model version 14
 
