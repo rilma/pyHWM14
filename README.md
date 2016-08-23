@@ -1,2 +1,0 @@
-# HWM
-HWM Python interface
