@@ -31,8 +31,7 @@ in your path and use it. So all to be typed is
 'f2py' will write the wrapper files, compile hwm14.f90 and the wrapper files, and link them 
 in a shared object. After this step, one can start Python and load the extension module.
 
-NOTE:
-- To specify a Fortran compiler type by vendor, e.g. ifort (Intel Fortran compiler):
+NOTE: To specify a Fortran compiler type by vendor, e.g. ifort (Intel Fortran compiler):
 
 .. code-block:: bash
 
