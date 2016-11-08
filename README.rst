@@ -34,6 +34,7 @@ You can also list the values on screen as follows
 
     >>> from pyhwm2014.pyhwm14 import HWM14
     >>> hwm14Obj = HWM14( option=1, verbose=True )
+    
     HEIGHT PROFILE
                      quiet         disturbed             total
      alt      mer      zon      mer      zon      mer      zon
