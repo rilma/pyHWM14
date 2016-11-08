@@ -1,7 +1,7 @@
 ======
 pyHWM14
 ======
-Python interface for the Horizontal Wind Model version 14
+Python interface for the Horizontal Wind Model version 2014 (HWM14)
 
 .. contents::
 
@@ -21,9 +21,9 @@ Height Profile
 
 .. code-block:: bash
 
-    >>> import pyhwm14
-    >>> hwm14Obj = pyhwm14.HWM14( option=1, verbose=False )
-    >>> hwm14Gbj = pyhwm14.HWM14Plot( profObj=hwm14Obj )
+    >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
+    >>> hwm14Obj = HWM14( option=1, verbose=False )
+    >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )    
     
 .. image:: graphics/figure_1.png
     :scale: 100 %
@@ -32,8 +32,8 @@ You can also list the values on screen as follows
 
 .. code-block:: bash
 
-    >>> import pyhwm14
-    >>> hwm14Obj = pyhwm14.HWM14( option=1, verbose=True )
+    >>> from pyhwm2014.pyhwm14 import HWM14
+    >>> hwm14Obj = HWM14( option=1, verbose=True )
     HEIGHT PROFILE
                      quiet         disturbed             total
      alt      mer      zon      mer      zon      mer      zon
@@ -60,11 +60,11 @@ Geog. Latitude Profile
 ----------------------
 
 .. code-block:: bash
-
-    import pyhwm14
-    hwm14Obj = pyhwm14.HWM14( option=2, verbose=False )
-    hwm14Gbj = pyhwm14.HWM14Plot( profObj=hwm14Obj )
     
+    >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
+    >>> hwm14Obj = HWM14( option=2, verbose=False )
+    >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
+        
 .. image:: graphics/figure_2.png
     :scale: 100 %
 
@@ -74,9 +74,9 @@ Local Time Profile
 
 .. code-block:: bash
 
-    import pyhwm14
-    hwm14Obj = pyhwm14.HWM14( option=3, verbose=False )
-    hwm14Gbj = pyhwm14.HWM14Plot( profObj=hwm14Obj )
+    >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
+    >>> hwm14Obj = HWM14( option=3, verbose=False )
+    >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 .. image:: graphics/figure_3.png
     :scale: 100 %
@@ -87,9 +87,9 @@ Geog. Longitude Profile
 
 .. code-block:: bash
 
-    import pyhwm14
-    hwm14Obj = pyhwm14.HWM14( option=4, verbose=False )
-    hwm14Gbj = pyhwm14.HWM14Plot( profObj=hwm14Obj )
+    >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
+    >>> hwm14Obj = HWM14( option=4, verbose=False )
+    >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 .. image:: graphics/figure_4.png
     :scale: 100 %
