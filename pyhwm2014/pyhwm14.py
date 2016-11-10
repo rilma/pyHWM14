@@ -1,7 +1,6 @@
 
 from pyhwm2014 import hwm14
 import pylab
-#from scipy import append, arange, ones, tile, transpose, reshape
 from scipy import append, arange, reshape, transpose
 
 
