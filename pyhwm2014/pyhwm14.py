@@ -1,12 +1,15 @@
 
 from pyhwm2014 import hwm14
 import pylab
+#from scipy import append, arange, ones, tile, transpose, reshape
+from scipy import append, arange, reshape, transpose
 
 
 class HWM14:
 
     def __init__( self, alt=None, altlim=[0., 400.], altstp=25., ap=None, day=None, \
-        glat=None, glon=None, option=1, stl=None, ut=None, verbose=True, year=None ):
+        glat=None, glatlim=[-10.,10.], glatstp=2., glon=None, option=1, stl=None, ut=None, \
+        verbose=True, year=None ):
 
         """ Constructor for the Horizontal Wind Model 14
 
@@ -54,6 +57,8 @@ class HWM14:
             self.glon = glon
             if stl is None: stl = -45.
             self.stl = stl
+            self.glatlim = glatlim
+            self.glatstp = glatstp
             iap = 48
         elif option == 3:   # Local Time profile
             iday = 75
@@ -148,7 +153,7 @@ class HWM14:
             print( '                   quiet         disturbed             total' )
             print( '  glat      mer      zon      mer      zon      mer      zon' )
 
-        self.glatbins = range( -90, 90, 10 ) 
+        self.glatbins = arange( self.glatlim[0], self.glatlim[1] + self.glatstp, self.glatstp ) 
 
         for glat in self.glatbins:
 
@@ -338,7 +343,7 @@ class HWM14Plot:
 class HWM142D:
     
     def __init__( self, alt=None, altlim=[0., 400.], altstp=25., ap=None, day=None, 
-        glat=None, glon=None, option=1, stl=None, sltlim=[0., 24.], sltstp=1., 
+        glat=None, glatlim=[-40., 40.], glatstp=5., glon=None, option=1, stl=None, sltlim=[0., 24.], sltstp=1., 
         ut=None, verbose=True, year=None ):    
 
         """
@@ -346,7 +351,7 @@ class HWM142D:
 
         self.option = option
 
-        if option == 1:     # Height profile
+        if option == 1:     # Time vs Height
             iday = 150
             if ut is None: ut = 12.
             if glat is None: glat = -45.
@@ -360,6 +365,20 @@ class HWM142D:
             self.altlim = altlim            
             self.altstp = altstp
             iap = 80
+        elif option == 2:   # Latitude vs Height`
+            iday = 305
+            if ut is None: ut = 18.
+            if alt is None: alt = 250. 
+            self.alt = alt
+            if glon is None: glon = 30.
+            self.glon = glon
+            if stl is None: stl = -45.
+            self.stl = stl
+            self.altlim = altlim
+            self.altstp = altstp
+            self.glatlim = glatlim
+            self.glatstp = glatstp
+            iap = 48            
         else: 
             print( 'Invalid option!' )
             return
@@ -381,7 +400,7 @@ class HWM142D:
         self.Vwind = []
 
         if not 'alt' in self.__dict__.keys(): self.HeiVsLTArray()
-        #elif not 'glat' in self.__dict__.keys(): self.LatProfile()
+        elif not 'glat' in self.__dict__.keys(): self.LatProfile()
         #elif not 'stl' in self.__dict__.keys(): self.LTProfile()
         #elif not 'glon' in self.__dict__.keys(): self.LonProfile()
         else: print( '' )
@@ -413,6 +432,29 @@ class HWM142D:
             self.Vwind = Vwind if slt == self.sltlim[ 0 ] else pylab.append( self.Vwind, Vwind, axis=1 )
 
         self.altbins = hwm14Obj.altbins
+
+
+    def LatProfile(self):
+
+        """        """
+
+        self.altbins = arange(self.altlim[0], self.altlim[1] + self.altstp, self.altstp)
+
+        for _alt in self.altbins:
+
+            hwm14Obj = HWM14( alt=_alt, ap=None, glatlim=self.glatlim, glatstp=self.glatstp, 
+                glon=self.glon, option=self.option, verbose=self.verbose )
+
+            Uwind = reshape( hwm14Obj.Uwind, ( len( hwm14Obj.Uwind ), 1 ) )
+            Vwind = reshape( hwm14Obj.Vwind, ( len( hwm14Obj.Vwind ), 1 ) )
+            self.Uwind = Uwind if _alt == self.altlim[ 0 ] else append( self.Uwind, Uwind, axis=1 )
+            self.Vwind = Vwind if _alt == self.altlim[ 0 ] else append( self.Vwind, Vwind, axis=1 )
+
+        self.glatbins = hwm14Obj.glatbins
+
+        self.Uwind = transpose(self.Uwind)
+        self.Vwind = transpose(self.Vwind)
+
 #
 # End of 'HWM142D'
 #####
@@ -440,9 +482,12 @@ class HWM142DPlot:
                 self.sltbins = profObj.sltbins
                 self.sltlim = profObj.sltlim
                 self.HeiVsLTPlot()
-            # elif self.option == 2:
-            #     self.glatbins = profObj.glatbins 
-            #     self.LatProfPlot()
+            elif self.option == 2:
+                self.glatbins = profObj.glatbins
+                self.glatlim = profObj.glatlim
+                self.altbins = profObj.altbins
+                self.altlim = profObj.altlim 
+                self.LatVsHeiPlot()
             # elif self.option == 3:
             #     self.ltbins = profObj.ltbins 
             #     self.LTProfPlot()
@@ -503,28 +548,47 @@ class HWM142DPlot:
     # End of 'HeiProfPlot' 
     #####
 
+
+    def LatVsHeiPlot(self):
+
+        fig = pylab.figure( figsize=(15,6) )
+
+        ax = pylab.subplot(121)                
+        cmap = pylab.cm.RdBu_r
+        self.XVsY2DPlot( ax, self.glatbins, self.altbins, self.Uwind, cmap=cmap, title=r'Zonal wind (U)',
+            xlabel=r'Geog. Lat. ($^o$)', xlim=self.glatlim, ylabel=r'(km)', ylim=self.altlim, zlabel=r'm/s', zMax=None, zMin=None )
+                
+        ax = pylab.subplot(122)
+
+        self.XVsY2DPlot( ax, self.glatbins, self.altbins, self.Vwind, cmap=cmap, title=r'Meridional wind (V)',
+            xlabel=r'Geog. Lat. ($^o$)', xlim=self.glatlim, ylabel=r'(km)', ylim=self.altlim, zlabel=r'm/s', zMax=None, zMin=None )
+
+    #
+    # End of 'HeiProfPlot' 
+    #####    
+
 #
 # End of 'HWM14Plot' 
 #####
 
 
-def main():
-
-    """ Example """
-
-    # Generates model data
-    hwm14Obj = HWM14( altlim=[0, 200], altstp=5., glat=-12., glon=283.13, option=4, verbose=False )
-    
-    # Produces simple graphical report
-    hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
-
-#
-# End of 'main'
-#####
-
-
-
 if __name__ == '__main__':
+
+
+    def main():
+
+        """ Example """
+
+        # Generates model data
+        hwm14Obj = HWM14( altlim=[0, 200], altstp=5., glat=-12., glon=283.13, option=4, verbose=False )
+        
+        # Produces simple graphical report
+        hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
+
+    #
+    # End of 'main'
+    #####
+
 
     main()
 
