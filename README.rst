@@ -21,9 +21,11 @@ Height Profile
 
 .. code-block:: bash
 
-    >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
-    >>> hwm14Obj = HWM14( option=1, verbose=False )
-    >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )    
+    >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot    
+    >>> hwm14Obj = HWM14( altlim=[90,200], altstp=1, ap=[-1, 35], day=323,
+            option=1, ut=11.66667, verbose=False, year=1993 )            
+    >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
+    
     
 .. image:: graphics/figure_1.png
     :scale: 100 %
@@ -33,28 +35,25 @@ You can also list the values on screen as follows
 .. code-block:: bash
 
     >>> from pyhwm2014.pyhwm14 import HWM14
-    >>> hwm14Obj = HWM14( option=1, verbose=True )
+    >>> hwm14Obj = HWM14( altlim=[90,200], altstp=10, ap=[-1, 35], day=323,
+            option=1, ut=11.66667, verbose=True, year=1993 )
     
     HEIGHT PROFILE
                      quiet         disturbed             total
      alt      mer      zon      mer      zon      mer      zon
-       0    0.031    6.271    0.000   -0.000    0.031    6.271
-      25    2.965   25.115    0.000   -0.000    2.965   25.115
-      50   -6.627   96.343    0.000   -0.000   -6.627   96.343
-      75    2.238   44.845    0.000   -0.000    2.238   44.845
-     100  -14.339   31.627    0.086   -0.037  -14.253   31.590
-     125   15.125   21.110   22.279   -9.483   37.403   11.628
-     150   -1.683  -14.391   44.472  -18.929   42.789  -33.319
-     175  -24.280  -31.019   44.558  -18.965   20.278  -49.984
-     200  -19.531  -49.623   44.558  -18.965   25.027  -68.588
-     225  -10.261  -61.057   44.558  -18.965   34.297  -80.022
-     250   -4.150  -68.595   44.558  -18.965   40.408  -87.560
-     275   -0.122  -73.564   44.558  -18.965   44.436  -92.530
-     300    2.534  -76.840   44.558  -18.965   47.092  -95.806
-     325    4.285  -79.000   44.558  -18.965   48.843  -97.965
-     350    5.439  -80.424   44.558  -18.965   49.997  -99.389
-     375    6.200  -81.362   44.558  -18.965   50.758 -100.327
-     400    6.702  -81.981   44.558  -18.965   51.259 -100.946
+      90   11.112   28.727   -0.001   -0.000   11.112   28.726
+     100   26.762    6.705   -0.007   -0.006   26.755    6.700
+     110  -40.361    1.468   -0.080   -0.066  -40.442    1.402
+     120  -15.063  -16.198   -0.777   -0.640  -15.840  -16.838
+     130    5.352  -28.597   -2.713   -2.233    2.639  -30.829
+     140   -7.310  -28.295   -3.410   -2.806  -10.720  -31.101
+     150  -23.281  -26.597   -3.484   -2.867  -26.765  -29.464
+     160  -34.557  -20.983   -3.490   -2.872  -38.047  -23.855
+     170  -40.041  -13.405   -3.491   -2.872  -43.531  -16.277
+     180  -37.589  -12.893   -3.491   -2.872  -41.080  -15.765
+     190  -29.611  -18.405   -3.491   -2.872  -33.102  -21.278
+     200  -19.680  -26.278   -3.491   -2.872  -23.171  -29.150
+
 
 ----------------------
 Geog. Latitude Profile
@@ -63,21 +62,25 @@ Geog. Latitude Profile
 .. code-block:: bash
     
     >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
-    >>> hwm14Obj = HWM14( option=2, verbose=False )
+    >>> hwm14Obj = HWM14( alt=130., ap=[-1, 35], day=323, glatlim=[-90.,90.],
+            glatstp=1., option=2, ut=11.66667, verbose=False, year=1993 )            
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
+    
         
 .. image:: graphics/figure_2.png
     :scale: 100 %
 
 ------------------
-Local Time Profile
+GMT Profile
 ------------------
 
 .. code-block:: bash
 
     >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
-    >>> hwm14Obj = HWM14( option=3, verbose=False )
+    >>> hwm14Obj = HWM14( alt=130., ap=[-1, 35], day=323,
+            option=3, utlim=[0., 23.45], utstp=.25, verbose=False, year=1993 )            
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
+    
 
 .. image:: graphics/figure_3.png
     :scale: 100 %
@@ -89,8 +92,10 @@ Geog. Longitude Profile
 .. code-block:: bash
 
     >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
-    >>> hwm14Obj = HWM14( option=4, verbose=False )
+    >>> hwm14Obj = HWM14( alt=130., ap=[-1, 35], day=323, glonlim=[-180., 180.], glonstp=2.,
+            option=4, verbose=False, year=1993 )            
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
+
 
 .. image:: graphics/figure_4.png
     :scale: 100 %
