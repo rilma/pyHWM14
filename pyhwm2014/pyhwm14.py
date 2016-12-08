@@ -641,7 +641,7 @@ class HWM142D:
 
 class HWM142DPlot:
 
-    def __init__( self, profObj=None ):
+    def __init__( self, profObj=None, zMax=[None]*2, zMin=[None]*2 ):
 
         """
             Constructor of class resposible of graphical reports for the
@@ -650,6 +650,8 @@ class HWM142DPlot:
         """
 
         if profObj != None:
+
+            self.zMin, self.zMax = zMin, zMax            
 
             self.option = profObj.option
 
@@ -724,7 +726,7 @@ class HWM142DPlot:
         apStr = 'ap: {:3d}'.format(self.ap[1])
         
         try:
-            altStr = 'ALT: {:7.2f}'.format(self.alt)
+            altStr = 'ALT: {:7.2f} km'.format(self.alt)
         except:
             pass
 
@@ -827,13 +829,13 @@ class HWM142DPlot:
 
         self.XVsY2DPlot( ax, self.utbins, self.altbins, self.Uwind, cmap=cmap,
             title=self.title, xlabel=r'Hour (GMT)', xlim=self.utlim, ylabel=r'Altitude (km)',
-            ylim=self.altlim, zlabel=r'Zonal (U), m/s', zMax=None, zMin=None )
+            ylim=self.altlim, zlabel=r'Zonal (U), m/s', zMax=self.zMax[0], zMin=self.zMin[0] )
 
         ax = pylab.subplot(122)
 
         self.XVsY2DPlot( ax, self.utbins, self.altbins, self.Vwind, cmap=cmap,
             title=self.title, xlabel=r'Hour (GMT)', xlim=self.utlim, ylabel=r'Altitude (km)',
-            ylim=self.altlim, zlabel=r'Meridional (V), m/s', zMax=None, zMin=None )
+            ylim=self.altlim, zlabel=r'Meridional (V), m/s', zMax=self.zMax[1], zMin=self.zMin[1] )
 
     #
     # End of 'HeiProfPlot'
@@ -852,14 +854,14 @@ class HWM142DPlot:
         self.XVsY2DPlot( ax, self.glatbins, self.altbins, self.Uwind, cmap=cmap, 
             title=self.title, xlabel=r'Geog. Lat. ($^o$)', xlim=self.glatlim, 
             ylabel=r'Altitude (km)', ylim=self.altlim, zlabel=r'Zonal (U), m/s', 
-            zMax=None, zMin=None )
+            zMax=self.zMax[0], zMin=self.zMin[0] )
 
         ax = pylab.subplot(122)
 
         self.XVsY2DPlot( ax, self.glatbins, self.altbins, self.Vwind, cmap=cmap, 
             title=self.title, xlabel=r'Geog. Lat. ($^o$)', 
             xlim=self.glatlim, ylabel=r'Altitude (km)', ylim=self.altlim, 
-            zlabel=r'Meridional (V), m/s', zMax=None, zMin=None )
+            zlabel=r'Meridional (V), m/s', zMax=self.zMax[1], zMin=self.zMin[1] )
 
     #
     # End of 'LatVsHeiPlot'
@@ -878,14 +880,14 @@ class HWM142DPlot:
         self.XVsY2DPlot( ax, self.glonbins, self.altbins, self.Uwind, cmap=cmap, 
             title=self.title, xlabel=r'Geog. Lon. ($^o$)', xlim=self.glonlim, 
             ylabel=r'Altitude (km)', ylim=self.altlim, zlabel=r'Zonal (U), m/s', 
-            zMax=None, zMin=None )
+            zMax=self.zMax[0], zMin=self.zMin[0] )
 
         ax = pylab.subplot(122)
 
         self.XVsY2DPlot( ax, self.glonbins, self.altbins, self.Vwind, cmap=cmap, 
             title=self.title, xlabel=r'Geog. Lon. ($^o$)', 
             xlim=self.glonlim, ylabel=r'Altitude (km)', ylim=self.altlim, 
-            zlabel=r'Meridional (V), m/s', zMax=None, zMin=None )
+            zlabel=r'Meridional (V), m/s', zMax=self.zMax[1], zMin=self.zMin[1] )
 
     #
     # End of 'LonVsHeiPlot'
@@ -904,14 +906,14 @@ class HWM142DPlot:
         self.XVsY2DMap( ax, self.glonbins, self.glatbins, self.Uwind, cmap=cmap, 
             title=self.title, xlabel=r'Geog. Lon. ($^o$)', xlim=self.glonlim, 
             ylabel=r'Geog. Lat. ($^o$)', ylim=self.glatlim, zlabel=r'Zonal (U), m/s', 
-            zMax=None, zMin=None )
+            zMax=self.zMax[0], zMin=self.zMin[0] )
 
         ax = pylab.subplot(212)
 
         self.XVsY2DMap( ax, self.glonbins, self.glatbins, self.Vwind, cmap=cmap, 
             title=self.title, xlabel=r'Geog. Lon. ($^o$)', 
             xlim=self.glonlim, ylabel=r'Geog. Lat. ($^o$)', ylim=self.glatlim, 
-            zlabel=r'Meridional (V), m/s', zMax=None, zMin=None )
+            zlabel=r'Meridional (V), m/s', zMax=self.zMax[1], zMin=self.zMin[1] )
 
     #
     # End of 'LonVsLatPlot'

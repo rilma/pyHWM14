@@ -10,7 +10,7 @@ if __name__ == '__main__':
             utlim=[0.,23.75], utstp=.25, verbose=False )
 
         # Height vs GMT plot
-        hwm14Gbj = HWM142DPlot( profObj=hwm14Obj )
+        hwm14Gbj = HWM142DPlot( profObj=hwm14Obj, zMin=[-75., -100], zMax=[75., 100.] )
 
 
     example11()

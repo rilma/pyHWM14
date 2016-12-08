@@ -10,6 +10,6 @@ if __name__ == '__main__':
             glonlim=[-90., 90.], glonstp=2., option=4, ut=12., verbose=False )
 
         # Longitude vs Height plot
-        hwm14Gbj = HWM142DPlot( profObj=hwm14Obj )
+        hwm14Gbj = HWM142DPlot( profObj=hwm14Obj, zMin=[-100., -100], zMax=[100., 100.] )
 
     example14()

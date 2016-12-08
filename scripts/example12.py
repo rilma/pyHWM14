@@ -10,7 +10,7 @@ if __name__ == '__main__':
             glatlim=[-90., 90.], glatstp=2., option=2, verbose=False, ut=12. )
 
         # Latitude vs Height plot
-        hwm14Gbj = HWM142DPlot( profObj=hwm14Obj )
+        hwm14Gbj = HWM142DPlot( profObj=hwm14Obj, zMin=[-250., -100], zMax=[250., 100.] )
 
 
     example12()

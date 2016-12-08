@@ -109,7 +109,7 @@ Height vs GMT
     >>> from pyhwm2014.pyhwm14 import HWM142D, HWM142DPlot
     >>> hwm14Obj = HWM142D(altlim=[90,200], altstp=2, ap=[-1, 35], 
             option=1, utlim=[0.,23.75], utstp=.25, verbose=False)
-    >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj)
+    >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-75., -100], zMax=[75., 100.])
 
 .. image:: graphics/figure_11.png
     :scale: 100 %
@@ -123,7 +123,7 @@ Height vs Geog. Latitude
     >>> from pyhwm2014.pyhwm14 import HWM142D, HWM142DPlot
     >>> hwm14Obj = HWM142D(altlim=[90., 200.], altstp=2., ap=[-1, 35], 
             glatlim=[-90., 90.], glatstp=2., option=2, verbose=False, ut=12.)            
-    >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj)
+    >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-250., -100], zMax=[250., 100.])
 
 .. image:: graphics/figure_12.png
     :scale: 100 %
@@ -137,7 +137,7 @@ Height vs Geog. Longitude
     >>> from pyhwm2014.pyhwm14 import HWM142D, HWM142DPlot
     >>> hwm14Obj = HWM142D(altlim=[90., 200.], altstp=1., ap=[-1, 35], 
             glonlim=[-90., 90.], glonstp=2., option=4, ut=12., verbose=False)            
-    >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj)
+    >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-100., -100], zMax=[100., 100.])
 
 .. image:: graphics/figure_14.png
     :scale: 100 %
@@ -151,7 +151,7 @@ Geog. Latitude vs Geog. Longitude
     >>> from pyhwm2014.pyhwm14 import HWM142D, HWM142DPlot
     >>> hwm14Obj = HWM142D(alt=130., ap=[-1, 35], glatlim=[-90., 90.], 
             glatstp=1., glonlim=[-180., 180.], glonstp=2., option=6, verbose=False)
-    >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj)
+    >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-150., -150], zMax=[150., 150.])
 
 .. image:: graphics/figure_16.png
     :scale: 100 %

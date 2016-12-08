@@ -10,6 +10,6 @@ if __name__ == '__main__':
             glonlim=[-180., 180.], glonstp=2., option=6, verbose=False)
 
         # Latitude vs Longitude plot
-        hwm14Gbj = HWM142DPlot( profObj=hwm14Obj )
+        hwm14Gbj = HWM142DPlot( profObj=hwm14Obj, zMin=[-150., -150], zMax=[150., 150.] )
 
     example16()
