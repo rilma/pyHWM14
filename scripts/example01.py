@@ -9,7 +9,7 @@ if __name__ == '__main__':
             option=1, ut=11.66667, verbose=True, year=1993 )
             
         # Height profile plot
-        #hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
+        hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 
     example01()

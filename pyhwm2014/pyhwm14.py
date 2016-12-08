@@ -1,8 +1,9 @@
 
-import seaborn
+from mpl_toolkits.basemap import Basemap
 from pyhwm2014 import hwm14
 import pylab
-from scipy import append, arange, floor, ones, reshape, tile, transpose
+import seaborn
+from scipy import append, arange, ceil, floor, meshgrid, ones, reshape, tile, transpose
 
 
 class HWM14:
@@ -46,7 +47,6 @@ class HWM14:
         self.option = option
         self.year, self.doy = year, day
 
-
         if option == 1:     # Height profile
             self.glat = glat
             self.glon = glon
@@ -59,7 +59,7 @@ class HWM14:
             self.stl = stl
             self.glatlim = glatlim
             self.glatstp = glatstp
-        elif option == 3:   # Local Time profile
+        elif option == 3:   # GMT profile
             self.alt = alt
             self.glat = glat
             self.glon = glon
@@ -180,6 +180,10 @@ class HWM14:
                 
         for ut in self.utbins:
         
+            if False:
+                self.toMLT(ut)
+                print(self.mlt)
+
             sec = ut * 3600
 
             wqt = hwm14.hwm14( self.iyd, sec, self.alt, self.glat, self.glon, -1, \
@@ -229,6 +233,18 @@ class HWM14:
 
     #
     # End of 'LonProfile'
+    #####
+
+    def toMLT(self, ut):
+
+        """ Magnetic Local Time """
+
+        hwm14.inithwm()
+        mlat, mlon, f1e, f1n, f2e, f2n = hwm14.gd2qd(self.glat, self.glon)
+        self.mlt = hwm14.mltcalc(mlat, mlon, self.doy, ut)
+
+    #
+    # End of 'toMLT' 
     #####
 
 #
@@ -742,6 +758,40 @@ class HWM142DPlot:
     # End of 'GetTitle'
     #####
 
+    def XVsY2DMap(self, ax, xVal, yVal, zVal, cmap=None, title=None, xlabel=None, 
+        xlim=None, ylabel=None, ylim=None, zlabel=None, zMax=None, zMin=None):
+
+        m = Basemap(llcrnrlon=self.glonlim[0], llcrnrlat=self.glatlim[0],
+            urcrnrlon=self.glonlim[-1], urcrnrlat=self.glatlim[-1], resolution='l')
+
+        m.drawcoastlines()            
+            
+        # Lines at constant "latitude"
+        parallelsLim = self._RoundLim([yVal[0], yVal[-1]])
+        m.drawparallels(arange(parallelsLim[0], parallelsLim[1], 20.), labels=[True,False,False,True])
+
+        # Lines at constant "longitude"
+        meridiansLim = self._RoundLim([xVal[0], xVal[-1]])
+        m.drawmeridians(arange(meridiansLim[0], meridiansLim[1], 30.), labels=[True,False,False,True])            
+
+        X, Y = meshgrid(xVal, yVal)            
+        ipc = m.pcolor(X, Y, transpose(zVal), cmap=cmap, edgecolors='None', 
+            norm=pylab.Normalize(), vmax=zMax, vmin=zMin)
+        # m.contour(X, Y, transpose(self.data2D['dip']), colors='k', linestyles='--')
+
+        ax.set_xlim( xlim )
+        ax.set_ylim( ylim )
+        ax.set_title( title )
+        # ax.set_xlabel( xlabel )
+        # ax.set_ylabel( ylabel )
+        
+        cbpn = m.colorbar(ipc)
+        cbpn.set_label(zlabel)
+        
+    #
+    # End of 'XVsY2DMap' 
+    #####
+
     def XVsY2DPlot( self, ax, xVal, yVal, zVal, cmap=None, title=None,
         xlabel=None, xlim=None, ylabel=None, ylim=None, zlabel=None, zMax=None, zMin=None ):
 
@@ -764,7 +814,6 @@ class HWM142DPlot:
     #
     # End of 'XVsY2DPlot'
     #####
-
 
     def HeiVsLTPlot( self ):
 
@@ -848,18 +897,18 @@ class HWM142DPlot:
 
         cmap = pylab.cm.RdBu_r
 
-        fig = pylab.figure( figsize=(15,6) )
+        fig = pylab.figure( figsize=(8,8) )
 
-        ax = pylab.subplot(121)
-
-        self.XVsY2DPlot( ax, self.glonbins, self.glatbins, self.Uwind, cmap=cmap, 
+        ax = pylab.subplot(211)
+        # XVsY2DMap or XVsY2DPlot
+        self.XVsY2DMap( ax, self.glonbins, self.glatbins, self.Uwind, cmap=cmap, 
             title=self.title, xlabel=r'Geog. Lon. ($^o$)', xlim=self.glonlim, 
             ylabel=r'Geog. Lat. ($^o$)', ylim=self.glatlim, zlabel=r'Zonal (U), m/s', 
             zMax=None, zMin=None )
 
-        ax = pylab.subplot(122)
+        ax = pylab.subplot(212)
 
-        self.XVsY2DPlot( ax, self.glonbins, self.glatbins, self.Vwind, cmap=cmap, 
+        self.XVsY2DMap( ax, self.glonbins, self.glatbins, self.Vwind, cmap=cmap, 
             title=self.title, xlabel=r'Geog. Lon. ($^o$)', 
             xlim=self.glonlim, ylabel=r'Geog. Lat. ($^o$)', ylim=self.glatlim, 
             zlabel=r'Meridional (V), m/s', zMax=None, zMin=None )
@@ -867,6 +916,10 @@ class HWM142DPlot:
     #
     # End of 'LonVsLatPlot'
     #####
+
+    def _RoundLim(self, lim):
+
+        return list(map(lambda x : x * 10., [floor(lim[0] / 10.), ceil(lim[1] / 10.)]))    
     
 #
 # End of 'HWM14Plot'
