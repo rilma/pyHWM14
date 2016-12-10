@@ -2,6 +2,7 @@
 from mpl_toolkits.basemap import Basemap
 from pyhwm2014 import hwm14
 import pylab
+from matplotlib.pyplot import cm
 import seaborn
 from scipy import append, arange, ceil, floor, meshgrid, ones, reshape, tile, transpose
 
@@ -177,12 +178,13 @@ class HWM14:
             print( '   stl      mer      zon      mer      zon      mer      zon' )
 
         self.utbins = arange(self.utlim[0], self.utlim[1] + self.utstp, self.utstp)
+        self.mltbins = []
                 
         for ut in self.utbins:
         
-            if False:
+            if True:
                 self.toMLT(ut)
-                print(self.mlt)
+                self.mltbins.append(self.mlt)
 
             sec = ut * 3600
 
@@ -641,7 +643,7 @@ class HWM142D:
 
 class HWM142DPlot:
 
-    def __init__( self, profObj=None, zMax=[None]*2, zMin=[None]*2 ):
+    def __init__( self, profObj=None, WF=False, zMax=[None]*2, zMin=[None]*2 ):
 
         """
             Constructor of class resposible of graphical reports for the
@@ -651,7 +653,8 @@ class HWM142DPlot:
 
         if profObj != None:
 
-            self.zMin, self.zMax = zMin, zMax            
+            self.zMin, self.zMax = zMin, zMax  
+            self.WF = WF          
 
             self.option = profObj.option
 
@@ -760,6 +763,42 @@ class HWM142DPlot:
     # End of 'GetTitle'
     #####
 
+    def XVsY2DWindMap(self, ax, xVal, yVal, uVal, vVal, title=None, xlabel=None, 
+        xlim=None, ylabel=None, ylim=None, zlabel=None, zMax=None, zMin=None):
+
+        m = Basemap(llcrnrlon=self.glonlim[0], llcrnrlat=self.glatlim[0],
+            urcrnrlon=self.glonlim[-1], urcrnrlat=self.glatlim[-1], resolution='l')
+
+        m.drawcoastlines()            
+            
+        # Lines at constant "latitude"
+        parallelsLim = self._RoundLim([yVal[0], yVal[-1]])
+        m.drawparallels(arange(parallelsLim[0], parallelsLim[1], 20.), labels=[True,False,False,True])
+
+        # Lines at constant "longitude"
+        meridiansLim = self._RoundLim([xVal[0], xVal[-1]])
+        m.drawmeridians(arange(meridiansLim[0], meridiansLim[1], 30.), labels=[True,False,False,True])            
+
+        X, Y = meshgrid(xVal, yVal)
+        totalWind = (uVal**2 + vVal**2)**.5
+
+        ipc = m.quiver(X, Y, transpose(uVal), transpose(vVal), transpose(totalWind), \
+            alpha=.5, angles='uv', cmap=cm.jet, pivot='middle', units='xy')
+        ipc2 = m.quiver(X, Y, transpose(uVal), transpose(vVal), \
+            angles='uv', edgecolor='k', facecolor='None', linewidth=.5, pivot='middle', \
+            units='xy')
+
+        ax.set_xlim( xlim )
+        ax.set_ylim( ylim )
+        ax.set_title( title )
+        
+        cbpn = m.colorbar(ipc)
+        cbpn.set_label(zlabel)
+        
+    #
+    # End of 'XVsY2DMap' 
+    #####
+
     def XVsY2DMap(self, ax, xVal, yVal, zVal, cmap=None, title=None, xlabel=None, 
         xlim=None, ylabel=None, ylim=None, zlabel=None, zMax=None, zMin=None):
 
@@ -821,7 +860,7 @@ class HWM142DPlot:
 
         self.GetTitle()
 
-        cmap = pylab.cm.RdBu_r
+        cmap = cm.RdBu_r
 
         fig = pylab.figure( figsize=(15,6) )
 
@@ -845,7 +884,7 @@ class HWM142DPlot:
 
         self.GetTitle()
 
-        cmap = pylab.cm.RdBu_r
+        cmap = cm.RdBu_r
 
         fig = pylab.figure( figsize=(15,6) )
 
@@ -871,7 +910,7 @@ class HWM142DPlot:
 
         self.GetTitle()
 
-        cmap = pylab.cm.RdBu_r
+        cmap = cm.RdBu_r
 
         fig = pylab.figure( figsize=(15,6) )
 
@@ -897,23 +936,36 @@ class HWM142DPlot:
 
         self.GetTitle()
 
-        cmap = pylab.cm.RdBu_r
+        if not self.WF:
 
-        fig = pylab.figure( figsize=(8,8) )
+            cmap = cm.RdBu_r
 
-        ax = pylab.subplot(211)
-        # XVsY2DMap or XVsY2DPlot
-        self.XVsY2DMap( ax, self.glonbins, self.glatbins, self.Uwind, cmap=cmap, 
-            title=self.title, xlabel=r'Geog. Lon. ($^o$)', xlim=self.glonlim, 
-            ylabel=r'Geog. Lat. ($^o$)', ylim=self.glatlim, zlabel=r'Zonal (U), m/s', 
-            zMax=self.zMax[0], zMin=self.zMin[0] )
+            fig = pylab.figure( figsize=(8,8) )
 
-        ax = pylab.subplot(212)
+            ax = pylab.subplot(211)
 
-        self.XVsY2DMap( ax, self.glonbins, self.glatbins, self.Vwind, cmap=cmap, 
-            title=self.title, xlabel=r'Geog. Lon. ($^o$)', 
-            xlim=self.glonlim, ylabel=r'Geog. Lat. ($^o$)', ylim=self.glatlim, 
-            zlabel=r'Meridional (V), m/s', zMax=self.zMax[1], zMin=self.zMin[1] )
+            # XVsY2DMap or XVsY2DPlot
+            self.XVsY2DMap( ax, self.glonbins, self.glatbins, self.Uwind, cmap=cmap, 
+                title=self.title, xlabel=r'Geog. Lon. ($^o$)', xlim=self.glonlim, 
+                ylabel=r'Geog. Lat. ($^o$)', ylim=self.glatlim, zlabel=r'Zonal (U), m/s', 
+                zMax=self.zMax[0], zMin=self.zMin[0] )
+
+            ax = pylab.subplot(212)
+
+            self.XVsY2DMap( ax, self.glonbins, self.glatbins, self.Vwind, cmap=cmap, 
+                title=self.title, xlabel=r'Geog. Lon. ($^o$)', 
+                xlim=self.glonlim, ylabel=r'Geog. Lat. ($^o$)', ylim=self.glatlim, 
+                zlabel=r'Meridional (V), m/s', zMax=self.zMax[1], zMin=self.zMin[1] )
+
+        else:
+
+            fig = pylab.figure(figsize=(16,12))
+            ax = pylab.subplot(111)
+            self.XVsY2DWindMap(ax, self.glonbins, self.glatbins, self.Uwind, self.Vwind, 
+                title=self.title, \
+                xlabel=r'Geog. Lon. ($^o$)', xlim=self.glonlim, \
+                ylabel=r'Geog. Lat. ($^o$)', ylim=self.glatlim, \
+                zlabel='Wind (m/s)', zMax=self.zMax[0], zMin=self.zMin[0])
 
     #
     # End of 'LonVsLatPlot'
