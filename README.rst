@@ -156,6 +156,20 @@ Geog. Latitude vs Geog. Longitude
 .. image:: graphics/figure_16.png
     :scale: 100 %
 
+----------------------------------
+Horizontal Wind Field Map 
+----------------------------------
+
+.. code-block:: bash
+
+    >>> from pyhwm2014.pyhwm14 import HWM142D, HWM142DPlot
+    >>> hwm14Obj = HWM142D(alt=400., ap=[-1, 35], glatlim=[-90., 90.], glatstp=10., 
+            glonlim=[-180., 180.], glonstp=20., option=6, verbose=False)
+    >>> hwm14Gbj = HWM142DPlot( profObj=hwm14Obj, WF=True, zMin=[-150., -150], 
+            zMax=[150., 150.] )
+    
+.. image:: graphics/figure_16b.png
+    :scale: 100 %
 
 Wrapping Fortran code
 =====================

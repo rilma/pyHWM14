@@ -9,7 +9,7 @@ if __name__ == '__main__':
         hwm14Obj = HWM142D(alt=400., ap=[-1, 35], glatlim=[-90., 90.], glatstp=10., 
             glonlim=[-180., 180.], glonstp=20., option=6, verbose=False)
 
-        # Latitude vs Longitude plot
+        # Latitude vs Longitude plot (Wind field)
         hwm14Gbj = HWM142DPlot( profObj=hwm14Obj, WF=True, zMin=[-150., -150], zMax=[150., 150.] )
 
     example16b()
