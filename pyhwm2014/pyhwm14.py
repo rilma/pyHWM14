@@ -77,7 +77,7 @@ class HWM14:
             print( 'Invalid option!' )
             return
         
-        self.iyd = int((year - (2000 if year > 1999 else 1900)) * 10000) + day
+        self.iyd = int((year - (2000 if year > 1999 else 1900)) * 1000) + day
 
         if option != 3: 
             self.sec = ut * 3600.
