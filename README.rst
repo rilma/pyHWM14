@@ -1,3 +1,5 @@
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.240895.svg
+   :target: http://doi.org/10.5281/zenodo.240895
 ======
 pyHWM14
 ======
