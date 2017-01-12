@@ -1,5 +1,6 @@
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.240895.svg
-   :target: http://doi.org/10.5281/zenodo.240895
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.240890.svg
+   :target: http://doi.org/10.5281/zenodo.240890
+   
 ======
 pyHWM14
 ======
