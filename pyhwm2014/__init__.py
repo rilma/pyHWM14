@@ -6,10 +6,14 @@ except (ImportError,AttributeError):  # Python < 3.5
 #
 from . import hwm14
 from numpy import append, arange, ceil, floor, meshgrid, ones,reshape
-from mpl_toolkits.basemap import Basemap
 from matplotlib.pyplot import figure,show,subplots,cm
 from matplotlib.colors import Normalize
 import seaborn
+try:
+    from mpl_toolkits.basemap import Basemap
+except ImportError:
+    Basemap=None
+
 from os import environ
 
 # Defines a shell variable 'HWMPATH' which indicates the location of
@@ -773,6 +777,9 @@ class HWM142DPlot:
 
     def XVsY2DWindMap(self, ax, xVal, yVal, uVal, vVal, title=None, xlabel=None,
         xlim=None, ylabel=None, ylim=None, zlabel=None, zMax=None, zMin=None):
+        
+        if Basemap is None: 
+            return
 
         m = Basemap(llcrnrlon=self.glonlim[0], llcrnrlat=self.glatlim[0],
             urcrnrlon=self.glonlim[-1], urcrnrlat=self.glatlim[-1], resolution='l')
@@ -807,6 +814,9 @@ class HWM142DPlot:
     def XVsY2DMap(self, ax, xVal, yVal, zVal, cmap=None, title=None, xlabel=None,
         xlim=None, ylabel=None, ylim=None, zlabel=None, zMax=None, zMin=None):
 
+        if Basemap is None:
+            return
+        
         m = Basemap(llcrnrlon=self.glonlim[0], llcrnrlat=self.glatlim[0],
             urcrnrlon=self.glonlim[-1], urcrnrlat=self.glatlim[-1], resolution='l')
 
