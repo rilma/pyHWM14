@@ -4,7 +4,8 @@ from glob import glob
 from os.path import join
 from numpy.distutils.core import Extension, setup
 
-req = ['numpy','matplotlib']
+req = ['nose','numpy','matplotlib','pathlib2',
+       'timeutil']
 
 name = 'pyhwm2014'
 
@@ -12,7 +13,7 @@ ext = Extension( extra_compile_args=['-w'],
             extra_f90_compile_args=['-w'],
             f2py_options=[ '--quiet' ],
             name='hwm14',
-            sources=['source/hwm14.pyf', 'source/hwm14.f90']
+            sources=[ 'source/hwm14.f90']
              )
 
 hwmData1 = glob(join('data', '*.dat'))
@@ -28,5 +29,16 @@ setup( author=['Ronald Ilma','Michael Hirsch, Ph.D'],
         name=name,
         packages=[name],
         url='https://github.com/rilma/pyHWM14',
-        version='1.0.01',
-        )
+        version='1.1',
+        install_requires=req,
+        dependency_links=[
+      'https://github.com/rilma/TimeUtilities/zipball/master#egg=timeutil'],
+        classifiers=[
+          'Intended Audience :: Science/Research',
+          'Development Status :: 5 - Production/Stable',
+          'License :: OSI Approved :: MIT License',
+          'Topic :: Scientific/Engineering :: Atmospheric Science',
+          'Programming Language :: Python',
+          'Programming Language :: Python :: 3',
+          ],
+)
