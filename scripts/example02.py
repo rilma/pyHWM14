@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
+from pyhwm2014 import HWM14, HWM14Plot
 
 def example02():
 

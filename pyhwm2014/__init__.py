@@ -854,7 +854,7 @@ class HWM142DPlot:
         ax.set_xlabel( xlabel )
         ax.set_ylabel( ylabel )
 
-        cbpn = ax.figure.colorbar( ipn )
+        cbpn = ax.figure.colorbar( ipn,ax=ax )
         cbpn.set_label( zlabel )
 
     #
