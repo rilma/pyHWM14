@@ -1,9 +1,9 @@
 .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.240890.svg
    :target: http://doi.org/10.5281/zenodo.240890
    
-======
+=======
 pyHWM14
-======
+=======
 Python interface for the Horizontal Wind Model version 2014 (HWM14)
 
 .. contents::
@@ -182,6 +182,7 @@ References
 
 .. [2] Drob, D. P. et al. `"An update to the Horizontal Wind Model (HWM): The quiet time thermosphere", Earth and Space Science, 2015 <http://onlinelibrary.wiley.com/doi/10.1002/2014EA000089/full>`_
 
+---------------------
 Wrapping Fortran code
 ---------------------
 This is for reference, no need to do this as it's done by  ``python setup.py develop``
