@@ -11,9 +11,9 @@ Python interface for the Horizontal Wind Model version 2014 (HWM14)
 Installation
 ============
 
-.. code-block:: bash
+::
 
-    >>> python setup.py install
+    python setup.py develop
 
 Examples
 ========
@@ -174,8 +174,17 @@ Horizontal Wind Field Map
 .. image:: graphics/figure_16b.png
     :scale: 100 %
 
+
+References
+==========
+
+.. [1] Peterson, P. `"F2PY: Fortran to Python interface generator" <https://sysbio.ioc.ee/projects/f2py2e/>`_
+
+.. [2] Drob, D. P. et al. `"An update to the Horizontal Wind Model (HWM): The quiet time thermosphere", Earth and Space Science, 2015 <http://onlinelibrary.wiley.com/doi/10.1002/2014EA000089/full>`_
+
 Wrapping Fortran code
-=====================
+---------------------
+This is for reference, no need to do this as it's done by  ``python setup.py develop``
 
 1. The first step is to ask 'f2py' to write the signature of the routine (hwm14.f90) to 
 a description file
@@ -206,9 +215,3 @@ NOTE: To specify a Fortran compiler type by vendor, e.g. ifort (Intel Fortran co
 
     $ f2py -c hwm14.pyf hwm14.f90 --fcompiler=intelem
 
-References
-==========
-
-.. [1] Peterson, P. `"F2PY: Fortran to Python interface generator" <https://sysbio.ioc.ee/projects/f2py2e/>`_
-
-.. [2] Drob, D. P. et al. `"An update to the Horizontal Wind Model (HWM): The quiet time thermosphere", Earth and Space Science, 2015 <http://onlinelibrary.wiley.com/doi/10.1002/2014EA000089/full>`_

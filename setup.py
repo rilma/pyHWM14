@@ -1,4 +1,5 @@
-
+#!/usr/bin/env python
+import setuptools
 from glob import glob
 from os.path import join
 from numpy.distutils.core import Extension, setup
