@@ -325,31 +325,31 @@ class HWM14Plot:
         try:
             self.GetHHMMSS()
             timeStr = 'TIME: {:02d}:{:02d} UT'.format(self.hour, self.minute)
-        except:
+        except Exception:
             pass
 
         apStr = 'ap: {:3d}'.format(self.ap[1])
 
         try:
             altStr = 'ALT: {:7.2f} km'.format(self.alt)
-        except:
+        except Exception:
             pass
 
         try:
             latStr = '{:6.2f}$^\circ${:s}'.format(abs(self.glat),
                 'N' if self.glat > 0 else 'S')
-        except:
+        except Exception:
             pass
 
         try:
             lonStr = '{:6.2f}$^\circ${:s}'.format(abs(self.glon),
                 'E' if self.glon > 0 else 'W')
-        except:
+        except Exception:
             pass
 
         try:
             locStr = '{:s}, {:s}'.format(latStr, lonStr)
-        except:
+        except Exception:
             pass
 
         if self.option == 1:
@@ -372,10 +372,10 @@ class HWM14Plot:
         ax = figure().gca()
         ax.plot( self.Uwind, self.altbins, label='U' )
         ax.plot( self.Vwind, self.altbins, label='V' )
-        ax.ylim(self.altbins[[0, -1]])
-        ax.title(self.title)
-        ax.xlabel( r'(m/s)' );
-        ax.ylabel( r'(km)')
+        ax.set_ylim(self.altbins[[0, -1]])
+        ax.set_title(self.title)
+        ax.set_xlabel( r'(m/s)' );
+        ax.set_ylabel( r'(km)')
         ax.legend( loc='best' )
 
     #
@@ -389,10 +389,10 @@ class HWM14Plot:
         ax = figure().gca()
         ax.plot( self.glatbins, self.Uwind, label='U' )
         ax.plot( self.glatbins, self.Vwind, label='V' )
-        ax.xlim(self.glatbins[[0, -1]])
-        ax.title(self.title)
-        ax.xlabel( r'Geog. Lat. ($^\circ$)' );
-        ax.ylabel( r'Wind speed (m/s)')
+        ax.set_xlim(self.glatbins[[0, -1]])
+        ax.set_title(self.title)
+        ax.set_xlabel( r'Geog. Lat. ($^\circ$)' );
+        ax.set_ylabel( r'Wind speed (m/s)')
         ax.legend( loc='best' )
 
     #
@@ -406,10 +406,10 @@ class HWM14Plot:
         ax = figure().gca()
         ax.plot( self.utbins, self.Uwind, label='U' )
         ax.plot( self.utbins, self.Vwind, label='V' )
-        ax.xlim(self.utbins[[0, -1]])
-        ax.title(self.title)
-        ax.xlabel( r'Hour (GMT)' )
-        ax.ylabel( r'Wind speed (m/s)')
+        ax.set_xlim(self.utbins[[0, -1]])
+        ax.set_title(self.title)
+        ax.set_xlabel( r'Hour (GMT)' )
+        ax.set_ylabel( r'Wind speed (m/s)')
         ax.legend( loc='best' )
 
     #
@@ -423,10 +423,10 @@ class HWM14Plot:
         ax = figure().gca()
         ax.plot( self.glonbins, self.Uwind, label='U' )
         ax.plot( self.glonbins, self.Vwind, label='V' )
-        ax.xlim(self.glonbins[[0, -1]])
-        ax.title(self.title)
-        ax.xlabel( r'Geog. Lon. ($^\circ$)' );
-        ax.ylabel( r'Wind speed (m/s)')
+        ax.set_xlim(self.glonbins[[0, -1]])
+        ax.set_title(self.title)
+        ax.set_xlabel( r'Geog. Lon. ($^\circ$)' );
+        ax.set_ylabel( r'Wind speed (m/s)')
         ax.legend( loc='best' )
 
     #
@@ -738,24 +738,24 @@ class HWM142DPlot:
 
         try:
             altStr = 'ALT: {:7.2f} km'.format(self.alt)
-        except:
+        except Exception:
             pass
 
         try:
             latStr = '{:6.2f}$^\circ${:s}'.format(abs(self.glat),
                 'N' if self.glat > 0 else 'S')
-        except:
+        except Exception:
             pass
 
         try:
             lonStr = '{:6.2f}$^\circ${:s}'.format(abs(self.glon),
                 'E' if self.glon > 0 else 'W')
-        except:
+        except Exception:
             pass
 
         try:
             locStr = '{:s}, {:s}'.format(latStr, lonStr)
-        except:
+        except Exception:
             pass
 
         if self.option == 1:
