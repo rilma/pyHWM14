@@ -4,7 +4,7 @@ from glob import glob
 from os.path import join
 from numpy.distutils.core import Extension, setup
 
-req = ['nose','numpy','matplotlib','pathlib2',
+req = ['nose','numpy','matplotlib','seaborn','pathlib2',
        'timeutil']
 
 name = 'pyhwm2014'
