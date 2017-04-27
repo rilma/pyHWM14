@@ -1,11 +1,19 @@
 #!/usr/bin/env python
-import setuptools
+req = ['nose','numpy','matplotlib','seaborn','pathlib2',]
+pipreq=['timeutil']
+# %%
+import pip
+try:
+    import conda.cli
+    conda.cli.main('install',*req)
+except Exception:
+    pip.main(['install'] + req)
+pip.main(['install'] + pipreq)
+# %%
+import setuptools  # enables develop
+from numpy.distutils.core import Extension, setup
 from glob import glob
 from os.path import join
-from numpy.distutils.core import Extension, setup
-
-req = ['nose','numpy','matplotlib','seaborn','pathlib2',
-       'timeutil']
 
 name = 'pyhwm2014'
 
@@ -30,7 +38,6 @@ setup( author=['Ronald Ilma','Michael Hirsch, Ph.D'],
         packages=[name],
         url='https://github.com/rilma/pyHWM14',
         version='1.1',
-        install_requires=req,
         dependency_links=[
       'https://github.com/rilma/TimeUtilities/zipball/master#egg=timeutil'],
         classifiers=[
