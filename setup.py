@@ -38,6 +38,7 @@ setup( author=['Ronald Ilma','Michael Hirsch, Ph.D'],
         packages=[name],
         url='https://github.com/rilma/pyHWM14',
         version='1.1',
+        install_requires=pipreq,  # for those not on PyPi
         dependency_links=[
       'https://github.com/rilma/TimeUtilities/zipball/master#egg=timeutil'],
         classifiers=[
