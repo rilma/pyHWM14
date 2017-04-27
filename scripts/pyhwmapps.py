@@ -7,7 +7,7 @@ import pyapex
 from pylab import cm, Normalize
 from scipy import arange, asarray, isnan, nan, tile, transpose, where
 #
-from timeutil.timeutil import TimeUtilities
+from timeutil import TimeUtilities
 
 
 class HWM14_2DProf(HWM142D):
