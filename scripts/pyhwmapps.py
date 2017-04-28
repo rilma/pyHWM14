@@ -1,20 +1,20 @@
-
+from pyhwm2014 import HWM142D, hwm14
 import seaborn
 from matplotlib.pyplot import colorbar, figure, show
 from numpy.ma import masked_where
-from pyhwm2014.pyhwm14 import HWM142D
-from pyhwm2014 import hwm14
+
 import pyapex
 from pylab import cm, Normalize
 from scipy import arange, asarray, isnan, nan, tile, transpose, where
-from timeutil.timeutil import TimeUtilities
+#
+from timeutil import TimeUtilities
 
 
 class HWM14_2DProf(HWM142D):
 
     def __init__(self):
 
-        HWM142D.__init__(self, verbose=False)        
+        HWM142D.__init__(self, verbose=False)
 
 
     def LatVsFL(self, date=[2003,11,21], time=[23,15,0], gc=[-77.76,-11.95],
@@ -64,8 +64,8 @@ class HWM14_2DProf(HWM142D):
         # np -> No. of points per field-line
         nfl, nc, np = self.coordl.shape
 
-        self.Uwind, self.Vwind = tile(nan, (np, nfl)),  tile(nan, (np, nfl))      
-        
+        self.Uwind, self.Vwind = tile(nan, (np, nfl)),  tile(nan, (np, nfl))
+
         iyd = int((year - (2000 if year >= 2000 else 1900)) * 1e3) + self.doy
         sec = (hour + minute / 60 + second / 3600) * 3600
         stl, f107a, f107, ap = 17., 90, 90, [2,2]
@@ -83,17 +83,12 @@ class HWM14_2DProf(HWM142D):
 
                 for s in range(ns):
 
-                    glon, alt, glat = curr_coordl[ind[0][s], :] 
+                    glon, alt, glat = curr_coordl[ind[0][s], :]
 
                     w = hwm14.hwm14( iyd, sec, alt, glat, glon, stl, f107a, f107, ap )
 
                     self.Uwind[ind[0][s], fl] = w[1]
                     self.Vwind[ind[0][s], fl] = w[0]
-
-
-    #
-    # End of 'LatVsFL' 
-    #####
 
 
     def PlotLatVsFL(self):
@@ -121,7 +116,7 @@ class HWM14_2DProf(HWM142D):
                     vmin, vmax = -50, 50
                     title=''
                     cblabel = 'Zonal (U), m/s '
-                    
+
                 elif counter == 1:
                     Z = self.Vwind
                     vmin, vmax = -100, 100
@@ -129,7 +124,7 @@ class HWM14_2DProf(HWM142D):
                     cblabel = 'Meridonal (V), m/s '
 
                 Z_masked = masked_where(isnan(Z), Z)
-                ipc = pn.pcolor(X, Y, Z_masked, cmap=cm.RdBu_r, edgecolors='None', 
+                ipc = pn.pcolor(X, Y, Z_masked, cmap=cm.RdBu_r, edgecolors='None',
                     norm=Normalize(), vmax=vmax, vmin=vmin)
 
                 # pn.set_xlim( xlim )
@@ -137,26 +132,20 @@ class HWM14_2DProf(HWM142D):
                 pn.set_title( title )
                 pn.set_xlabel( xlabel )
                 pn.set_ylabel( ylabel )
-                    
+
                 cp = colorbar(ipc)
                 cp.set_label(cblabel)
-                pn.set_ylim(self.hlim)                
+                pn.set_ylim(self.hlim)
                 pn.invert_xaxis()
 
                 counter += 1
 
-    #
-    # End of 'PlotLatVsFL' 
-    #####
 
-    def GetTitle(self):
-        dateStr = 'DATE: {:4d}.{:3d}'.format(self.year, self.doy)
-        timeStr = 'TIME: {:02d}{:02d}'.format(self.hour, self.minute)
-        latStr = 'GEOG. LAT.: {:6.2f}'.format(self.dlat)
-        lonStr = 'GEOG. LON.: {:6.2f}'.format(self.dlon)
-    #
-    # End of 'GetTitle'
-    #####
+#    def GetTitle(self):
+#        dateStr = 'DATE: {:4d}.{:3d}'.format(self.year, self.doy)
+#        timeStr = 'TIME: {:02d}{:02d}'.format(self.hour, self.minute)
+#        latStr = 'GEOG. LAT.: {:6.2f}'.format(self.dlat)
+#        lonStr = 'GEOG. LON.: {:6.2f}'.format(self.dlon)
 
 
 
@@ -174,7 +163,7 @@ if __name__ == '__main__':
 
         Obj = HWM14_2DProf()
         print(dir(Obj))
-        
+
 
     #example1()
     example2()

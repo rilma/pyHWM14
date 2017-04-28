@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 from pyhwm2014 import hwm14
 
 ut, stl, glon, alt, glat, f107a, f107, ap = 12, 17, -77.76, 130., -11.95, 90, 90, [2,2]
