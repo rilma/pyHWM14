@@ -15,6 +15,12 @@ Installation
 
 ::
 
+    pip install pyhwm2014
+
+Or
+
+::
+
     python setup.py develop
 
 Examples
