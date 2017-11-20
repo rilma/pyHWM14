@@ -5,10 +5,15 @@ except (ImportError,AttributeError):  # Python < 3.5
     from pathlib2 import Path
 #
 from . import hwm14
+import logging
 from numpy import append, arange, ceil, floor, meshgrid, ones,reshape
-from matplotlib.pyplot import figure,show,subplots,cm
-from matplotlib.colors import Normalize
-import seaborn
+try:
+    from matplotlib.pyplot import figure,show,subplots,cm
+    from matplotlib.colors import Normalize
+    import seaborn
+except (ImportError, RuntimeError):
+    figure=None
+# 
 try:
     from mpl_toolkits.basemap import Basemap
 except ImportError:
@@ -89,7 +94,7 @@ class HWM14:
             self.glonstp = glonstp
             self.stl = stl
         else:
-            print( 'Invalid option!' )
+            logging.error('Invalid option!')
             return
 
         self.iyd = int((year - (2000 if year > 1999 else 1900)) * 1000) + day
@@ -172,9 +177,6 @@ class HWM14:
             self.Uwind.append( w[ 1 ] )
             self.Vwind.append( w[ 0 ] )
 
-    #
-    # End of 'LatProfile'
-    #####
 
     def GMTProfile( self ):
 
@@ -210,9 +212,6 @@ class HWM14:
             self.Uwind.append( w[ 1 ] )
             self.Vwind.append( w[ 0 ] )
 
-    #
-    # End of 'GMTProfile'
-    #####
 
     def LonProfile( self ):
 
@@ -241,9 +240,6 @@ class HWM14:
             self.Uwind.append( w[ 1 ] )
             self.Vwind.append( w[ 0 ] )
 
-    #
-    # End of 'LonProfile'
-    #####
 
     def toMLT(self, ut):
 
@@ -252,14 +248,6 @@ class HWM14:
         hwm14.inithwm()
         mlat, mlon, f1e, f1n, f2e, f2n = hwm14.gd2qd(self.glat, self.glon)
         self.mlt = hwm14.mltcalc(mlat, mlon, self.doy, ut)
-
-    #
-    # End of 'toMLT'
-    #####
-
-#
-# End of HWM14
-######
 
 
 class HWM14Plot:
@@ -302,14 +290,11 @@ class HWM14Plot:
             else:
                 print( 'Invalid option!' )
                 valid = False
-            if valid:
+            if valid and figure is not None:
                 show()
         else:
             print( 'Wrong inputs!' )
 
-    #
-    # End of '__init__'
-    #####
 
     def GetHHMMSS(self):
         hh = floor(self.ut)
@@ -318,9 +303,7 @@ class HWM14Plot:
         dummy = dummy * 60 - mm
         self.second = int(floor(dummy * 60))
         self.hour, self.minute = int(hh), int(mm)
-    #
-    # End of 'GetHHMMSS'
-    #####
+
 
     def GetTitle(self):
 
@@ -365,11 +348,10 @@ class HWM14Plot:
         elif self.option == 4:
             self.title = '{:s} - {:s} - {:s} - {:s} - GEOG. LAT.: {:s}'.format(dateStr, timeStr, apStr, altStr, latStr)
 
-    #
-    # End of 'GetTitle'
-    #####
 
     def HeiProfPlot( self ):
+        if figure is None:
+            return
 
         self.GetTitle()
 
@@ -382,11 +364,10 @@ class HWM14Plot:
         ax.set_ylabel( r'(km)')
         ax.legend( loc='best' )
 
-    #
-    # End of 'HeiProfPlot'
-    #####
 
     def LatProfPlot( self ):
+        if figure is None:
+            return
 
         self.GetTitle()
 
@@ -399,11 +380,10 @@ class HWM14Plot:
         ax.set_ylabel( r'Wind speed (m/s)')
         ax.legend( loc='best' )
 
-    #
-    # End of 'LatProfPlot'
-    #####
 
     def GMTProfPlot( self ):
+        if figure is None:
+            return
 
         self.GetTitle()
 
@@ -416,11 +396,10 @@ class HWM14Plot:
         ax.set_ylabel( r'Wind speed (m/s)')
         ax.legend( loc='best' )
 
-    #
-    # End of 'GMTProfPlot'
-    #####
 
     def LonProfPlot( self ):
+        if figure is None:
+            return
 
         self.GetTitle()
 
@@ -433,14 +412,6 @@ class HWM14Plot:
         ax.set_ylabel( r'Wind speed (m/s)')
         ax.legend( loc='best' )
 
-    #
-    # End of 'LonProfPlot'
-    #####
-
-#
-# End of 'HWM14Plot'
-#####
-
 
 class HWM142D:
 
@@ -448,7 +419,6 @@ class HWM142D:
         day=323, f107=-1, f107a=-1, glat=-11.95, glatlim=[-40., 40.],
         glatstp=5., glon=-76.77, glonlim=[-40., 40], glonstp=5., option=1,
         stl=-1, utlim=[0., 24.], utstp=1., ut=12., verbose=True, year=1993 ):
-
         """
         """
 
@@ -500,7 +470,7 @@ class HWM142D:
             self.glonlim = glonlim
             self.glonstp = glonstp
         else:
-            print( 'Invalid option!' )
+            logging.error('Invalid option!')
             return
 
         self.iyd = int((year - (2000 if year > 1999 else 1900)) * 10000) + day
@@ -522,12 +492,8 @@ class HWM142D:
         elif not 'glon' in self.__dict__.keys(): self.LonVsHeiArray()
         else: print( '' )
 
-    #
-    # End of '__init__'
-    #####
 
     def HeiVsLTArray( self ):
-
         """
         """
 
@@ -547,12 +513,8 @@ class HWM142D:
 
         self.altbins = hwm14Obj.altbins
 
-    #
-    # End of 'HeiVsLTArray'
-    #####
 
     def LatVsHeiArray(self):
-
         """        """
 
         self.altbins = arange(self.altlim[0], self.altlim[1] + self.altstp, self.altstp)
@@ -560,13 +522,10 @@ class HWM142D:
         for _alt in self.altbins:
 
             if True:
-
                 hwm14Obj = HWM14( alt=_alt, ap=self.ap, glatlim=self.glatlim,
                     glatstp=self.glatstp, glon=self.glon, option=self.option,
                     verbose=self.verbose, ut=self.ut )
-
             else:
-
                 pass
 
             Uwind = reshape( hwm14Obj.Uwind, ( len( hwm14Obj.Uwind ), 1 ) )
@@ -579,9 +538,6 @@ class HWM142D:
         self.Uwind = self.Uwind.T
         self.Vwind = self.Vwind.T
 
-    #
-    # End of 'LatVsHeiArray'
-    #####
 
     def LonVsHeiArray(self):
 
@@ -611,9 +567,6 @@ class HWM142D:
         self.Uwind = self.Uwind.T
         self.Vwind = self.Vwind.T
 
-    #
-    # End of 'LonVsHeiArray'
-    #####
 
     def LonVsLatArray(self):
 
@@ -637,16 +590,10 @@ class HWM142D:
         self.Uwind = self.Uwind.T
         self.Vwind = self.Vwind.T
 
-    #
-    # End of 'LonVsHeiArray'
-    #####
-
 
     def LatVsGMTArray(self):
         pass
-    #
-    # End of 'LatVsGMTArray'
-    #####
+
 
 #
 # End of 'HWM142D'
@@ -850,6 +797,8 @@ class HWM142DPlot:
 
     def XVsY2DPlot( self, ax, xVal, yVal, zVal, cmap=None, title=None,
         xlabel=None, xlim=None, ylabel=None, ylim=None, zlabel=None, zMax=None, zMin=None ):
+        if figure is None:
+            return
 
         X, Y = meshgrid( xVal, yVal )
         X = X.T
