@@ -5,7 +5,7 @@ from numpy.ma import masked_where
 
 import pyapex
 from pylab import cm, Normalize
-from scipy import arange, asarray, isnan, nan, tile, transpose, where
+from numpy import arange, asarray, isnan, nan, tile, transpose, where
 #
 from timeutil import TimeUtilities
 
