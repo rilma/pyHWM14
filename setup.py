@@ -1,16 +1,8 @@
 #!/usr/bin/env python
-req = ['nose','numpy','matplotlib','pandas','scipy','seaborn','pathlib2',]
-pipreq=['timeutil']
+req = ['nose','numpy','pathlib2',
+       'timeutil']
 # %%
-import pip
-try:
-    import conda.cli
-    conda.cli.main('install',*req)
-except Exception:
-    pip.main(['install'] + req)
-pip.main(['install'] + pipreq)
-# %%
-import setuptools  # enables develop
+from setuptools import find_packages
 from numpy.distutils.core import Extension, setup
 from glob import glob
 from os.path import join
@@ -21,7 +13,7 @@ ext = Extension( extra_compile_args=['-w'],
             extra_f90_compile_args=['-w'],
             f2py_options=[ '--quiet' ],
             name='hwm14',
-            sources=[ 'source/hwm14.f90']
+            sources=['source/hwm14.f90']
              )
 
 hwmData1 = glob(join('data', '*.dat'))
@@ -35,12 +27,13 @@ setup( author=['Ronald Ilma','Michael Hirsch, Ph.D'],
         ext_modules=[ ext ],
         ext_package=name,
         name=name,
-        packages=[name],
+        packages=find_packages(),
         url='https://github.com/rilma/pyHWM14',
-        version='1.1',
-        install_requires=pipreq,  # for those not on PyPi
+        version='1.1.0',
+        install_requires=req,
+        extras_requires={'plot':['matplotlib','seaborn']},
         dependency_links=[
-      'https://github.com/rilma/TimeUtilities/zipball/master#egg=timeutil'],
+      'https://github.com/rilma/TimeUtilities/zipball/master#egg=timeutil-999.0'],
         classifiers=[
           'Intended Audience :: Science/Research',
           'Development Status :: 5 - Production/Stable',
@@ -49,4 +42,5 @@ setup( author=['Ronald Ilma','Michael Hirsch, Ph.D'],
           'Programming Language :: Python',
           'Programming Language :: Python :: 3',
           ],
+         python_requires='>=2.7',
 )
