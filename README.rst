@@ -50,7 +50,8 @@ Examples
 
 You will need seaborn (the statistical data visualization package) in order to run the following examples.
 
-::
+.. code-block:: bash
+
     $ pip install seaborn
 
 
