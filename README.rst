@@ -18,18 +18,21 @@ Installation
 From Source Code
 ----------------
 
-::
+.. code-block:: bash
+
     $ git clone https://github.com/rilma/pyHWM14.git
     $ cd pyHWM14
     $ pip -q install coveralls
     $ pip install numpy
     $ pip install -e . --process-dependency-links
 
+
 -------
 Testing
 -------
 
-::
+.. code-block:: bash
+
     $ coverage run tests/test.py -v
 
 
