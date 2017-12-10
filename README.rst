@@ -10,25 +10,51 @@ Python interface for the Horizontal Wind Model version 2014 (HWM14)
 
 .. contents::
 
+
 Installation
 ============
+
+----------------
+From Source Code
+----------------
+
+.. code-block:: bash
+    $ git clone https://github.com/rilma/pyHWM14.git
+    $ cd pyHWM14
+    $ pip -q install coveralls
+    $ pip install numpy
+    $ pip install -e . --process-dependency-links
+
+-------
+Testing
+-------
+
+.. code-block:: bash
+    $ coverage run tests/test.py -v
+
+
+---------
+From PyPi
+---------
 
 ::
 
     pip install pyhwm2014
 
-Or
-
-::
-
-    python setup.py develop
 
 Examples
 ========
 
+You will need seaborn (the statistical data visualization package) in order to run the following examples.
+
+.. code-block::
+    $ pip install seaborn
+
+
 --------------
 Height Profile
 --------------
+
 
 .. code-block:: bash
 
