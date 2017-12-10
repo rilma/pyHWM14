@@ -62,7 +62,7 @@ Height Profile
 
 .. code-block:: bash
 
-    >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot    
+    >>> from pyhwm2014 import HWM14, HWM14Plot    
     >>> hwm14Obj = HWM14( altlim=[90,200], altstp=1, ap=[-1, 35], day=323,
             option=1, ut=11.66667, verbose=False, year=1993 )            
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
@@ -75,7 +75,7 @@ You can also list the values on screen as follows
 
 .. code-block:: bash
 
-    >>> from pyhwm2014.pyhwm14 import HWM14
+    >>> from pyhwm2014 import HWM14
     >>> hwm14Obj = HWM14( altlim=[90,200], altstp=10, ap=[-1, 35], day=323,
             option=1, ut=11.66667, verbose=True, year=1993 )
     
@@ -102,7 +102,7 @@ Geog. Latitude Profile
 
 .. code-block:: bash
     
-    >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
+    >>> from pyhwm2014 import HWM14, HWM14Plot
     >>> hwm14Obj = HWM14( alt=130., ap=[-1, 35], day=323, glatlim=[-90.,90.],
             glatstp=1., option=2, ut=11.66667, verbose=False, year=1993 )            
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
@@ -117,7 +117,7 @@ GMT Profile
 
 .. code-block:: bash
 
-    >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
+    >>> from pyhwm2014 import HWM14, HWM14Plot
     >>> hwm14Obj = HWM14( alt=130., ap=[-1, 35], day=323,
             option=3, utlim=[0., 23.45], utstp=.25, verbose=False, year=1993 )            
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
@@ -132,7 +132,7 @@ Geog. Longitude Profile
 
 .. code-block:: bash
 
-    >>> from pyhwm2014.pyhwm14 import HWM14, HWM14Plot
+    >>> from pyhwm2014 import HWM14, HWM14Plot
     >>> hwm14Obj = HWM14( alt=130., ap=[-1, 35], day=323, glonlim=[-180., 180.], glonstp=2.,
             option=4, verbose=False, year=1993 )            
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
@@ -147,7 +147,7 @@ Height vs GMT
 
 .. code-block:: bash
 
-    >>> from pyhwm2014.pyhwm14 import HWM142D, HWM142DPlot
+    >>> from pyhwm2014 import HWM142D, HWM142DPlot
     >>> hwm14Obj = HWM142D(altlim=[90,200], altstp=2, ap=[-1, 35], 
             option=1, utlim=[0.,23.75], utstp=.25, verbose=False)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-75., -100], zMax=[75., 100.])
@@ -161,7 +161,7 @@ Height vs Geog. Latitude
 
 .. code-block:: bash
 
-    >>> from pyhwm2014.pyhwm14 import HWM142D, HWM142DPlot
+    >>> from pyhwm2014 import HWM142D, HWM142DPlot
     >>> hwm14Obj = HWM142D(altlim=[90., 200.], altstp=2., ap=[-1, 35], 
             glatlim=[-90., 90.], glatstp=2., option=2, verbose=False, ut=12.)            
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-250., -100], zMax=[250., 100.])
@@ -175,7 +175,7 @@ Height vs Geog. Longitude
 
 .. code-block:: bash
 
-    >>> from pyhwm2014.pyhwm14 import HWM142D, HWM142DPlot
+    >>> from pyhwm2014 import HWM142D, HWM142DPlot
     >>> hwm14Obj = HWM142D(altlim=[90., 200.], altstp=1., ap=[-1, 35], 
             glonlim=[-90., 90.], glonstp=2., option=4, ut=12., verbose=False)            
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-100., -100], zMax=[100., 100.])
@@ -189,7 +189,7 @@ Geog. Latitude vs Geog. Longitude
 
 .. code-block:: bash
 
-    >>> from pyhwm2014.pyhwm14 import HWM142D, HWM142DPlot
+    >>> from pyhwm2014 import HWM142D, HWM142DPlot
     >>> hwm14Obj = HWM142D(alt=130., ap=[-1, 35], glatlim=[-90., 90.], 
             glatstp=1., glonlim=[-180., 180.], glonstp=2., option=6, verbose=False)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-150., -150], zMax=[150., 150.])
@@ -203,7 +203,7 @@ Horizontal Wind Field Map
 
 .. code-block:: bash
 
-    >>> from pyhwm2014.pyhwm14 import HWM142D, HWM142DPlot
+    >>> from pyhwm2014 import HWM142D, HWM142DPlot
     >>> hwm14Obj = HWM142D(alt=400., ap=[-1, 35], glatlim=[-90., 90.], glatstp=10., 
             glonlim=[-180., 180.], glonstp=20., option=6, verbose=False)
     >>> hwm14Gbj = HWM142DPlot( profObj=hwm14Obj, WF=True, zMin=[-150., -150], 
