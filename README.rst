@@ -18,7 +18,7 @@ Installation
 From Source Code
 ----------------
 
-.. code-block:: bash
+::
     $ git clone https://github.com/rilma/pyHWM14.git
     $ cd pyHWM14
     $ pip -q install coveralls
@@ -29,7 +29,7 @@ From Source Code
 Testing
 -------
 
-.. code-block:: bash
+::
     $ coverage run tests/test.py -v
 
 
@@ -47,7 +47,7 @@ Examples
 
 You will need seaborn (the statistical data visualization package) in order to run the following examples.
 
-.. code-block::
+::
     $ pip install seaborn
 
 
