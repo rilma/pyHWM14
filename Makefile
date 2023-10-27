@@ -1,7 +1,7 @@
 
 install-gfortran:
-	sudo apt update -y
-	sudp apt -y install gfortran
+	sudo apt-get update -y
+	sudo apt-get -y install gfortran
 
 install:
 	pip -q install coveralls
