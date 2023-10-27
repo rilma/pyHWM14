@@ -1,15 +1,9 @@
-#!/usr/bin/env python
-from numpy.testing import run_module_suite,assert_allclose
+from unittest import TestCase
 from pyhwm2014 import HWM14
 
-def test_hwm14():
-    # Single Height profile
-    h = HWM14( altlim=[90,200], altstp=1, ap=[-1, 35], day=323,
-        option=1, ut=11.66667, verbose=False, year=1993 )
-
-    assert_allclose([h.Uwind[92],h.Vwind[92]],
-                              [-16.502953,-39.811909])
-
-
-if __name__ == '__main__':
-    run_module_suite()
+class Test(TestCase):
+    def test_hwm14(self):
+        h = HWM14( altlim=[90,200], altstp=1, ap=[-1, 35], day=323,
+            option=1, ut=11.66667, verbose=False, year=1993 )
+        self.assertAlmostEqual(h.Uwind[92], -16.502953, places=3)
+        self.assertAlmostEqual(h.Vwind[92], -39.811909, places=3)
