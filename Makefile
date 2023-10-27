@@ -1,4 +1,8 @@
 
+install-gfortran:
+	sudo apt update -y
+	sudp apt -y install gfortran
+
 install:
 	pip -q install coveralls
 	pip install numpy
