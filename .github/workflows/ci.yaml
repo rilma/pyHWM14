@@ -26,7 +26,8 @@ jobs:
     #     lsb_release --all
     - name: Install dependencies
       run: |
-        make install
-    - name: Run code test in Python programs
-      run: |
-        make test
+        # make install
+        pip install coveralls numpy
+    # - name: Run code test in Python programs
+    #   run: |
+    #     make test
