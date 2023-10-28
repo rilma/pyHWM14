@@ -1,5 +1,7 @@
 .. image:: https://travis-ci.org/rilma/pyHWM14.svg?branch=master
     :target: https://travis-ci.org/rilma/pyHWM14
+.. image:: https://github.com/rilma/pyHWM14/actions/workflows/ci.yaml/badge.svg
+    :target: https://github.com/rilma/pyHWM14/actions/workflows/ci.yaml
 .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.240890.svg
    :target: http://doi.org/10.5281/zenodo.240890
    
