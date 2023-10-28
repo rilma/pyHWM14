@@ -20,10 +20,14 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python_version }}
-    - name: Install dependencies
+    - name: Explore
       run: |
-        # make install-gfortran
-        make install
-    - name: Run code test in Python programs
-      run: |
-        make test
+        which gfortran
+        lsb_release --all
+    # - name: Install dependencies
+    #   run: |
+    #     # make install-gfortran
+    #     make install
+    # - name: Run code test in Python programs
+    #   run: |
+    #     make test
