@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        python_version: ["3.8"]
+        python_version: ["3.10"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python_version }}
@@ -27,8 +27,9 @@ jobs:
     - name: Install dependencies
       run: |
         # make install
-        pip install coveralls numpy
-        pip install -e .
+        python -m venv .venv
+        .venv/bin/pip install coveralls numpy
+        .venv/bin/pip install -e .
     # - name: Run code test in Python programs
     #   run: |
     #     make test
