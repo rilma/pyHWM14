@@ -20,16 +20,11 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python_version }}
-    # - name: Explore
-    #   run: |
-    #     which gfortran
-    #     lsb_release --all
     - name: Install dependencies
       run: |
-        # make install
         python -m venv .venv
         .venv/bin/pip install coveralls numpy
         .venv/bin/pip install -e .
-    # - name: Run code test in Python programs
-    #   run: |
-    #     make test
+    - name: Run code test in Python programs
+      run: |
+        .venv/bin/coverage run --source=. --module unittest discover --start-directory tests --verbose
