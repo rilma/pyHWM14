@@ -1,5 +1,3 @@
-.. image:: https://travis-ci.org/rilma/pyHWM14.svg?branch=master
-    :target: https://travis-ci.org/rilma/pyHWM14
 .. image:: https://github.com/rilma/pyHWM14/actions/workflows/ci.yaml/badge.svg
     :target: https://github.com/rilma/pyHWM14/actions/workflows/ci.yaml
 .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.240890.svg
@@ -20,14 +18,13 @@ Installation
 From Source Code
 ----------------
 
+Currently supports Python 3.10 (see Github Actions)
+
 .. code-block:: bash
 
     $ git clone https://github.com/rilma/pyHWM14.git
     $ cd pyHWM14
-    $ pip -q install coveralls
-    $ pip install numpy
-    $ pip install -e . --process-dependency-links
-
+    $ make install
 
 -------
 Testing
@@ -35,7 +32,7 @@ Testing
 
 .. code-block:: bash
 
-    $ coverage run tests/test.py -v
+    $ make test
 
 
 ---------
