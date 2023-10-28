@@ -28,6 +28,7 @@ jobs:
       run: |
         # make install
         pip install coveralls numpy
+        pip install -e .
     # - name: Run code test in Python programs
     #   run: |
     #     make test
