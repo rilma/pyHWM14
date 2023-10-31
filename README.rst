@@ -35,7 +35,7 @@ From PyPi
     pip install pyhwm2014
 
 Testing
--------
+=======
 
 .. code-block:: bash
 
