@@ -26,15 +26,6 @@ Currently supports Python 3.10 (see Github Actions)
     $ cd pyHWM14
     $ make install
 
--------
-Testing
--------
-
-.. code-block:: bash
-
-    $ make test
-
-
 ---------
 From PyPi
 ---------
@@ -43,6 +34,12 @@ From PyPi
 
     pip install pyhwm2014
 
+Testing
+-------
+
+.. code-block:: bash
+
+    $ make test
 
 Examples
 ========
