@@ -21,7 +21,7 @@ hwmData2 = glob(join('data', '*.bin'))
 hwmDataFiles = [(join(name, 'data'), hwmData1),
                 (join(name, 'data'), hwmData2)]
 
-setup( author=['Ronald Ilma','Michael Hirsch, Ph.D'],
+setup( author=['Ronald Ilma'],
         data_files=hwmDataFiles,
         description='HWM14 neutral winds model',
         ext_modules=[ ext ],
