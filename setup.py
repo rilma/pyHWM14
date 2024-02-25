@@ -42,5 +42,5 @@ setup( author=['Ronald Ilma','Michael Hirsch, Ph.D'],
           'Programming Language :: Python',
           'Programming Language :: Python :: 3',
           ],
-         python_requires='>=2.7',
+         python_requires='>=3.10',
 )
