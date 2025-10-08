@@ -4,7 +4,7 @@ python_sources = ['__init__.py']
 
 py.install_sources(
     python_sources,
-    subdir: 'pyhwm14'
+    subdir: 'pyhwm2014'
 )
 
 # Install additional data sources
@@ -18,5 +18,5 @@ data_sources = [
 
 py.install_sources(
     data_sources,
-    subdir: 'pyhwm14/data/'
+    subdir: 'pyhwm2014/data/'
 )

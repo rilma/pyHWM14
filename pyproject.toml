@@ -3,7 +3,7 @@ requires = ["meson", "meson-python", "numpy"]
 build-backend = "mesonpy"
 
 [project]
-name = "pyhwm14"
+name = "pyhwm2014"
 version = "0.1.0"
 description = "Python wrapper for HWM14."
 readme = "README.md"
