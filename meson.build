@@ -38,3 +38,7 @@ py.extension_module('hwm14',
   dependencies : py_dep,
   install : true
 )
+
+py_dir = 'pyhwm2014'
+
+subdir(py_dir)

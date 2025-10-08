@@ -4,7 +4,7 @@ try:
 except (ImportError,AttributeError):  # Python < 3.5
     from pathlib2 import Path
 #
-from . import hwm14
+import hwm14
 import logging
 from numpy import append, arange, ceil, floor, meshgrid, ones,reshape
 try:
