@@ -8,4 +8,4 @@ version = "0.1.0"
 description = "Python wrapper for HWM14."
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["numpy"]
+dependencies = ["numpy", "seaborn"]
