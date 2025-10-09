@@ -6,6 +6,6 @@ build-backend = "mesonpy"
 name = "pyhwm2014"
 version = "0.1.0"
 description = "Python wrapper for HWM14."
-readme = "README.md"
+readme = "README.rst"
 requires-python = ">=3.12"
 dependencies = ["numpy", "seaborn"]

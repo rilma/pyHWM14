@@ -20,13 +20,13 @@ From Source Code
 
 Currently supports Python 3.10 under Ubuntu 20.04 (see Github Actions).
 
-IMPORTANT: For support in other Python versions and/or OS, users are invited to work on the case and submmit a PR. Help making the project more generic!
+IMPORTANT: For support in other Python versions and/or OS, users are invited to work on the case and submit a PR. Help making the project more generic!
 
 .. code-block:: bash
 
     $ git clone https://github.com/rilma/pyHWM14.git
     $ cd pyHWM14
-    $ make install
+    $ pip install .
 
 ---------
 From PyPi
