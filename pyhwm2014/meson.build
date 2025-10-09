@@ -10,13 +10,14 @@ py.install_sources(
 # Install additional data sources
 
 data_dir = 'data/'
+install_dir = py.get_install_dir() / 'pyhwm2014'
 
-data_sources = [
+data_sources = files(
     data_dir / 'dwm07b104i.dat',
     data_dir / 'gd2qd.dat',
-    data_dir / 'hwm123114.bin']
+    data_dir / 'hwm123114.bin')
 
-py.install_sources(
+install_data(
     data_sources,
-    subdir: 'pyhwm2014/data/'
+    install_dir: install_dir / 'data'
 )
