@@ -18,7 +18,7 @@ Installation
 From Source Code
 ----------------
 
-Currently requires Python 3.12+ with scikit-build-core (see Github Actions).
+Currently requires Python 3.13+ with scikit-build-core (see Github Actions).
 
 IMPORTANT: For support in other Python versions and/or OS, users are invited to work on the case and submit a PR. Help making the project more generic!
 
@@ -29,7 +29,7 @@ IMPORTANT: For support in other Python versions and/or OS, users are invited to 
     $ make install
 
 -------------------
-Make Targets (3.12)
+Make Targets (3.13)
 -------------------
 
 The repository uses ``uv`` (a fast, modern Python package manager) for managing Python versions and dependencies. All targets automatically install and use uv if needed.
@@ -39,16 +39,16 @@ The repository uses ``uv`` (a fast, modern Python package manager) for managing 
 
      * - Target
          - Purpose
-     * - ``make install-python312``
-         - Installs Python 3.12 with ``uv`` (if needed) and pins ``.python-version`` to 3.12.
-     * - ``make venv312``
-         - Creates/recreates a local ``.venv312`` using Python 3.12 via ``uv``.
-     * - ``make install312-sci``
+     * - ``make install-python313``
+         - Installs Python 3.13 with ``uv`` (if needed) and pins ``.python-version`` to 3.13.
+     * - ``make venv313``
+         - Creates/recreates a local ``.venv313`` using Python 3.13 via ``uv``.
+     * - ``make install313-sci``
          - Installs build dependencies (scikit-build-core, cmake, ninja, meson) and project via ``uv pip``.
-     * - ``make test312``
-         - Runs the test suite using Python 3.12.
+     * - ``make test313``
+         - Runs the test suite using Python 3.13.
      * - ``make clean``
-         - Removes build/test artifacts. Use ``make clean CLEAN_VENV=1`` to also remove ``.venv312``.
+         - Removes build/test artifacts. Use ``make clean CLEAN_VENV=1`` to also remove ``.venv313``.
 
 **About uv**: The project uses ``uv`` (https://github.com/astral-sh/uv) for fast, reliable dependency management and Python version control. Benefits include:
 

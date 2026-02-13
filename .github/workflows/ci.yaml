@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ["3.12"]
+        python_version: ["3.13"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python_version }}
