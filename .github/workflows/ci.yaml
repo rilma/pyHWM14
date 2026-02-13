@@ -13,21 +13,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ["3.11"]
+        python_version: ["3.12"]
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python_version }}
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python_version }}
-    - name: Install dependencies
+    - name: Install build dependencies
       run: |
-        python -m venv .venv
-        .venv/bin/python -m ensurepip --upgrade
-        .venv/bin/python -m pip install --upgrade pip
-        .venv/bin/python -m pip install "setuptools<60"
-        .venv/bin/python -m pip install coveralls "numpy==1.23.5"
-        .venv/bin/python setup.py develop
-    - name: Run code test in Python programs
+        python -m pip install --upgrade pip
+        python -m pip install scikit-build-core cmake ninja numpy meson
+    - name: Build and install package
       run: |
-        .venv/bin/coverage run --source=. --module unittest discover --start-directory tests --verbose
+        pip install -e .
+    - name: Run tests
+      run: |
+        python -m unittest discover -s tests --verbose

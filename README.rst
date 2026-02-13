@@ -18,9 +18,9 @@ Installation
 From Source Code
 ----------------
 
-Currently supports Python 3.11 under Ubuntu 20.04 (see Github Actions).
+Currently requires Python 3.12+ with scikit-build-core (see Github Actions).
 
-IMPORTANT: For support in other Python versions and/or OS, users are invited to work on the case and submmit a PR. Help making the project more generic!
+IMPORTANT: For support in other Python versions and/or OS, users are invited to work on the case and submit a PR. Help making the project more generic!
 
 .. code-block:: bash
 
@@ -29,34 +29,35 @@ IMPORTANT: For support in other Python versions and/or OS, users are invited to 
     $ make install
 
 -------------------
-Make Targets (3.11)
+Make Targets (3.12)
 -------------------
 
-The repository includes additional ``make`` targets to set up and use a local Python 3.11 environment.
+The repository includes additional ``make`` targets to set up and use a local Python 3.12 environment with the modern scikit-build-core backend.
 
 .. list-table::
      :header-rows: 1
 
      * - Target
          - Purpose
-     * - ``make install-python311``
-         - Installs Python 3.11 with ``uv`` (if needed) and pins ``.python-version`` to 3.11.
-     * - ``make venv311``
-         - Creates/recreates a local ``.venv`` using Python 3.11.
-     * - ``make install311``
-         - Installs project dependencies and runs ``setup.py develop`` inside ``.venv``.
-     * - ``make test311``
-         - Runs the test suite with coverage using ``.venv`` Python 3.11.
+     * - ``make install-python312``
+         - Installs Python 3.12 with ``uv`` (if needed) and pins ``.python-version`` to 3.12.
+     * - ``make venv312``
+         - Creates/recreates a local ``.venv312`` using Python 3.12.
+     * - ``make install312-sci``
+         - Builds hwm14 extension with scikit-build-core and installs project in editable mode.
+     * - ``make test312``
+         - Runs the test suite using Python 3.12.
      * - ``make clean``
-         - Removes build/test artifacts. Use ``make clean CLEAN_VENV=1`` to also remove ``.venv``.
+         - Removes build/test artifacts. Use ``make clean CLEAN_VENV=1`` to also remove ``.venv312``.
 
 Typical workflow:
 
 .. code-block:: bash
 
-        $ make install311
-        $ source .venv/bin/activate
-        $ make test311
+        $ make install-python312
+        $ make install312-sci
+        $ source .venv312/bin/activate
+        $ make test312
 
     Cleanup examples:
 

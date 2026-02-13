@@ -60,14 +60,9 @@ install312-sci: venv312
 test312: install312-sci
 	.venv312/bin/python -m unittest discover -s tests --verbose
 
-install:
-	pip install "setuptools<60"
-	pip install coveralls "numpy==1.23.5"
-	rm -rf build pyhwm2014.egg-info
-	python setup.py develop
+install: install-python312 install312-sci
 
-test:
-	coverage run --source=. --module unittest discover --start-directory tests --verbose
+test: test312
 
 clean:
 	rm -rf build dist pyhwm2014.egg-info
