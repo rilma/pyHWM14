@@ -1,7 +1,7 @@
 
 # Python 3.12+ with scikit-build-core + CMake + f2py (Meson backend)
 # Minimum Python 3.12 required (see GitHub issue #11: numpy.distutils deprecation)
-# For Python 3.11 or earlier support, use git tag v1.0.x
+# For Python 3.11 or earlier support, use git tag v1.0.1
 
 CLEAN_VENV ?= 0
 
