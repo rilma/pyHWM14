@@ -43,6 +43,143 @@ Testing
 
     $ make test
 
+Getting Started
+===============
+
+This section provides a quick guide to retrieving zonal and meridional wind values from the HWM14 model.
+
+-----------------
+Basic Concepts
+-----------------
+
+The HWM14 model provides **zonal** (east-west) and **meridional** (north-south) wind components in the upper atmosphere. To retrieve wind values, you need to specify:
+
+* **Date/Time**: Year, day of year (1-366), and universal time (0-24 hours)
+* **Location**: Geographic latitude (-90° to 90°) and longitude (-180° to 180°)
+* **Altitude**: Height above Earth's surface in kilometers
+* **Geomagnetic Activity**: The ap index (default: -1 for climatology)
+
+**Wind Components:**
+
+* **Zonal wind (U)**: Positive = Eastward, Negative = Westward
+* **Meridional wind (V)**: Positive = Northward, Negative = Southward
+
+All wind values are in meters per second (m/s).
+
+--------------------------
+Quick Start: Single Point
+--------------------------
+
+Retrieve wind values at a specific location, date/time, and altitude:
+
+.. code-block:: python
+
+    from pyhwm2014 import HWM14
+    
+    # Define parameters
+    year = 2023
+    day_of_year = 150  # Approximately May 30
+    universal_time = 12.0  # 12:00 UT (noon)
+    altitude_km = 300.0  # 300 km altitude
+    latitude = 40.0  # 40°N
+    longitude = -105.0  # 105°W
+    ap_index = 10  # Geomagnetic activity index
+    
+    # Retrieve wind values
+    hwm14 = HWM14(
+        alt=altitude_km,
+        altlim=[altitude_km, altitude_km],
+        altstp=1,
+        year=year,
+        day=day_of_year,
+        ut=universal_time,
+        glat=latitude,
+        glon=longitude,
+        ap=[-1, ap_index],
+        option=1,
+        verbose=False
+    )
+    
+    # Access results
+    zonal_wind = hwm14.Uwind[0]  # m/s
+    meridional_wind = hwm14.Vwind[0]  # m/s
+    
+    print(f"Zonal wind: {zonal_wind:.2f} m/s")
+    print(f"Meridional wind: {meridional_wind:.2f} m/s")
+
+--------------------------------
+Using Python datetime Objects
+--------------------------------
+
+Convert Python datetime to required parameters:
+
+.. code-block:: python
+
+    from datetime import datetime
+    from pyhwm2014 import HWM14
+    
+    # Your datetime
+    dt = datetime(2024, 7, 15, 18, 30)  # July 15, 2024, 18:30
+    
+    # Convert to HWM14 parameters
+    year = dt.year
+    day_of_year = dt.timetuple().tm_yday
+    universal_time = dt.hour + dt.minute / 60.0
+    
+    # Now use with HWM14
+    hwm14 = HWM14(
+        alt=250.0,
+        altlim=[250.0, 250.0],
+        altstp=1,
+        year=year,
+        day=day_of_year,
+        ut=universal_time,
+        glat=0.0,
+        glon=0.0,
+        ap=[-1, 10],
+        option=1,
+        verbose=False
+    )
+
+-----------------------
+Command-Line Interface
+-----------------------
+
+Use the CLI tool for quick retrievals without writing code:
+
+.. code-block:: bash
+
+    # Single point retrieval
+    $ python scripts/retrieve.py --year 2023 --day 150 --time 12.0 \
+        --lat 40.0 --lon -105.0 --alt 300.0
+
+    # Height profile (multiple altitudes)
+    $ python scripts/retrieve.py --year 2023 --day 150 --time 12.0 \
+        --lat 40.0 --lon -105.0 --alt-range 100 400 50
+
+    # Using datetime format
+    $ python scripts/retrieve.py --datetime "2023-05-30 12:00:00" \
+        --lat 40.0 --lon -105.0 --alt 300.0
+
+    # Get JSON output
+    $ python scripts/retrieve.py --year 2023 --day 150 --time 12.0 \
+        --lat 40.0 --lon -105.0 --alt 300.0 --json
+
+----------------
+More Examples
+----------------
+
+For comprehensive examples including height profiles, latitude profiles, and more, see:
+
+* ``examples/retrieve_values.py`` - Detailed Python examples
+* ``scripts/`` directory - Various example scripts
+
+Run the comprehensive example:
+
+.. code-block:: bash
+
+    $ python examples/retrieve_values.py
+
 Examples
 ========
 
