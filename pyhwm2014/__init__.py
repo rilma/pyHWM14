@@ -4,16 +4,19 @@ try:
 except (ImportError,AttributeError):  # Python < 3.5
     from pathlib2 import Path
 #
-from . import hwm14
 import logging
-from numpy import append, arange, ceil, floor, meshgrid, ones,reshape
+
+from numpy import append, arange, ceil, floor, meshgrid, ones, reshape
+
+from . import hwm14
+
 try:
-    from matplotlib.pyplot import figure,show,subplots,cm
-    from matplotlib.colors import Normalize
     import seaborn
+    from matplotlib.colors import Normalize
+    from matplotlib.pyplot import cm, figure, show, subplots
 except (ImportError, RuntimeError):
     figure=None
-# 
+#
 try:
     from mpl_toolkits.basemap import Basemap
 except ImportError:
@@ -114,10 +117,10 @@ class HWM14:
         self.Uwind = []
         self.Vwind = []
 
-        if not 'alt' in self.__dict__.keys(): self.HeiProfile()
-        elif not 'glat' in self.__dict__.keys(): self.LatProfile()
-        elif not 'ut' in self.__dict__.keys(): self.GMTProfile()
-        elif not 'glon' in self.__dict__.keys(): self.LonProfile()
+        if 'alt' not in self.__dict__.keys(): self.HeiProfile()
+        elif 'glat' not in self.__dict__.keys(): self.LatProfile()
+        elif 'ut' not in self.__dict__.keys(): self.GMTProfile()
+        elif 'glon' not in self.__dict__.keys(): self.LonProfile()
         else:
             print()
 
@@ -307,46 +310,46 @@ class HWM14Plot:
 
     def GetTitle(self):
 
-        dateStr = 'DATE: {:4d}.{:03d}'.format(self.year, self.doy)
+        dateStr = f'DATE: {self.year:4d}.{self.doy:03d}'
 
         try:
             self.GetHHMMSS()
-            timeStr = 'TIME: {:02d}:{:02d} UT'.format(self.hour, self.minute)
+            timeStr = f'TIME: {self.hour:02d}:{self.minute:02d} UT'
         except Exception:
             pass
 
-        apStr = 'ap: {:3d}'.format(self.ap[1])
+        apStr = f'ap: {self.ap[1]:3d}'
 
         try:
-            altStr = 'ALT: {:7.2f} km'.format(self.alt)
+            altStr = f'ALT: {self.alt:7.2f} km'
         except Exception:
             pass
 
         try:
-            latStr = '{:6.2f}$^\circ${:s}'.format(abs(self.glat),
+            latStr = r'{:6.2f}$^\circ${:s}'.format(abs(self.glat),
                 'N' if self.glat > 0 else 'S')
         except Exception:
             pass
 
         try:
-            lonStr = '{:6.2f}$^\circ${:s}'.format(abs(self.glon),
+            lonStr = r'{:6.2f}$^\circ${:s}'.format(abs(self.glon),
                 'E' if self.glon > 0 else 'W')
         except Exception:
             pass
 
         try:
-            locStr = '{:s}, {:s}'.format(latStr, lonStr)
+            locStr = f'{latStr:s}, {lonStr:s}'
         except Exception:
             pass
 
         if self.option == 1:
-            self.title = '{:s} - {:s} - {:s} - {:s}'.format(dateStr, timeStr, apStr, locStr)
+            self.title = f'{dateStr:s} - {timeStr:s} - {apStr:s} - {locStr:s}'
         elif self.option == 2:
-            self.title = '{:s} - {:s} - {:s} - {:s} - GEOG. LON.: {:s}'.format(dateStr, timeStr, apStr, altStr, lonStr)
+            self.title = f'{dateStr:s} - {timeStr:s} - {apStr:s} - {altStr:s} - GEOG. LON.: {lonStr:s}'
         elif self.option == 3:
-            self.title = '{:s} - {:s} - {:s} - {:s}'.format(dateStr, apStr, altStr, locStr)
+            self.title = f'{dateStr:s} - {apStr:s} - {altStr:s} - {locStr:s}'
         elif self.option == 4:
-            self.title = '{:s} - {:s} - {:s} - {:s} - GEOG. LAT.: {:s}'.format(dateStr, timeStr, apStr, altStr, latStr)
+            self.title = f'{dateStr:s} - {timeStr:s} - {apStr:s} - {altStr:s} - GEOG. LAT.: {latStr:s}'
 
 
     def HeiProfPlot( self ):
@@ -360,7 +363,7 @@ class HWM14Plot:
         ax.plot( self.Vwind, self.altbins, label='V' )
         ax.set_ylim(self.altbins[[0, -1]])
         ax.set_title(self.title)
-        ax.set_xlabel( r'(m/s)' );
+        ax.set_xlabel( r'(m/s)' )
         ax.set_ylabel( r'(km)')
         ax.legend( loc='best' )
 
@@ -376,7 +379,7 @@ class HWM14Plot:
         ax.plot( self.glatbins, self.Vwind, label='V' )
         ax.set_xlim(self.glatbins[[0, -1]])
         ax.set_title(self.title)
-        ax.set_xlabel( r'Geog. Lat. ($^\circ$)' );
+        ax.set_xlabel( r'Geog. Lat. ($^\circ$)' )
         ax.set_ylabel( r'Wind speed (m/s)')
         ax.legend( loc='best' )
 
@@ -408,7 +411,7 @@ class HWM14Plot:
         ax.plot( self.glonbins, self.Vwind, label='V' )
         ax.set_xlim(self.glonbins[[0, -1]])
         ax.set_title(self.title)
-        ax.set_xlabel( r'Geog. Lon. ($^\circ$)' );
+        ax.set_xlabel( r'Geog. Lon. ($^\circ$)' )
         ax.set_ylabel( r'Wind speed (m/s)')
         ax.legend( loc='best' )
 
@@ -424,7 +427,7 @@ class HWM142D:
 
         self.option = option
         self.year, self.doy = year, day
-        if not option in [3, 5]: self.ut = ut
+        if option not in [3, 5]: self.ut = ut
 
         if option == 1:     # Time vs Height
             self.glat = glat
@@ -485,11 +488,11 @@ class HWM142D:
         self.Uwind = []
         self.Vwind = []
 
-        if not 'alt' in self.__dict__.keys(): self.HeiVsLTArray()
-        elif not 'glat' in self.__dict__.keys() and not 'glon' in self.__dict__.keys(): self.LonVsLatArray()
-        elif not 'glat' in self.__dict__.keys() and not 'ut' in self.__dict__.keys(): self.LatVsGMTArray()
-        elif not 'glat' in self.__dict__.keys(): self.LatVsHeiArray()
-        elif not 'glon' in self.__dict__.keys(): self.LonVsHeiArray()
+        if 'alt' not in self.__dict__.keys(): self.HeiVsLTArray()
+        elif 'glat' not in self.__dict__.keys() and 'glon' not in self.__dict__.keys(): self.LonVsLatArray()
+        elif 'glat' not in self.__dict__.keys() and 'ut' not in self.__dict__.keys(): self.LatVsGMTArray()
+        elif 'glat' not in self.__dict__.keys(): self.LatVsHeiArray()
+        elif 'glon' not in self.__dict__.keys(): self.LonVsHeiArray()
         else: print( '' )
 
 
@@ -680,43 +683,43 @@ class HWM142DPlot:
 
     def GetTitle(self):
 
-        dateStr = 'DATE: {:4d}.{:03d}'.format(self.year, self.doy)
+        dateStr = f'DATE: {self.year:4d}.{self.doy:03d}'
 
         self.GetHHMMSS()
-        timeStr = 'TIME: {:02d}:{:02d} UT'.format(self.hour, self.minute)
+        timeStr = f'TIME: {self.hour:02d}:{self.minute:02d} UT'
 
-        apStr = 'ap: {:3d}'.format(self.ap[1])
+        apStr = f'ap: {self.ap[1]:3d}'
 
         try:
-            altStr = 'ALT: {:7.2f} km'.format(self.alt)
+            altStr = f'ALT: {self.alt:7.2f} km'
         except Exception:
             pass
 
         try:
-            latStr = '{:6.2f}$^\circ${:s}'.format(abs(self.glat),
+            latStr = r'{:6.2f}$^\circ${:s}'.format(abs(self.glat),
                 'N' if self.glat > 0 else 'S')
         except Exception:
             pass
 
         try:
-            lonStr = '{:6.2f}$^\circ${:s}'.format(abs(self.glon),
+            lonStr = r'{:6.2f}$^\circ${:s}'.format(abs(self.glon),
                 'E' if self.glon > 0 else 'W')
         except Exception:
             pass
 
         try:
-            locStr = '{:s}, {:s}'.format(latStr, lonStr)
+            locStr = f'{latStr:s}, {lonStr:s}'
         except Exception:
             pass
 
         if self.option == 1:
-            self.title = '{:s} - {:s} - {:s}'.format(dateStr, apStr, locStr)
+            self.title = f'{dateStr:s} - {apStr:s} - {locStr:s}'
         elif self.option == 2:
-            self.title = '{:s} - {:s} - {:s} - GEOG. LON.: {:s}'.format(dateStr, timeStr, apStr, lonStr)
+            self.title = f'{dateStr:s} - {timeStr:s} - {apStr:s} - GEOG. LON.: {lonStr:s}'
         elif self.option == 4:
-            self.title = '{:s} - {:s} - {:s} - GEOG. LAT.: {:s}'.format(dateStr, timeStr, apStr, latStr)
+            self.title = f'{dateStr:s} - {timeStr:s} - {apStr:s} - GEOG. LAT.: {latStr:s}'
         elif self.option == 6:
-            self.title = '{:s} - {:s} - {:s} - {:s}'.format(dateStr, timeStr, apStr, altStr)
+            self.title = f'{dateStr:s} - {timeStr:s} - {apStr:s} - {altStr:s}'
 
     #
     # End of 'GetTitle'
@@ -724,8 +727,8 @@ class HWM142DPlot:
 
     def XVsY2DWindMap(self, ax, xVal, yVal, uVal, vVal, title=None, xlabel=None,
         xlim=None, ylabel=None, ylim=None, zlabel=None, zMax=None, zMin=None):
-        
-        if Basemap is None: 
+
+        if Basemap is None:
             return
 
         m = Basemap(llcrnrlon=self.glonlim[0], llcrnrlat=self.glatlim[0],
@@ -763,7 +766,7 @@ class HWM142DPlot:
 
         if Basemap is None:
             return
-        
+
         m = Basemap(llcrnrlon=self.glonlim[0], llcrnrlat=self.glatlim[0],
             urcrnrlon=self.glonlim[-1], urcrnrlat=self.glatlim[-1], resolution='l')
 

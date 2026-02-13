@@ -1,13 +1,13 @@
-from pyhwm2014 import HWM142D, hwm14
-import seaborn
-from matplotlib.pyplot import colorbar, figure, show
-from numpy.ma import masked_where
-
 import pyapex
-from pylab import cm, Normalize
+from matplotlib.pyplot import colorbar, figure, show
 from numpy import arange, asarray, isnan, nan, tile, transpose, where
+from numpy.ma import masked_where
+from pylab import Normalize, cm
+
 #
 from timeutil import TimeUtilities
+
+from pyhwm2014 import HWM142D, hwm14
 
 
 class HWM14_2DProf(HWM142D):

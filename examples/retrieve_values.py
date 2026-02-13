@@ -8,6 +8,7 @@ date/time, location, and altitude.
 """
 
 from datetime import datetime
+
 from pyhwm2014 import HWM14
 
 
@@ -21,7 +22,7 @@ def example_single_point():
     print("=" * 70)
     print("Example 1: Single Point Retrieval")
     print("=" * 70)
-    
+
     # Define parameters
     year = 2023
     day_of_year = 150  # Day 150 is approximately May 30
@@ -30,14 +31,14 @@ def example_single_point():
     latitude = 40.0  # 40°N
     longitude = -105.0  # 105°W
     ap_index = 10  # Geomagnetic activity index
-    
-    print(f"\nParameters:")
+
+    print("\nParameters:")
     print(f"  Date: Year {year}, Day of Year {day_of_year}")
     print(f"  Time: {universal_time} UT")
     print(f"  Location: {latitude}°N, {longitude}°E")
     print(f"  Altitude: {altitude_km} km")
     print(f"  ap index: {ap_index}")
-    
+
     # Create HWM14 object with a single altitude
     # Note: We use option=1 (height profile) but with a single altitude point
     hwm14 = HWM14(
@@ -53,18 +54,18 @@ def example_single_point():
         option=1,
         verbose=False
     )
-    
+
     # Extract wind values
     # Uwind = Zonal wind (positive eastward)
     # Vwind = Meridional wind (positive northward)
     zonal_wind = hwm14.Uwind[0]
     meridional_wind = hwm14.Vwind[0]
-    
-    print(f"\nResults:")
+
+    print("\nResults:")
     print(f"  Zonal wind (U): {zonal_wind:.2f} m/s")
     print(f"  Meridional wind (V): {meridional_wind:.2f} m/s")
     print(f"  Total horizontal wind: {(zonal_wind**2 + meridional_wind**2)**0.5:.2f} m/s")
-    
+
 
 def example_height_profile():
     """
@@ -75,7 +76,7 @@ def example_height_profile():
     print("\n" + "=" * 70)
     print("Example 2: Height Profile")
     print("=" * 70)
-    
+
     # Define parameters
     year = 2023
     day_of_year = 180
@@ -86,15 +87,15 @@ def example_height_profile():
     latitude = -30.0  # 30°S
     longitude = 150.0  # 150°E
     ap_index = 5
-    
-    print(f"\nParameters:")
+
+    print("\nParameters:")
     print(f"  Date: Year {year}, Day of Year {day_of_year}")
     print(f"  Time: {universal_time} UT")
     print(f"  Location: {latitude}°N, {longitude}°E")
     print(f"  Altitude range: {altitude_min}-{altitude_max} km")
     print(f"  Altitude step: {altitude_step} km")
     print(f"  ap index: {ap_index}")
-    
+
     # Create HWM14 object for height profile
     hwm14 = HWM14(
         altlim=[altitude_min, altitude_max],
@@ -108,8 +109,8 @@ def example_height_profile():
         option=1,  # Height profile option
         verbose=False
     )
-    
-    print(f"\nResults:")
+
+    print("\nResults:")
     print(f"{'Altitude (km)':>15} {'Zonal U (m/s)':>15} {'Meridional V (m/s)':>20}")
     print("-" * 52)
     for i, alt in enumerate(hwm14.altbins):
@@ -123,30 +124,30 @@ def example_with_datetime():
     print("\n" + "=" * 70)
     print("Example 3: Using Python datetime")
     print("=" * 70)
-    
+
     # Use a datetime object
     dt = datetime(2024, 7, 15, 18, 30)  # July 15, 2024, 18:30
-    
+
     # Convert to year and day of year
     year = dt.year
     day_of_year = dt.timetuple().tm_yday
     # Convert time to decimal hours UT
     universal_time = dt.hour + dt.minute / 60.0 + dt.second / 3600.0
-    
+
     # Location and other parameters
     altitude_km = 250.0
     latitude = 0.0  # Equator
     longitude = 0.0  # Prime Meridian
     ap_index = 15
-    
+
     print(f"\nInput datetime: {dt}")
-    print(f"Converted to:")
+    print("Converted to:")
     print(f"  Year: {year}")
     print(f"  Day of Year: {day_of_year}")
     print(f"  Universal Time: {universal_time:.4f} hours")
     print(f"  Location: {latitude}°N, {longitude}°E")
     print(f"  Altitude: {altitude_km} km")
-    
+
     # Get wind values
     hwm14 = HWM14(
         alt=altitude_km,
@@ -161,8 +162,8 @@ def example_with_datetime():
         option=1,
         verbose=False
     )
-    
-    print(f"\nResults:")
+
+    print("\nResults:")
     print(f"  Zonal wind (U): {hwm14.Uwind[0]:.2f} m/s")
     print(f"  Meridional wind (V): {hwm14.Vwind[0]:.2f} m/s")
 
@@ -174,7 +175,7 @@ def example_multiple_locations():
     print("\n" + "=" * 70)
     print("Example 4: Latitude Profile")
     print("=" * 70)
-    
+
     # Parameters
     year = 2023
     day_of_year = 1
@@ -185,15 +186,15 @@ def example_multiple_locations():
     latitude_step = 30.0
     longitude = 0.0
     ap_index = 10
-    
-    print(f"\nParameters:")
+
+    print("\nParameters:")
     print(f"  Date: Year {year}, Day of Year {day_of_year}")
     print(f"  Time: {universal_time} UT")
     print(f"  Longitude: {longitude}°E")
     print(f"  Altitude: {altitude_km} km")
     print(f"  Latitude range: {latitude_min}° to {latitude_max}°")
     print(f"  Latitude step: {latitude_step}°")
-    
+
     # Get latitude profile
     hwm14 = HWM14(
         alt=altitude_km,
@@ -207,8 +208,8 @@ def example_multiple_locations():
         option=2,  # Latitude profile option
         verbose=False
     )
-    
-    print(f"\nResults:")
+
+    print("\nResults:")
     print(f"{'Latitude (°)':>15} {'Zonal U (m/s)':>15} {'Meridional V (m/s)':>20}")
     print("-" * 52)
     for i, lat in enumerate(hwm14.glatbins):
@@ -223,13 +224,13 @@ def main():
     print("pyHWM14: Horizontal Wind Model 2014")
     print("Examples of retrieving zonal and meridional wind values")
     print("=" * 70)
-    
+
     # Run examples
     example_single_point()
     example_height_profile()
     example_with_datetime()
     example_multiple_locations()
-    
+
     print("\n" + "=" * 70)
     print("Examples completed!")
     print("\nNotes:")

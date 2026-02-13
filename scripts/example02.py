@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from pyhwm2014 import HWM14, HWM14Plot
 
+
 def example02():
 
     # Single latitudinal profile

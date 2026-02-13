@@ -26,7 +26,7 @@ print(w)
 # # hwm14Gbj = HWM142DPlot( profObj=hwm14Obj )
 
 # Latitude vs Height array
-# hwm14Obj = HWM142D( altlim=[90., 200.], altstp=10., glatlim=[-40., 40.], glatstp=5., 
+# hwm14Obj = HWM142D( altlim=[90., 200.], altstp=10., glatlim=[-40., 40.], glatstp=5.,
 #     option=2, verbose=False )
 # Latitude vs Height plot
 # hwm14Gbj = HWM142DPlot( profObj=hwm14Obj )

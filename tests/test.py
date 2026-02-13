@@ -1,5 +1,7 @@
 from unittest import TestCase
+
 from pyhwm2014 import HWM14
+
 
 class Test(TestCase):
     def test_hwm14(self):
