@@ -4,6 +4,7 @@
 # For Python 3.11 or earlier support, use git tag v1.0.1
 
 CLEAN_VENV ?= 0
+export UV_LINK_MODE = copy
 
 .PHONY: install-gfortran install test \
 	install-python312 venv312 install312-sci test312 clean
