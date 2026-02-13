@@ -1,25 +1,28 @@
 
-.PHONY: install-gfortran install test install-python310 venv310 install310 test310
+PYTHON_VERSION ?= 3.11
+
+.PHONY: install-gfortran install test \
+	install-python311 venv311 install311 test311
 
 install-gfortran:
 	sudo apt-get -y install gfortran
 
-install-python310:
+install-python311:
 	@if ! command -v uv >/dev/null 2>&1; then \
 		echo "Installing uv..."; \
 		curl -LsSf https://astral.sh/uv/install.sh | sh; \
 	fi
 	@UV_BIN="$${HOME}/.local/bin/uv"; \
 	if command -v uv >/dev/null 2>&1; then UV_BIN="$$(command -v uv)"; fi; \
-	"$$UV_BIN" python install 3.10; \
-	"$$UV_BIN" python pin 3.10
+	"$$UV_BIN" python install $(PYTHON_VERSION); \
+	"$$UV_BIN" python pin $(PYTHON_VERSION)
 
-venv310: install-python310
+venv311: install-python311
 	@UV_BIN="$${HOME}/.local/bin/uv"; \
 	if command -v uv >/dev/null 2>&1; then UV_BIN="$$(command -v uv)"; fi; \
-	"$$UV_BIN" venv --python 3.10 --seed --clear .venv
+	"$$UV_BIN" venv --python $(PYTHON_VERSION) --seed --clear .venv
 
-install310: venv310
+install311: venv311
 	.venv/bin/python -m ensurepip --upgrade
 	.venv/bin/python -m pip install --upgrade pip
 	.venv/bin/python -m pip install "setuptools<60"
@@ -27,7 +30,7 @@ install310: venv310
 	rm -rf build pyhwm2014.egg-info
 	.venv/bin/python setup.py develop
 
-test310: install310
+test311: install311
 	.venv/bin/python -m coverage run --source=. --module unittest discover --start-directory tests --verbose
 
 install:

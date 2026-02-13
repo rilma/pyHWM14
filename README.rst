@@ -18,7 +18,7 @@ Installation
 From Source Code
 ----------------
 
-Currently supports Python 3.10 under Ubuntu 20.04 (see Github Actions).
+Currently supports Python 3.11 under Ubuntu 20.04 (see Github Actions).
 
 IMPORTANT: For support in other Python versions and/or OS, users are invited to work on the case and submmit a PR. Help making the project more generic!
 
@@ -29,32 +29,32 @@ IMPORTANT: For support in other Python versions and/or OS, users are invited to 
     $ make install
 
 -------------------
-Make Targets (3.10)
+Make Targets (3.11)
 -------------------
 
-The repository includes additional ``make`` targets to set up and use a local Python 3.10 environment.
+The repository includes additional ``make`` targets to set up and use a local Python 3.11 environment.
 
 .. list-table::
      :header-rows: 1
 
      * - Target
          - Purpose
-     * - ``make install-python310``
-         - Installs Python 3.10 with ``uv`` (if needed) and pins ``.python-version`` to 3.10.
-     * - ``make venv310``
-         - Creates/recreates a local ``.venv`` using Python 3.10.
-     * - ``make install310``
+     * - ``make install-python311``
+         - Installs Python 3.11 with ``uv`` (if needed) and pins ``.python-version`` to 3.11.
+     * - ``make venv311``
+         - Creates/recreates a local ``.venv`` using Python 3.11.
+     * - ``make install311``
          - Installs project dependencies and runs ``setup.py develop`` inside ``.venv``.
-     * - ``make test310``
-         - Runs the test suite with coverage using ``.venv`` Python 3.10.
+     * - ``make test311``
+         - Runs the test suite with coverage using ``.venv`` Python 3.11.
 
 Typical workflow:
 
 .. code-block:: bash
 
-        $ make install310
+        $ make install311
         $ source .venv/bin/activate
-        $ make test310
+        $ make test311
 
 ---------
 From PyPi
