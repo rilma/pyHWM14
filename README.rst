@@ -28,6 +28,34 @@ IMPORTANT: For support in other Python versions and/or OS, users are invited to 
     $ cd pyHWM14
     $ make install
 
+-------------------
+Make Targets (3.10)
+-------------------
+
+The repository includes additional ``make`` targets to set up and use a local Python 3.10 environment.
+
+.. list-table::
+     :header-rows: 1
+
+     * - Target
+         - Purpose
+     * - ``make install-python310``
+         - Installs Python 3.10 with ``uv`` (if needed) and pins ``.python-version`` to 3.10.
+     * - ``make venv310``
+         - Creates/recreates a local ``.venv`` using Python 3.10.
+     * - ``make install310``
+         - Installs project dependencies and runs ``setup.py develop`` inside ``.venv``.
+     * - ``make test310``
+         - Runs the test suite with coverage using ``.venv`` Python 3.10.
+
+Typical workflow:
+
+.. code-block:: bash
+
+        $ make install310
+        $ source .venv/bin/activate
+        $ make test310
+
 ---------
 From PyPi
 ---------
