@@ -47,6 +47,8 @@ The repository includes additional ``make`` targets to set up and use a local Py
          - Installs project dependencies and runs ``setup.py develop`` inside ``.venv``.
      * - ``make test311``
          - Runs the test suite with coverage using ``.venv`` Python 3.11.
+     * - ``make clean``
+         - Removes build/test artifacts. Use ``make clean CLEAN_VENV=1`` to also remove ``.venv``.
 
 Typical workflow:
 
@@ -55,6 +57,13 @@ Typical workflow:
         $ make install311
         $ source .venv/bin/activate
         $ make test311
+
+    Cleanup examples:
+
+    .. code-block:: bash
+
+        $ make clean
+        $ make clean CLEAN_VENV=1
 
 ---------
 From PyPi

@@ -27,7 +27,7 @@ jobs:
         .venv/bin/python -m pip install --upgrade pip
         .venv/bin/python -m pip install "setuptools<60"
         .venv/bin/python -m pip install coveralls "numpy==1.23.5"
-        .venv/bin/pip install -e .
+        .venv/bin/python setup.py develop
     - name: Run code test in Python programs
       run: |
         .venv/bin/coverage run --source=. --module unittest discover --start-directory tests --verbose

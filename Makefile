@@ -1,8 +1,9 @@
 
 PYTHON_VERSION ?= 3.11
+CLEAN_VENV ?= 0
 
 .PHONY: install-gfortran install test \
-	install-python311 venv311 install311 test311
+	install-python311 venv311 install311 test311 clean
 
 install-gfortran:
 	sudo apt-get -y install gfortran
@@ -41,3 +42,10 @@ install:
 
 test:
 	coverage run --source=. --module unittest discover --start-directory tests --verbose
+
+clean:
+	rm -rf build dist pyhwm2014.egg-info
+	find . -type d -name "__pycache__" -prune -exec rm -rf {} +
+	find . -type f -name "*.py[co]" -delete
+	rm -f .coverage
+	@if [ "$(CLEAN_VENV)" = "1" ]; then rm -rf .venv; fi
