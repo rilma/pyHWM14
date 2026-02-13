@@ -32,7 +32,7 @@ IMPORTANT: For support in other Python versions and/or OS, users are invited to 
 Make Targets (3.12)
 -------------------
 
-The repository includes additional ``make`` targets to set up and use a local Python 3.12 environment with the modern scikit-build-core backend.
+The repository uses ``uv`` (a fast, modern Python package manager) for managing Python versions and dependencies. All targets automatically install and use uv if needed.
 
 .. list-table::
      :header-rows: 1
@@ -42,13 +42,20 @@ The repository includes additional ``make`` targets to set up and use a local Py
      * - ``make install-python312``
          - Installs Python 3.12 with ``uv`` (if needed) and pins ``.python-version`` to 3.12.
      * - ``make venv312``
-         - Creates/recreates a local ``.venv312`` using Python 3.12.
+         - Creates/recreates a local ``.venv312`` using Python 3.12 via ``uv``.
      * - ``make install312-sci``
-         - Builds hwm14 extension with scikit-build-core and installs project in editable mode.
+         - Installs build dependencies (scikit-build-core, cmake, ninja, meson) and project via ``uv pip``.
      * - ``make test312``
          - Runs the test suite using Python 3.12.
      * - ``make clean``
          - Removes build/test artifacts. Use ``make clean CLEAN_VENV=1`` to also remove ``.venv312``.
+
+**About uv**: The project uses ``uv`` (https://github.com/astral-sh/uv) for fast, reliable dependency management and Python version control. Benefits include:
+
+- ⚡ 10-100x faster than pip
+- 📦 Reproducible builds via ``uv.lock``
+- 🎯 Single tool for Python + package management
+- 🔒 Superior dependency resolution
 
 Typical workflow:
 

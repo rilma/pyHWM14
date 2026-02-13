@@ -27,11 +27,14 @@ venv312: install-python312
 	"$$UV_BIN" venv --python 3.12 --seed --clear .venv312
 
 install312-sci: venv312
-	.venv312/bin/python -m ensurepip --upgrade
-	.venv312/bin/python -m pip install --upgrade pip
-	.venv312/bin/python -m pip install scikit-build-core cmake ninja numpy
+	@UV_BIN="$${HOME}/.local/bin/uv"; \
+	if command -v uv >/dev/null 2>&1; then UV_BIN="$$(command -v uv)"; fi; \
+	"$$UV_BIN" pip install --python .venv312/bin/python --upgrade pip; \
+	"$$UV_BIN" pip install --python .venv312/bin/python scikit-build-core cmake ninja numpy meson
 	rm -rf build dist pyhwm2014.egg-info
-	.venv312/bin/pip install -e .
+	@UV_BIN="$${HOME}/.local/bin/uv"; \
+	if command -v uv >/dev/null 2>&1; then UV_BIN="$$(command -v uv)"; fi; \
+	"$$UV_BIN" pip install --python .venv312/bin/python -e .
 
 test312: install312-sci
 	.venv312/bin/python -m unittest discover -s tests --verbose
