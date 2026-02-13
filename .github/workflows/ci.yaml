@@ -23,8 +23,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m venv .venv
-        .venv/bin/pip install coveralls numpy
-        .venv/bin/pip install -e .
+	      .venv/bin/python -m ensurepip --upgrade
+	      .venv/bin/python -m pip install --upgrade pip
+	      .venv/bin/python -m pip install "setuptools<60"
+	      .venv/bin/python -m pip install coveralls "numpy==1.23.5"
     - name: Run code test in Python programs
       run: |
         .venv/bin/coverage run --source=. --module unittest discover --start-directory tests --verbose
