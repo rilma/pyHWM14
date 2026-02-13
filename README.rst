@@ -396,34 +396,14 @@ References
 ---------------------
 Wrapping Fortran code
 ---------------------
-This is for reference, no need to do this as it's done by  ``python setup.py develop``
 
-1. The first step is to ask 'f2py' to write the signature of the routine (hwm14.f90) to 
-a description file
+The Fortran extension is automatically built using CMake + f2py (Meson backend) during installation:
 
 .. code-block:: bash
 
-    $ f2py hwm14.f90 -m hwm14 -h hwm14.pyf
-    
-The '-m' flag gives the name the python module should have (hwm14). The '-h' flag tells 
-'f2py' in which file should write the signature (see file 'hwm14.pyf').
+    $ pip install -e .
 
-2. 'f2py' recognizes which variables need to be passed in or out. This is done by the command 
-'intent' added to the declaration of variables. 
+This automatically invokes the build system defined in `pyproject.toml` and `CMakeLists.txt`. No manual compilation steps are needed.
 
-3. Now everything is ready and the module can be compiled. f2py will try to find a compiler 
-in your path and use it. So all to be typed is
-
-.. code-block:: bash
-
-    $ f2py -c hwm14.pyf hwm14.f90
-
-'f2py' will write the wrapper files, compile hwm14.f90 and the wrapper files, and link them 
-in a shared object. After this step, one can start Python and load the extension module.
-
-NOTE: To specify a Fortran compiler type by vendor, e.g. ifort (Intel Fortran compiler):
-
-.. code-block:: bash
-
-    $ f2py -c hwm14.pyf hwm14.f90 --fcompiler=intelem
+For details on the migration from deprecated `numpy.distutils` to the modern CMake/f2py build system, see `MIGRATION_PLAN_PY312.md`.
 
