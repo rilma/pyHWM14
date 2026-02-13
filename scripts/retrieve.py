@@ -13,7 +13,6 @@ Usage:
 import argparse
 import sys
 from datetime import datetime
-from pyhwm2014 import HWM14
 
 
 def parse_arguments():
@@ -108,6 +107,8 @@ def parse_datetime_string(dt_string):
 
 def retrieve_single_point(year, day, time, lat, lon, alt, ap, verbose=False):
     """Retrieve wind values at a single point."""
+    from pyhwm2014 import HWM14
+    
     hwm14 = HWM14(
         alt=alt,
         altlim=[alt, alt],
@@ -133,6 +134,8 @@ def retrieve_single_point(year, day, time, lat, lon, alt, ap, verbose=False):
 
 def retrieve_height_profile(year, day, time, lat, lon, alt_range, ap, verbose=False):
     """Retrieve wind values at multiple altitudes."""
+    from pyhwm2014 import HWM14
+    
     alt_min, alt_max, alt_step = alt_range
     
     hwm14 = HWM14(
@@ -161,6 +164,8 @@ def retrieve_height_profile(year, day, time, lat, lon, alt_range, ap, verbose=Fa
 
 def retrieve_latitude_profile(year, day, time, lon, alt, lat_range, ap, verbose=False):
     """Retrieve wind values at multiple latitudes."""
+    from pyhwm2014 import HWM14
+    
     lat_min, lat_max, lat_step = lat_range
     
     hwm14 = HWM14(
@@ -189,6 +194,8 @@ def retrieve_latitude_profile(year, day, time, lon, alt, lat_range, ap, verbose=
 
 def retrieve_longitude_profile(year, day, time, lat, alt, lon_range, ap, verbose=False):
     """Retrieve wind values at multiple longitudes."""
+    from pyhwm2014 import HWM14
+    
     lon_min, lon_max, lon_step = lon_range
     
     hwm14 = HWM14(
