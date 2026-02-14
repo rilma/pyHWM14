@@ -31,14 +31,14 @@ install313-sci: venv313
 	@UV_BIN="$${HOME}/.local/bin/uv"; \
 	if command -v uv >/dev/null 2>&1; then UV_BIN="$$(command -v uv)"; fi; \
 	"$$UV_BIN" pip install --python .venv313/bin/python --upgrade pip; \
-	"$$UV_BIN" pip install --python .venv313/bin/python scikit-build-core cmake ninja numpy meson
+	"$$UV_BIN" pip install --python .venv313/bin/python scikit-build-core cmake ninja numpy meson pytest
 	rm -rf build dist pyhwm2014.egg-info
 	@UV_BIN="$${HOME}/.local/bin/uv"; \
 	if command -v uv >/dev/null 2>&1; then UV_BIN="$$(command -v uv)"; fi; \
 	"$$UV_BIN" pip install --python .venv313/bin/python -e .
 
 test313: install313-sci
-	.venv313/bin/python -m unittest discover -s tests --verbose
+	.venv313/bin/python -m pytest tests/ -v --tb=short
 
 install: install-python313 install313-sci
 
