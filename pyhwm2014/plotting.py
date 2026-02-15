@@ -16,17 +16,17 @@ try:
     from matplotlib.colors import Normalize
     from matplotlib.pyplot import cm, figure, show, subplots
 except (ImportError, RuntimeError):
-    cm = None  # type: ignore
-    figure = None  # type: ignore
-    show = None  # type: ignore
-    subplots = None  # type: ignore
-    Normalize = None  # type: ignore
+    cm = None
+    figure = None
+    show = None
+    subplots = None
+    Normalize = None
 
 # Optional Basemap import
 try:
     from mpl_toolkits.basemap import Basemap
 except ImportError:
-    Basemap = None  # type: ignore
+    Basemap = None
 
 
 class HWM14Plot:

@@ -63,12 +63,12 @@ pre-commit-run:
 
 lint:
 	@echo "Running ruff linter..."; \
-	.venv313/bin/ruff check pyhwm2014 tests || true; \
+	.venv313/bin/ruff check pyhwm2014 tests
 	.venv313/bin/ruff format --check pyhwm2014 tests
 
 type-check:
 	@echo "Running mypy type checker..."; \
-	.venv313/bin/mypy pyhwm2014 || true
+	.venv313/bin/mypy pyhwm2014
 
 check: lint type-check
 	@echo "✅ All checks passed!"

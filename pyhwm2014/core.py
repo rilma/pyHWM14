@@ -6,7 +6,7 @@ from typing import Literal
 import numpy as np
 from numpy import append, arange, ones, reshape
 
-from . import hwm14
+from . import hwm14  # type: ignore
 
 
 class HWM14:
@@ -504,8 +504,8 @@ class HWM142D:
         self.f107a = f107a
         self.verbose = verbose
 
-        self.Uwind: list[np.ndarray] = []
-        self.Vwind: list[np.ndarray] = []
+        self.Uwind: np.ndarray = np.empty((0, 0))
+        self.Vwind: np.ndarray = np.empty((0, 0))
 
         # Execute appropriate 2D profile calculation
         if "alt" not in self.__dict__:

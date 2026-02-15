@@ -23,11 +23,11 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install ruff mypy numpy timeutil
     - name: Run ruff check
-      run: ruff check pyhwm2014 tests || true
+      run: ruff check pyhwm2014 tests
     - name: Run ruff format check
       run: ruff format --check pyhwm2014 tests
     - name: Run mypy type checking
-      run: mypy pyhwm2014 || true
+      run: mypy pyhwm2014
 
   test:
     name: Test
