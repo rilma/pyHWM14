@@ -214,16 +214,13 @@ Use the CLI tool for quick retrievals without writing code:
 More Examples
 ----------------
 
-For comprehensive examples including height profiles, latitude profiles, and more, see:
+For comprehensive examples including height profiles, latitude profiles, and more, see the ``scripts/`` directory which contains various example scripts.
 
-* ``examples/retrieve_values.py`` - Detailed Python examples
-* ``scripts/`` directory - Various example scripts
-
-Run the comprehensive example:
+Run the comprehensive examples:
 
 .. code-block:: bash
 
-    $ python examples/retrieve_values.py
+    $ python scripts/retrieve_values.py
 
 Examples
 ========
