@@ -13,9 +13,7 @@ This guide documents the maintenance and release process for pyHWM14, intended f
 
 2. **Verify type checking and linting:**
    ```bash
-   mypy pyhwm2014
-   ruff check pyhwm2014 tests
-   ruff format --check pyhwm2014 tests
+   make check
    ```
 
 3. **Update version in `pyproject.toml`:**
@@ -148,7 +146,7 @@ Dependabot automatically checks for updates:
 
 1. **Test Coverage:** Should remain >80%
    ```bash
-   pytest tests/ --cov=pyhwm2014 --cov-report=term-missing | grep TOTAL
+   make test313
    ```
 
 2. **Open Issues/PRs:**
@@ -249,10 +247,10 @@ python -c "from pyhwm2014 import HWM14; print('✓ Import successful')"
 make venv313 && source .venv313/bin/activate && pip install -e ".[dev,plot,docs]"
 
 # Run full CI locally
-pytest tests/ --cov=pyhwm2014 && mypy pyhwm2014 && ruff check pyhwm2014 tests
+make test313 && make check
 
 # Format code
-black pyhwm2014 tests && ruff check --fix pyhwm2014 tests
+make fix
 
 # Create release
 git tag v1.2.0 && git push origin v1.2.0
