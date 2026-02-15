@@ -28,7 +28,6 @@ body:
         from pyhwm2014 import HWM14
         # Your code here
         ```
-      render: python
     validations:
       required: true
 
@@ -42,7 +41,6 @@ body:
         Traceback (most recent call last):
           ...
         ```
-      render: python
 
   - type: textarea
     id: environment
