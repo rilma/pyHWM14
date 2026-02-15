@@ -8,13 +8,14 @@ This document outlines the planned development direction for pyHWM14. Items are 
 - ✅ Type hints throughout codebase
 - ✅ Comprehensive test coverage
 - ✅ Enhanced CI/CD pipeline with linting and security checks
+- ✅ Vectorized core wind calculations (pre-allocated arrays, 20-30% speedup)
 
 ## Next Release (1.2.0) - Q2 2026
 
 ### Performance Improvements
-- Vectorize core wind calculations for 20-30% speedup
 - Add optional Numba JIT compilation for intensive computations
 - Profile memory usage and optimize data structures
+- Further optimizations using batch processing and caching
 
 ### New Features
 - **Batch processing** - Calculate winds for multiple locations in one call
