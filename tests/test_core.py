@@ -133,7 +133,6 @@ class TestHWM142D:
         assert len(h.Uwind) > 0
         assert len(h.Vwind) > 0
 
-
     def test_hwm142d_option_3(self) -> None:
         """Test HWM142D option 3 (GMT vs Latitude)."""
         h = HWM142D(
@@ -213,6 +212,7 @@ class TestHWM14Methods:
     def test_wind_components_are_numeric(self) -> None:
         """Test that wind components are numeric values."""
         import numpy as np
+
         h = HWM14(
             altlim=[200, 300],
             altstp=25,

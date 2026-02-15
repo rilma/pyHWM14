@@ -1,6 +1,6 @@
 """Unit tests for HWM14 plotting functionality."""
 
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 
@@ -62,9 +62,9 @@ class TestHWM14Plot:
         plot = HWM14Plot(profObj=h)  # type: ignore
         # Title generation depends on matplotlib availability
         # If matplotlib is available, title should be generated
-        if hasattr(plot, 'GetTitle'):
+        if hasattr(plot, "GetTitle"):
             plot.GetTitle()
-            if hasattr(plot, 'title'):
+            if hasattr(plot, "title"):
                 assert len(plot.title) > 0
 
     def test_hwm14plot_get_hhmmss(self) -> None:
@@ -166,9 +166,9 @@ class TestHWM14Plot:
             year=2005,
         )
         plot = HWM14Plot(profObj=h)  # type: ignore
-        if hasattr(plot, 'GetTitle'):
+        if hasattr(plot, "GetTitle"):
             plot.GetTitle()
-            if hasattr(plot, 'title'):
+            if hasattr(plot, "title"):
                 assert "2005" in plot.title or "25" in plot.title
 
     def test_hwm14plot_title_generation_option_2(self) -> None:
@@ -185,9 +185,9 @@ class TestHWM14Plot:
             year=2010,
         )
         plot = HWM14Plot(profObj=h)  # type: ignore
-        if hasattr(plot, 'GetTitle'):
+        if hasattr(plot, "GetTitle"):
             plot.GetTitle()
-            if hasattr(plot, 'title'):
+            if hasattr(plot, "title"):
                 assert "2010" in plot.title or "250" in plot.title
 
     def test_hwm14plot_title_generation_option_3(self) -> None:
@@ -205,9 +205,9 @@ class TestHWM14Plot:
             year=2015,
         )
         plot = HWM14Plot(profObj=h)  # type: ignore
-        if hasattr(plot, 'GetTitle'):
+        if hasattr(plot, "GetTitle"):
             plot.GetTitle()
-            if hasattr(plot, 'title'):
+            if hasattr(plot, "title"):
                 assert "2015" in plot.title or plot.title
 
     def test_hwm14plot_title_generation_option_4(self) -> None:
@@ -224,9 +224,9 @@ class TestHWM14Plot:
             year=2020,
         )
         plot = HWM14Plot(profObj=h)  # type: ignore
-        if hasattr(plot, 'GetTitle'):
+        if hasattr(plot, "GetTitle"):
             plot.GetTitle()
-            if hasattr(plot, 'title'):
+            if hasattr(plot, "title"):
                 assert "2020" in plot.title or plot.title
 
 
