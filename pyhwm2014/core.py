@@ -441,6 +441,10 @@ class HWM142D:
         if utlim is None:
             utlim = [0.0, 24.0]
 
+        # Initialize wind arrays early (before validation)
+        self.Uwind: np.ndarray = np.empty((0, 0))
+        self.Vwind: np.ndarray = np.empty((0, 0))
+
         self.option = option
         self.year = year
         self.doy = day
@@ -503,9 +507,6 @@ class HWM142D:
         self.f107 = f107
         self.f107a = f107a
         self.verbose = verbose
-
-        self.Uwind: np.ndarray = np.empty((0, 0))
-        self.Vwind: np.ndarray = np.empty((0, 0))
 
         # Execute appropriate 2D profile calculation
         if "alt" not in self.__dict__:
@@ -624,4 +625,26 @@ class HWM142D:
 
     def LatVsGMTArray(self) -> None:
         """Calculate latitude vs GMT 2D array."""
-        pass
+        self.utbins = arange(self.utlim[0], self.utlim[1] + self.utstp, self.utstp)
+
+        for ut in self.utbins:
+            hwm14obj = HWM14(
+                alt=self.alt,
+                ap=self.ap,
+                glatlim=self.glatlim,
+                glatstp=self.glatstp,
+                glon=self.glon,
+                option=2,
+                ut=ut,
+                verbose=self.verbose,
+            )
+
+            uwind = reshape(hwm14obj.Uwind, (len(hwm14obj.Uwind), 1))
+            vwind = reshape(hwm14obj.Vwind, (len(hwm14obj.Vwind), 1))
+            self.Uwind = uwind if ut == self.utlim[0] else append(self.Uwind, uwind, axis=1)
+            self.Vwind = vwind if ut == self.utlim[0] else append(self.Vwind, vwind, axis=1)
+
+        self.glatbins = hwm14obj.glatbins
+
+        self.Uwind = self.Uwind.T
+        self.Vwind = self.Vwind.T
