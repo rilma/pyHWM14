@@ -29,13 +29,27 @@ dependencies = [
 
 [project.optional-dependencies]
 plot = ["matplotlib>=3.8", "seaborn>=0.12"]
-dev = ["pytest>=7.4", "pytest-cov>=4.1", "mypy>=1.7", "ruff>=0.1", "black>=23.12"]
+dev = [
+    "pytest>=7.4", 
+    "pytest-cov>=4.1", 
+    "mypy>=1.7", 
+    "ruff>=0.1", 
+    "black>=23.12",
+    "pre-commit>=3.0",
+    "pip-audit>=2.0",
+]
 docs = ["sphinx>=7.0", "sphinx-rtd-theme>=2.0"]
+all = ["pyhwm2014[plot,dev,docs]"]
 
 [project.urls]
 "Homepage" = "https://github.com/rilma/pyHWM14"
 "Bug Tracker" = "https://github.com/rilma/pyHWM14/issues"
 "Documentation" = "https://github.com/rilma/pyHWM14/blob/main/README.rst"
+"Changelog" = "https://github.com/rilma/pyHWM14/blob/main/CHANGELOG.md"
+"Contributing" = "https://github.com/rilma/pyHWM14/blob/main/CONTRIBUTING.md"
+"Discussions" = "https://github.com/rilma/pyHWM14/discussions"
+"Roadmap" = "https://github.com/rilma/pyHWM14/blob/main/ROADMAP.md"
+"Repository" = "https://github.com/rilma/pyHWM14"
 
 [tool.scikit-build]
 cmake.minimum-version = "3.15"
