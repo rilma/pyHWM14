@@ -49,9 +49,8 @@ Use descriptive branch names following conventional commits:
 - Follow PEP 8 with line length of 100 characters
 - Use type hints for all functions and variables
 - Use meaningful variable names and include docstrings (NumPy format)
-- Format with: `black pyhwm2014 tests`
-- Lint with: `ruff check --fix pyhwm2014 tests`
-- Type check with: `mypy pyhwm2014`
+- Format and lint with: `make fix`
+- Type check with: `make type-check`
 
 **Example function with proper style:**
 ```python
@@ -85,13 +84,10 @@ def calculate_wind_profile(
 All new features must include tests. Run tests locally:
 ```bash
 # Run all tests
-pytest tests/ -v
+make test313
 
-# Run with coverage
-pytest tests/ --cov=pyhwm2014 --cov-report=html
-
-# Run specific test file
-pytest tests/test_core.py -v
+# Run specific test file (advanced option)
+uv run pytest tests/test_core.py -v
 ```
 
 Target test coverage: **>80%**
@@ -173,17 +169,16 @@ Before submitting a PR, run:
 
 ```bash
 # Run all tests
-pytest tests/ -v --cov=pyhwm2014
+make test313
 
-# Format and lint
-black pyhwm2014 tests
-ruff check --fix pyhwm2014 tests
+# Format and lint (auto-fixes)
+make fix
 
 # Type checking
-mypy pyhwm2014
+make type-check
 
-# All together (local CI)
-pytest tests/ --cov=pyhwm2014 && mypy pyhwm2014 && ruff check pyhwm2014 tests
+# All checks (local CI)
+make check && make test313
 ```
 
 ## Reporting Issues

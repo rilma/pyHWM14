@@ -17,18 +17,15 @@ This document outlines the planned development direction for pyHWM14. Items are 
 - Profile memory usage and optimize data structures
 
 ### New Features
-- **Interpolation methods** - Smooth wind profiles between points
 - **Batch processing** - Calculate winds for multiple locations in one call
 - **Output formats** - Export to NetCDF, HDF5, or CSV
 
 ### Documentation
-- Create Sphinx documentation site with examples
+- Create mkdocs documentation site with examples
 - Add comprehensive API reference
 - Create Jupyter notebook tutorials
-- Add "Getting Started" video guide
 
 ### Developer Experience
-- Publish on Conda-Forge for conda installation
 - Add Docker container for reproducibility
 - Pre-commit hook templates for contributors
 - GitHub Discussions enabled for Q&A
@@ -36,9 +33,7 @@ This document outlines the planned development direction for pyHWM14. Items are 
 ## Future Releases (1.3.0+)
 
 ### Model Updates
-- Support for HWM21 model (when available)
 - Historical model versions (HWM07, HWM14, future versions)
-- Ensemble/uncertainty estimates if available
 
 ### Advanced Features
 - **Real-time data** - Fetch geomagnetic indices automatically
@@ -61,7 +56,7 @@ This document outlines the planned development direction for pyHWM14. Items are 
 ### Major Redesign
 - Plugin system for different wind models
 - Support for multiple atmospheric properties (temperature, density, etc.)
-- C/C++ kernel with Python bindings for extreme performance
+- Rust kernel with Python bindings for extreme performance
 - WebAssembly version for browser-based calculations
 
 ### Broader Ecosystem
