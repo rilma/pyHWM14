@@ -78,6 +78,14 @@ warn_no_return = true
 strict_optional = true
 strict_equality = true
 
+# Ignore missing imports for optional dependencies
+[[tool.mypy.overrides]]
+module = [
+    "matplotlib.*",
+    "mpl_toolkits.*",
+]
+ignore_missing_imports = true
+
 [tool.ruff]
 target-version = "py313"
 line-length = 100

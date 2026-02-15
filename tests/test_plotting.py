@@ -1,9 +1,10 @@
 """Unit tests for HWM14 plotting functionality."""
 
-import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
-from pyhwm2014 import HWM14, HWM14Plot, HWM142D, HWM142DPlot
+import pytest
+
+from pyhwm2014 import HWM14, HWM142D, HWM14Plot, HWM142DPlot
 
 
 class TestHWM14Plot:
@@ -19,7 +20,7 @@ class TestHWM14Plot:
             verbose=False,
         )
         # Should not crash even if matplotlib is unavailable
-        plot = HWM14Plot(profObj=h)  # type: ignore
+        HWM14Plot(profObj=h)  # type: ignore
 
     def test_hwm14plot_with_object(self) -> None:
         """Test HWM14Plot initialization with valid HWM14 object."""
@@ -31,18 +32,18 @@ class TestHWM14Plot:
         )
         # Verify HWM14Plot can be instantiated
         # (actual plotting requires matplotlib)
-        plot = HWM14Plot(profObj=h)  # type: ignore
+        HWM14Plot(profObj=h)  # type: ignore
 
     def test_hwm14plot_without_object(self) -> None:
         """Test HWM14Plot handles None input."""
         # Should print "Wrong inputs!" and not crash
-        plot = HWM14Plot(profObj=None)  # type: ignore
+        HWM14Plot(profObj=None)  # type: ignore
 
     @pytest.mark.parametrize("option", [1, 2, 3, 4])
     def test_hwm14plot_all_options(self, option: int) -> None:
         """Test HWM14Plot for all profile options."""
         h = HWM14(option=option, verbose=False)
-        plot = HWM14Plot(profObj=h)  # type: ignore
+        HWM14Plot(profObj=h)  # type: ignore
 
 
 class TestHWM142DPlot:
@@ -60,7 +61,7 @@ class TestHWM142DPlot:
             verbose=False,
         )
         # Should not crash
-        plot = HWM142DPlot(profObj=h)  # type: ignore
+        HWM142DPlot(profObj=h)  # type: ignore
 
     def test_hwm142dplot_initialization(self) -> None:
         """Test HWM142DPlot initialization with valid parameters."""
@@ -72,11 +73,11 @@ class TestHWM142DPlot:
             option=1,
             verbose=False,
         )
-        plot = HWM142DPlot(profObj=h)  # type: ignore
+        HWM142DPlot(profObj=h)  # type: ignore
 
     def test_hwm142dplot_without_object(self) -> None:
         """Test HWM142DPlot handles None input."""
-        plot = HWM142DPlot(profObj=None)  # type: ignore
+        HWM142DPlot(profObj=None)  # type: ignore
 
     def test_hwm142dplot_wind_field_option(self) -> None:
         """Test HWM142DPlot with wind field visualization enabled."""
@@ -89,4 +90,4 @@ class TestHWM142DPlot:
             option=6,
             verbose=False,
         )
-        plot = HWM142DPlot(profObj=h, WF=True)  # type: ignore
+        HWM142DPlot(profObj=h, WF=True)  # type: ignore

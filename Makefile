@@ -7,7 +7,8 @@ CLEAN_VENV ?= 0
 export UV_LINK_MODE = copy
 
 .PHONY: install-gfortran install test \
-	install-python313 venv313 install313-sci test313 clean
+	install-python313 venv313 install313-sci test313 clean \
+	pre-commit-install pre-commit-run lint type-check check fix
 
 install-gfortran:
 	sudo apt-get -y install gfortran
@@ -31,7 +32,7 @@ install313-sci: venv313
 	@UV_BIN="$${HOME}/.local/bin/uv"; \
 	if command -v uv >/dev/null 2>&1; then UV_BIN="$$(command -v uv)"; fi; \
 	"$$UV_BIN" pip install --python .venv313/bin/python --upgrade pip; \
-	"$$UV_BIN" pip install --python .venv313/bin/python scikit-build-core cmake ninja numpy meson pytest
+	"$$UV_BIN" pip install --python .venv313/bin/python scikit-build-core cmake ninja numpy meson pytest pytest-cov ruff mypy black pre-commit
 	rm -rf build dist pyhwm2014.egg-info
 	@UV_BIN="$${HOME}/.local/bin/uv"; \
 	if command -v uv >/dev/null 2>&1; then UV_BIN="$$(command -v uv)"; fi; \
@@ -50,3 +51,31 @@ clean:
 	find . -type f -name "*.py[co]" -delete
 	rm -f .coverage
 	@if [ "$(CLEAN_VENV)" = "1" ]; then rm -rf .venv .venv313; fi
+
+pre-commit-install: install313-sci
+	@UV_BIN="$${HOME}/.local/bin/uv"; \
+	if command -v uv >/dev/null 2>&1; then UV_BIN="$$(command -v uv)"; fi; \
+	echo "Installing pre-commit hooks..."; \
+	.venv313/bin/pre-commit install
+
+pre-commit-run:
+	.venv313/bin/pre-commit run --all-files
+
+lint:
+	@echo "Running ruff linter..."; \
+	.venv313/bin/ruff check pyhwm2014 tests || true; \
+	.venv313/bin/ruff format --check pyhwm2014 tests
+
+type-check:
+	@echo "Running mypy type checker..."; \
+	.venv313/bin/mypy pyhwm2014 || true
+
+check: lint type-check
+	@echo "✅ All checks passed!"
+
+fix:
+	@echo "Running auto-fixes..."
+	.venv313/bin/ruff format pyhwm2014 tests
+	.venv313/bin/ruff check --fix pyhwm2014 tests || true
+	.venv313/bin/mypy pyhwm2014 || true
+	@echo "✅ Auto-fixes applied!"

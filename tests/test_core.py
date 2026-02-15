@@ -1,6 +1,7 @@
 """Unit tests for HWM14 core functionality."""
 
 import pytest
+
 from pyhwm2014 import HWM14, HWM142D
 
 
@@ -77,12 +78,15 @@ class TestHWM14Initialization:
         assert len(h.Uwind) > 0
         assert len(h.Vwind) > 0
 
-    @pytest.mark.parametrize("option,expected_attr", [
-        (1, "altbins"),
-        (2, "glatbins"),
-        (3, "utbins"),
-        (4, "glonbins"),
-    ])
+    @pytest.mark.parametrize(
+        "option,expected_attr",
+        [
+            (1, "altbins"),
+            (2, "glatbins"),
+            (3, "utbins"),
+            (4, "glonbins"),
+        ],
+    )
     def test_hwm14_profile_types(self, option: int, expected_attr: str) -> None:
         """Test that HWM14 creates correct attributes for each option."""
         h = HWM14(option=option, verbose=False)
@@ -135,8 +139,9 @@ class TestDataPathConfiguration:
 
     def test_hwmpath_is_set(self) -> None:
         """Test that HWMPATH is correctly configured."""
-        from pyhwm2014 import HWMPATH
         import os
+
+        from pyhwm2014 import HWMPATH
 
         assert HWMPATH is not None
         assert os.path.exists(HWMPATH) or "HWMPATH" in os.environ

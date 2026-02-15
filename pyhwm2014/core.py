@@ -11,10 +11,10 @@ from . import hwm14
 
 class HWM14:
     """Horizontal Wind Model version 2014 (HWM14) interface.
-    
+
     Calculates zonal and meridional wind components at various atmospheric
     profiles (height, latitude, GMT, longitude).
-    
+
     Parameters
     ----------
     alt : float, optional
@@ -62,7 +62,7 @@ class HWM14:
         Print message to screen during calculation. Default is True.
     year : int, optional
         Year (YYYY). Default is 1993.
-    
+
     Attributes
     ----------
     Uwind : list[float]
@@ -77,7 +77,7 @@ class HWM14:
         UTC values (hours) for option=3.
     glonbins : ndarray
         Longitude values (degrees) for option=4.
-    
+
     Examples
     --------
     >>> hwm = HWM14(altlim=[90, 200], altstp=1, ap=[-1, 35],
@@ -193,9 +193,7 @@ class HWM14:
             print("                 quiet         disturbed             total")
             print(" alt      mer      zon      mer      zon      mer      zon")
 
-        self.altbins = arange(
-            self.altlim[0], self.altlim[1] + self.altstp, self.altstp
-        )
+        self.altbins = arange(self.altlim[0], self.altlim[1] + self.altstp, self.altstp)
 
         for alt in self.altbins:
             wqt = hwm14.hwm14(
@@ -226,8 +224,7 @@ class HWM14:
 
             if self.verbose:
                 print(
-                    " %3i %8.3f %8.3f %8.3f %8.3f %8.3f %8.3f"
-                    % (alt, wqt[0], wqt[1], wdt[0], wdt[1], w[0], w[1])
+                    f" {alt:3d} {wqt[0]:8.3f} {wqt[1]:8.3f} {wdt[0]:8.3f} {wdt[1]:8.3f} {w[0]:8.3f} {w[1]:8.3f}"
                 )
 
             self.Uwind.append(w[1])
@@ -240,9 +237,7 @@ class HWM14:
             print("                   quiet         disturbed             total")
             print("  glat      mer      zon      mer      zon      mer      zon")
 
-        self.glatbins = arange(
-            self.glatlim[0], self.glatlim[1] + self.glatstp, self.glatstp
-        )
+        self.glatbins = arange(self.glatlim[0], self.glatlim[1] + self.glatstp, self.glatstp)
 
         for glat in self.glatbins:
             wqt = hwm14.hwm14(
@@ -273,8 +268,7 @@ class HWM14:
 
             if self.verbose:
                 print(
-                    " %5.1f %8.3f %8.3f %8.3f %8.3f %8.3f %8.3f"
-                    % (glat, wqt[0], wqt[1], wdt[0], wdt[1], w[0], w[1])
+                    f" {glat:5.1f} {wqt[0]:8.3f} {wqt[1]:8.3f} {wdt[0]:8.3f} {wdt[1]:8.3f} {w[0]:8.3f} {w[1]:8.3f}"
                 )
 
             self.Uwind.append(w[1])
@@ -287,9 +281,7 @@ class HWM14:
             print("                   quiet         disturbed             total")
             print("   stl      mer      zon      mer      zon      mer      zon")
 
-        self.utbins = arange(
-            self.utlim[0], self.utlim[1] + self.utstp, self.utstp
-        )
+        self.utbins = arange(self.utlim[0], self.utlim[1] + self.utstp, self.utstp)
         self.mltbins: list[float] = []
 
         for ut in self.utbins:
@@ -326,10 +318,8 @@ class HWM14:
 
             if self.verbose:
                 print(
-                    " %5.1f %8.3f %8.3f %8.3f %8.3f %8.3f %8.3f"
-                    % (ut, wqt[0], wqt[1], wdt[0], wdt[1], w[0], w[1])
+                    f" {ut:5.1f} {wqt[0]:8.3f} {wqt[1]:8.3f} {wdt[0]:8.3f} {wdt[1]:8.3f} {w[0]:8.3f} {w[1]:8.3f}"
                 )
-
             self.Uwind.append(w[1])
             self.Vwind.append(w[0])
 
@@ -340,9 +330,7 @@ class HWM14:
             print("                   quiet         disturbed             total")
             print("  glon      mer      zon      mer      zon      mer      zon")
 
-        self.glonbins = arange(
-            self.glonlim[0], self.glonlim[1] + self.glonstp, self.glonstp
-        )
+        self.glonbins = arange(self.glonlim[0], self.glonlim[1] + self.glonstp, self.glonstp)
 
         for glon in self.glonbins:
             wqt = hwm14.hwm14(
@@ -373,16 +361,14 @@ class HWM14:
 
             if self.verbose:
                 print(
-                    " %5.1f %8.3f %8.3f %8.3f %8.3f %8.3f %8.3f"
-                    % (glon, wqt[0], wqt[1], wdt[0], wdt[1], w[0], w[1])
+                    f" {glon:5.1f} {wqt[0]:8.3f} {wqt[1]:8.3f} {wdt[0]:8.3f} {wdt[1]:8.3f} {w[0]:8.3f} {w[1]:8.3f}"
                 )
-
             self.Uwind.append(w[1])
             self.Vwind.append(w[0])
 
     def toMLT(self, ut: float) -> None:
         """Calculate magnetic local time.
-        
+
         Parameters
         ----------
         ut : float
@@ -395,7 +381,7 @@ class HWM14:
 
 class HWM142D:
     """2D array calculations for HWM14 with varying two parameters.
-    
+
     Parameters
     ----------
     option : Literal[1, 2, 3, 4, 5, 6], optional
@@ -410,7 +396,7 @@ class HWM142D:
     **kwargs
         Additional keyword arguments passed to individual profile calculations.
         See HWM14 for parameter descriptions.
-    
+
     Attributes
     ----------
     Uwind : ndarray
@@ -524,15 +510,9 @@ class HWM142D:
         # Execute appropriate 2D profile calculation
         if "alt" not in self.__dict__:
             self.HeiVsLTArray()
-        elif (
-            "glat" not in self.__dict__
-            and "glon" not in self.__dict__
-        ):
+        elif "glat" not in self.__dict__ and "glon" not in self.__dict__:
             self.LonVsLatArray()
-        elif (
-            "glat" not in self.__dict__
-            and "ut" not in self.__dict__
-        ):
+        elif "glat" not in self.__dict__ and "ut" not in self.__dict__:
             self.LatVsGMTArray()
         elif "glat" not in self.__dict__:
             self.LatVsHeiArray()
@@ -559,24 +539,14 @@ class HWM142D:
 
             uwind = reshape(hwm14obj.Uwind, (len(hwm14obj.Uwind), 1))
             vwind = reshape(hwm14obj.Vwind, (len(hwm14obj.Vwind), 1))
-            self.Uwind = (
-                uwind
-                if ut == self.utlim[0]
-                else append(self.Uwind, uwind, axis=1)
-            )
-            self.Vwind = (
-                vwind
-                if ut == self.utlim[0]
-                else append(self.Vwind, vwind, axis=1)
-            )
+            self.Uwind = uwind if ut == self.utlim[0] else append(self.Uwind, uwind, axis=1)
+            self.Vwind = vwind if ut == self.utlim[0] else append(self.Vwind, vwind, axis=1)
 
         self.altbins = hwm14obj.altbins
 
     def LatVsHeiArray(self) -> None:
         """Calculate latitude vs height 2D array."""
-        self.altbins = arange(
-            self.altlim[0], self.altlim[1] + self.altstp, self.altstp
-        )
+        self.altbins = arange(self.altlim[0], self.altlim[1] + self.altstp, self.altstp)
 
         for _alt in self.altbins:
             hwm14obj = HWM14(
@@ -592,16 +562,8 @@ class HWM142D:
 
             uwind = reshape(hwm14obj.Uwind, (len(hwm14obj.Uwind), 1))
             vwind = reshape(hwm14obj.Vwind, (len(hwm14obj.Vwind), 1))
-            self.Uwind = (
-                uwind
-                if _alt == self.altlim[0]
-                else append(self.Uwind, uwind, axis=1)
-            )
-            self.Vwind = (
-                vwind
-                if _alt == self.altlim[0]
-                else append(self.Vwind, vwind, axis=1)
-            )
+            self.Uwind = uwind if _alt == self.altlim[0] else append(self.Uwind, uwind, axis=1)
+            self.Vwind = vwind if _alt == self.altlim[0] else append(self.Vwind, vwind, axis=1)
 
         self.glatbins = hwm14obj.glatbins
 
@@ -610,9 +572,7 @@ class HWM142D:
 
     def LonVsHeiArray(self) -> None:
         """Calculate longitude vs height 2D array."""
-        self.altbins = arange(
-            self.altlim[0], self.altlim[1] + self.altstp, self.altstp
-        )
+        self.altbins = arange(self.altlim[0], self.altlim[1] + self.altstp, self.altstp)
 
         for alt in self.altbins:
             hwm14obj = HWM14(
@@ -628,16 +588,8 @@ class HWM142D:
 
             uwind = reshape(hwm14obj.Uwind, (len(hwm14obj.Uwind), 1))
             vwind = reshape(hwm14obj.Vwind, (len(hwm14obj.Vwind), 1))
-            self.Uwind = (
-                uwind
-                if alt == self.altlim[0]
-                else append(self.Uwind, uwind, axis=1)
-            )
-            self.Vwind = (
-                vwind
-                if alt == self.altlim[0]
-                else append(self.Vwind, vwind, axis=1)
-            )
+            self.Uwind = uwind if alt == self.altlim[0] else append(self.Uwind, uwind, axis=1)
+            self.Vwind = vwind if alt == self.altlim[0] else append(self.Vwind, vwind, axis=1)
 
         self.glonbins = hwm14obj.glonbins
 
@@ -646,9 +598,7 @@ class HWM142D:
 
     def LonVsLatArray(self) -> None:
         """Calculate longitude vs latitude 2D array."""
-        self.glatbins = arange(
-            self.glatlim[0], self.glatlim[1] + self.glatstp, self.glatstp
-        )
+        self.glatbins = arange(self.glatlim[0], self.glatlim[1] + self.glatstp, self.glatstp)
 
         for glat in self.glatbins:
             hwm14obj = HWM14(
@@ -664,16 +614,8 @@ class HWM142D:
 
             uwind = reshape(hwm14obj.Uwind, (len(hwm14obj.Uwind), 1))
             vwind = reshape(hwm14obj.Vwind, (len(hwm14obj.Vwind), 1))
-            self.Uwind = (
-                uwind
-                if glat == self.glatlim[0]
-                else append(self.Uwind, uwind, axis=1)
-            )
-            self.Vwind = (
-                vwind
-                if glat == self.glatlim[0]
-                else append(self.Vwind, vwind, axis=1)
-            )
+            self.Uwind = uwind if glat == self.glatlim[0] else append(self.Uwind, uwind, axis=1)
+            self.Vwind = vwind if glat == self.glatlim[0] else append(self.Vwind, vwind, axis=1)
 
         self.glonbins = hwm14obj.glonbins
 

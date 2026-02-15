@@ -1,7 +1,7 @@
 """Data path management for HWM14 model data files."""
 
-from pathlib import Path
 from os import environ
+from pathlib import Path
 
 # Set HWMPATH to the location of data files:
 # - hwm123114.bin

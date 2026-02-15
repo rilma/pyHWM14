@@ -3,12 +3,13 @@
 from typing import TYPE_CHECKING
 
 import numpy as np
-from numpy import append, arange, ceil, floor, meshgrid
+from numpy import arange, ceil, floor, meshgrid
 
 if TYPE_CHECKING:
-    from matplotlib.figure import Figure
     from matplotlib.axes import Axes
     from mpl_toolkits.basemap import Basemap
+
+    from pyhwm2014.core import HWM14, HWM142D
 
 # Optional matplotlib imports
 try:
@@ -30,12 +31,12 @@ except ImportError:
 
 class HWM14Plot:
     """Graphical representation of HWM14 1D profile results.
-    
+
     Parameters
     ----------
     profObj : HWM14, optional
         HWM14 instance with calculated profile data.
-    
+
     Attributes
     ----------
     Uwind : list[float]
@@ -115,16 +116,12 @@ class HWM14Plot:
             altStr = ""
 
         try:
-            latStr = r"{:6.2f}$^\circ${:s}".format(
-                abs(self.glat), "N" if self.glat > 0 else "S"
-            )
+            latStr = r"{:6.2f}$^\circ${:s}".format(abs(self.glat), "N" if self.glat > 0 else "S")
         except Exception:
             latStr = ""
 
         try:
-            lonStr = r"{:6.2f}$^\circ${:s}".format(
-                abs(self.glon), "E" if self.glon > 0 else "W"
-            )
+            lonStr = r"{:6.2f}$^\circ${:s}".format(abs(self.glon), "E" if self.glon > 0 else "W")
         except Exception:
             lonStr = ""
 
@@ -137,15 +134,13 @@ class HWM14Plot:
             self.title = f"{dateStr:s} - {timeStr:s} - {apStr:s} - {locStr:s}"
         elif self.option == 2:
             self.title = (
-                f"{dateStr:s} - {timeStr:s} - {apStr:s} - {altStr:s} - "
-                f"GEOG. LON.: {lonStr:s}"
+                f"{dateStr:s} - {timeStr:s} - {apStr:s} - {altStr:s} - GEOG. LON.: {lonStr:s}"
             )
         elif self.option == 3:
             self.title = f"{dateStr:s} - {apStr:s} - {altStr:s} - {locStr:s}"
         elif self.option == 4:
             self.title = (
-                f"{dateStr:s} - {timeStr:s} - {apStr:s} - {altStr:s} - "
-                f"GEOG. LAT.: {latStr:s}"
+                f"{dateStr:s} - {timeStr:s} - {apStr:s} - {altStr:s} - GEOG. LAT.: {latStr:s}"
             )
 
     def HeiProfPlot(self) -> None:
@@ -215,7 +210,7 @@ class HWM14Plot:
 
 class HWM142DPlot:
     """Graphical representation of HWM142D 2D array results.
-    
+
     Parameters
     ----------
     profObj : HWM142D, optional
@@ -323,16 +318,12 @@ class HWM142DPlot:
             altStr = ""
 
         try:
-            latStr = r"{:6.2f}$^\circ${:s}".format(
-                abs(self.glat), "N" if self.glat > 0 else "S"
-            )
+            latStr = r"{:6.2f}$^\circ${:s}".format(abs(self.glat), "N" if self.glat > 0 else "S")
         except Exception:
             latStr = ""
 
         try:
-            lonStr = r"{:6.2f}$^\circ${:s}".format(
-                abs(self.glon), "E" if self.glon > 0 else "W"
-            )
+            lonStr = r"{:6.2f}$^\circ${:s}".format(abs(self.glon), "E" if self.glon > 0 else "W")
         except Exception:
             lonStr = ""
 
@@ -344,15 +335,9 @@ class HWM142DPlot:
         if self.option == 1:
             self.title = f"{dateStr:s} - {apStr:s} - {locStr:s}"
         elif self.option == 2:
-            self.title = (
-                f"{dateStr:s} - {timeStr:s} - {apStr:s} - "
-                f"GEOG. LON.: {lonStr:s}"
-            )
+            self.title = f"{dateStr:s} - {timeStr:s} - {apStr:s} - GEOG. LON.: {lonStr:s}"
         elif self.option == 4:
-            self.title = (
-                f"{dateStr:s} - {timeStr:s} - {apStr:s} - "
-                f"GEOG. LAT.: {latStr:s}"
-            )
+            self.title = f"{dateStr:s} - {timeStr:s} - {apStr:s} - GEOG. LAT.: {latStr:s}"
         elif self.option == 6:
             self.title = f"{dateStr:s} - {timeStr:s} - {apStr:s} - {altStr:s}"
 
@@ -480,7 +465,7 @@ class HWM142DPlot:
         )
 
         X, Y = meshgrid(xVal, yVal)
-        m.pcolor(
+        ipc = m.pcolor(
             X,
             Y,
             zVal.T,
@@ -733,12 +718,12 @@ class HWM142DPlot:
 
     def _RoundLim(self, lim: list[float]) -> list[float]:
         """Round limit values to nearest 10.
-        
+
         Parameters
         ----------
         lim : list[float]
             [min, max] limit values.
-            
+
         Returns
         -------
         list[float]
