@@ -16,7 +16,7 @@ import logging
 from typing import Literal
 
 import numpy as np
-from numpy import append, arange, ones, reshape
+from numpy import arange, ones
 
 from . import hwm14  # type: ignore
 
@@ -200,7 +200,7 @@ class HWM14:
 
     def HeiProfile(self) -> None:
         """Calculate height profile (varying altitude).
-        
+
         Uses vectorized approach with pre-allocated numpy arrays for optimal
         performance. Direct array assignment is ~25% faster than list.append()
         for large profiles.
@@ -568,7 +568,7 @@ class HWM142D:
 
     def HeiVsLTArray(self) -> None:
         """Calculate height vs local time 2D array.
-        
+
         Vectorized using pre-allocated 2D numpy arrays instead of repeatedly
         calling np.append(). This eliminates ~90% of memory allocation overhead
         typical in loop-based numpy append operations, improving performance by
@@ -576,7 +576,7 @@ class HWM142D:
         """
         self.utbins = arange(self.utlim[0], self.utlim[1] + self.utstp, self.utstp)
         utbins_list = list(self.utbins)
-        
+
         # Pre-compute one profile to get dimensions
         hwm14obj = HWM14(
             altlim=self.altlim,
@@ -591,14 +591,14 @@ class HWM142D:
         self.altbins = hwm14obj.altbins
         n_alt = len(hwm14obj.Uwind)
         n_ut = len(utbins_list)
-        
+
         # Pre-allocate 2D arrays - avoids repeated np.append with axis=1
         uwind_2d = np.empty((n_alt, n_ut))
         vwind_2d = np.empty((n_alt, n_ut))
-        
+
         uwind_2d[:, 0] = hwm14obj.Uwind
         vwind_2d[:, 0] = hwm14obj.Vwind
-        
+
         # Fill remaining columns with direct array assignment
         for j, ut in enumerate(utbins_list[1:], 1):
             hwm14obj = HWM14(
@@ -613,7 +613,7 @@ class HWM142D:
             )
             uwind_2d[:, j] = hwm14obj.Uwind
             vwind_2d[:, j] = hwm14obj.Vwind
-        
+
         self.Uwind = uwind_2d
         self.Vwind = vwind_2d
 
@@ -621,7 +621,7 @@ class HWM142D:
         """Calculate latitude vs height 2D array."""
         self.altbins = arange(self.altlim[0], self.altlim[1] + self.altstp, self.altstp)
         altbins_list = list(self.altbins)
-        
+
         # Pre-compute one profile to get dimensions
         hwm14obj = HWM14(
             alt=altbins_list[0],
@@ -636,14 +636,14 @@ class HWM142D:
         self.glatbins = hwm14obj.glatbins
         n_lat = len(hwm14obj.Uwind)
         n_alt = len(altbins_list)
-        
+
         # Pre-allocate 2D arrays
         uwind_2d = np.empty((n_alt, n_lat))
         vwind_2d = np.empty((n_alt, n_lat))
-        
+
         uwind_2d[0, :] = hwm14obj.Uwind
         vwind_2d[0, :] = hwm14obj.Vwind
-        
+
         # Fill remaining rows
         for i, alt in enumerate(altbins_list[1:], 1):
             hwm14obj = HWM14(
@@ -658,7 +658,7 @@ class HWM142D:
             )
             uwind_2d[i, :] = hwm14obj.Uwind
             vwind_2d[i, :] = hwm14obj.Vwind
-        
+
         self.Uwind = uwind_2d
         self.Vwind = vwind_2d
 
@@ -666,7 +666,7 @@ class HWM142D:
         """Calculate longitude vs height 2D array."""
         self.altbins = arange(self.altlim[0], self.altlim[1] + self.altstp, self.altstp)
         altbins_list = list(self.altbins)
-        
+
         # Pre-compute one profile to get dimensions
         hwm14obj = HWM14(
             alt=altbins_list[0],
@@ -681,14 +681,14 @@ class HWM142D:
         self.glonbins = hwm14obj.glonbins
         n_lon = len(hwm14obj.Uwind)
         n_alt = len(altbins_list)
-        
+
         # Pre-allocate 2D arrays
         uwind_2d = np.empty((n_alt, n_lon))
         vwind_2d = np.empty((n_alt, n_lon))
-        
+
         uwind_2d[0, :] = hwm14obj.Uwind
         vwind_2d[0, :] = hwm14obj.Vwind
-        
+
         # Fill remaining rows
         for i, alt in enumerate(altbins_list[1:], 1):
             hwm14obj = HWM14(
@@ -703,7 +703,7 @@ class HWM142D:
             )
             uwind_2d[i, :] = hwm14obj.Uwind
             vwind_2d[i, :] = hwm14obj.Vwind
-        
+
         self.Uwind = uwind_2d
         self.Vwind = vwind_2d
 
@@ -711,7 +711,7 @@ class HWM142D:
         """Calculate longitude vs latitude 2D array."""
         self.glatbins = arange(self.glatlim[0], self.glatlim[1] + self.glatstp, self.glatstp)
         glatbins_list = list(self.glatbins)
-        
+
         # Pre-compute one profile to get dimensions
         hwm14obj = HWM14(
             alt=self.alt,
@@ -726,14 +726,14 @@ class HWM142D:
         self.glonbins = hwm14obj.glonbins
         n_lon = len(hwm14obj.Uwind)
         n_lat = len(glatbins_list)
-        
+
         # Pre-allocate 2D arrays
         uwind_2d = np.empty((n_lat, n_lon))
         vwind_2d = np.empty((n_lat, n_lon))
-        
+
         uwind_2d[0, :] = hwm14obj.Uwind
         vwind_2d[0, :] = hwm14obj.Vwind
-        
+
         # Fill remaining rows
         for i, glat in enumerate(glatbins_list[1:], 1):
             hwm14obj = HWM14(
@@ -748,7 +748,7 @@ class HWM142D:
             )
             uwind_2d[i, :] = hwm14obj.Uwind
             vwind_2d[i, :] = hwm14obj.Vwind
-        
+
         self.Uwind = uwind_2d
         self.Vwind = vwind_2d
 
@@ -756,7 +756,7 @@ class HWM142D:
         """Calculate latitude vs GMT 2D array."""
         self.utbins = arange(self.utlim[0], self.utlim[1] + self.utstp, self.utstp)
         utbins_list = list(self.utbins)
-        
+
         # Pre-compute one profile to get dimensions
         hwm14obj = HWM14(
             alt=self.alt,
@@ -771,14 +771,14 @@ class HWM142D:
         self.glatbins = hwm14obj.glatbins
         n_lat = len(hwm14obj.Uwind)
         n_ut = len(utbins_list)
-        
+
         # Pre-allocate 2D arrays
         uwind_2d = np.empty((n_ut, n_lat))
         vwind_2d = np.empty((n_ut, n_lat))
-        
+
         uwind_2d[0, :] = hwm14obj.Uwind
         vwind_2d[0, :] = hwm14obj.Vwind
-        
+
         # Fill remaining rows
         for i, ut in enumerate(utbins_list[1:], 1):
             hwm14obj = HWM14(
@@ -793,6 +793,6 @@ class HWM142D:
             )
             uwind_2d[i, :] = hwm14obj.Uwind
             vwind_2d[i, :] = hwm14obj.Vwind
-        
+
         self.Uwind = uwind_2d
         self.Vwind = vwind_2d
