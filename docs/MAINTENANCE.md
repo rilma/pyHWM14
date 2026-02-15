@@ -264,7 +264,7 @@ python --version  # Ensure you're running supported version
 For questions about maintenance:
 - Review GitHub Issues labeled `maintenance`
 - Check existing maintenance PRs
-- Consult CONTRIBUTING.md for contributor guidelines
+- Consult [../CONTRIBUTING.md](../CONTRIBUTING.md) for contributor guidelines
 
 ---
 

@@ -206,8 +206,8 @@ Use GitHub Discussions for:
 ## Additional Resources
 
 - [pyHWM14 README](./README.rst) - Installation and usage
-- [Maintenance Guide](./MAINTENANCE.md) - Release process and project maintenance
-- [Development Roadmap](./ROADMAP.md) - Future direction and priorities
+- [Maintenance Guide](./docs/MAINTENANCE.md) - Release process and project maintenance
+- [Development Roadmap](./docs/ROADMAP.md) - Future direction and priorities
 - [HWM14 Model](https://www.nrl.navy.mil/research/nrl-review/2015/atmospheric-science/drob) - Model reference
 
 ---

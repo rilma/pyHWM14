@@ -201,10 +201,10 @@ Total: ~1 hour/month (with automation handling most work)
 
 | Need | File | Purpose |
 |------|------|---------|
-| **I'm a contributor** | [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute |
+| **I'm a contributor** | [../CONTRIBUTING.md](../CONTRIBUTING.md) | How to contribute |
 | **I need to release** | [MAINTENANCE.md](MAINTENANCE.md) | Release procedure |
 | **Quick reference** | [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) | Fast lookup |
-| **Release notes** | [CHANGELOG.md](CHANGELOG.md) | User-facing changes |
+| **Release notes** | [../CHANGELOG.md](../CHANGELOG.md) | User-facing changes |
 | **Future plans** | [ROADMAP.md](ROADMAP.md) | Project direction |
 | **Setup labels** | [GITHUB_LABELS.md](GITHUB_LABELS.md) | Issue organization |
 | **This diagram** | [ECOSYSTEM.md](ECOSYSTEM.md) | (This file) |

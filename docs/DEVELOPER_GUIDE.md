@@ -106,10 +106,10 @@ Add comment requesting update, close after 1-2 weeks if no response.
 
 | File | Purpose |
 |------|---------|
-| [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute (for external contributors) |
+| [../CONTRIBUTING.md](../CONTRIBUTING.md) | How to contribute (for external contributors) |
 | [MAINTENANCE.md](MAINTENANCE.md) | Full maintenance & release guide (this role) |
 | [ROADMAP.md](ROADMAP.md) | Project direction & priorities |
-| [CHANGELOG.md](CHANGELOG.md) | User-facing release notes |
+| [../CHANGELOG.md](../CHANGELOG.md) | User-facing release notes |
 | `.github/workflows/ci.yaml` | Automated tests and deployment |
 | `.pre-commit-config.yaml` | Local code quality checks |
 | `pyproject.toml` | Project metadata and dependencies |

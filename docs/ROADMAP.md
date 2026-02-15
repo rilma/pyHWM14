@@ -86,7 +86,7 @@ These areas are great for community involvement:
 - 🔌 **Extensions** - Integration with other tools
 - 💡 **Ideas** - Feature requests and enhancements
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to get involved!
+See [../CONTRIBUTING.md](../CONTRIBUTING.md) for how to get involved!
 
 ## Feedback & Suggestions
 
