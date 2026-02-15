@@ -60,8 +60,8 @@
 1. Local Development
    └─ Create branch: feature/cool-thing
    └─ Edit code
-   └─ Run: pytest tests/ --cov=pyhwm2014
-   └─ Run: mypy pyhwm2014 && ruff check pyhwm2014
+   └─ Run: make test313
+   └─ Run: make check
    └─ Update CHANGELOG.md
    └─ Commit with conventional message: feat: add cool thing
    └─ Push to GitHub
@@ -95,7 +95,7 @@
    └─ Reads CONTRIBUTING.md
    └─ Forks repo & creates branch
    └─ Makes changes following guidelines
-   └─ Runs local CI: pytest && mypy && ruff
+   └─ Runs local CI: make test313 && make check
    └─ Commits with conventional message
    └─ Pushes to fork
    └─ Creates PR with filled template
@@ -179,7 +179,7 @@ Day 8-14: Issue Triage
   └─ Typical: 5-10 minutes
 
 Day 15-21: Project Health
-  └─ Coverage check: pytest --cov
+  └─ Coverage check: make test313
   └─ Security audit: pip-audit
   └─ Review stale issues (>90 days)
   └─ Typical: 15 minutes
@@ -204,11 +204,9 @@ Total: ~1 hour/month (with automation handling most work)
 | **I'm a contributor** | [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute |
 | **I need to release** | [MAINTENANCE.md](MAINTENANCE.md) | Release procedure |
 | **Quick reference** | [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) | Fast lookup |
-| **What happened?** | [IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md) | Summary of setup |
 | **Release notes** | [CHANGELOG.md](CHANGELOG.md) | User-facing changes |
 | **Future plans** | [ROADMAP.md](ROADMAP.md) | Project direction |
 | **Setup labels** | [GITHUB_LABELS.md](GITHUB_LABELS.md) | Issue organization |
-| **Done checklist** | [COMPLETION_CHECKLIST.md](COMPLETION_CHECKLIST.md) | What's complete |
 | **This diagram** | [ECOSYSTEM.md](ECOSYSTEM.md) | (This file) |
 
 ### Technical Configuration
@@ -228,10 +226,8 @@ Total: ~1 hour/month (with automation handling most work)
 **Before committing:**
 ```bash
 # Local checks (automated by pre-commit hooks if installed)
-pytest tests/ -v --cov=pyhwm2014
-mypy pyhwm2014
-ruff check pyhwm2014 tests
-black --check pyhwm2014 tests
+make test313
+make check
 ```
 
 **Before releasing:**
@@ -241,7 +237,7 @@ sed -i 's/version = .*/version = "1.2.0"/' pyproject.toml
 # Edit CHANGELOG.md: move [Unreleased] to [1.2.0]
 
 # Final checks
-pytest tests/ --cov=pyhwm2014 && mypy pyhwm2014 && ruff check pyhwm2014
+make test313 && make check
 
 # Commit & tag
 git add pyproject.toml CHANGELOG.md
