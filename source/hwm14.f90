@@ -82,6 +82,30 @@ subroutine hwm14(iyd,sec,alt,glat,glon,stl,f107a,f107,ap,w)
 
 end subroutine hwm14
 
+! -----------------------------------------------------------------------------
+! Batch/vectorized wrapper: N points, one Fortran call.
+! Output: w_merid(1:n) = meridional (m/s), w_zonal(1:n) = zonal (m/s).
+! -----------------------------------------------------------------------------
+subroutine hwm14_batch(n, iyd, sec, alt, glat, glon, stl, f107a, f107, ap, w_merid, w_zonal)
+    use hwm
+    implicit none
+    integer(4), intent(in)   :: n
+    integer(4), intent(in)   :: iyd
+    real(4), intent(in)      :: sec(n), alt(n), glat(n), glon(n)
+    real(4), intent(in)      :: stl, f107a, f107
+    real(4), intent(in)      :: ap(2)
+    real(4), intent(out)     :: w_merid(n), w_zonal(n)
+    real(4)                  :: w(2)
+    integer(4)               :: i
+
+    do i = 1, n
+        call hwm14(iyd, sec(i), alt(i), glat(i), glon(i), stl, f107a, f107, ap, w)
+        w_merid(i) = w(1)
+        w_zonal(i)  = w(2)
+    end do
+    return
+end subroutine hwm14_batch
+
 ! ################################################################################
 ! Portable utility to compute vector spherical harmonical harmonic basis functions
 ! ################################################################################

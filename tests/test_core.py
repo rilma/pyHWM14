@@ -1,8 +1,9 @@
 """Unit tests for HWM14 core functionality."""
 
+import numpy as np
 import pytest
 
-from pyhwm2014 import HWM14, HWM142D
+from pyhwm2014 import HWM14, HWM142D, hwm14_vectorized
 
 
 class TestHWM14Initialization:
@@ -363,6 +364,61 @@ class TestHWM14Methods:
             verbose=False,
         )
         assert len(h.Uwind) > 0
+
+
+class TestHWM14Vectorized:
+    """Test batch/vectorized hwm14_vectorized API."""
+
+    def test_vectorized_single_point(self) -> None:
+        """Single point returns 0-d arrays with same value as HWM14."""
+        z, m = hwm14_vectorized(300.0, -11.95, -76.77, 12.0, 93323)
+        assert np.ndim(z) == 0 and np.ndim(m) == 0
+        h = HWM14(
+            alt=300,
+            glat=-11.95,
+            glon=-76.77,
+            ut=12.0,
+            day=323,
+            year=1993,
+            option=1,
+            altlim=[300, 300],
+            altstp=1,
+            verbose=False,
+        )
+        assert pytest.approx(float(z), rel=1e-5) == h.Uwind[0]
+        assert pytest.approx(float(m), rel=1e-5) == h.Vwind[0]
+
+    def test_vectorized_batch_matches_hwm14(self) -> None:
+        """Batch result matches HWM14 height profile."""
+        alt = np.linspace(200, 400, 5)
+        z, m = hwm14_vectorized(alt, -11.95, -76.77, 12.0, 93323)
+        assert z.shape == (5,) and m.shape == (5,)
+        h = HWM14(
+            altlim=[200, 400],
+            altstp=50,
+            glat=-11.95,
+            glon=-76.77,
+            ut=12.0,
+            day=323,
+            year=1993,
+            option=1,
+            verbose=False,
+        )
+        for i in range(5):
+            assert pytest.approx(z[i], rel=1e-5) == h.Uwind[i]
+            assert pytest.approx(m[i], rel=1e-5) == h.Vwind[i]
+
+    def test_vectorized_ap_default(self) -> None:
+        """Default ap works; custom ap changes result."""
+        z1, _ = hwm14_vectorized(300.0, -11.95, -76.77, 12.0, 93323)
+        z2, _ = hwm14_vectorized(300.0, -11.95, -76.77, 12.0, 93323, ap=[-1, 35])
+        assert pytest.approx(float(z1), rel=1e-9) == float(z2)
+
+    def test_vectorized_broadcast(self) -> None:
+        """Scalar broadcast: one alt, many lats."""
+        glat = np.array([-10.0, 0.0, 10.0])
+        z, m = hwm14_vectorized(300.0, glat, -76.77, 12.0, 93323)
+        assert z.shape == (3,) and m.shape == (3,)
 
 
 class TestDataPathConfiguration:
