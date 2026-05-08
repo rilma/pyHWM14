@@ -11,7 +11,12 @@ export UV_LINK_MODE = copy
 	pre-commit-install pre-commit-run lint type-check check fix
 
 install-gfortran:
-	sudo apt-get -y install gfortran
+	@if command -v gfortran >/dev/null 2>&1; then \
+		echo "gfortran already installed"; \
+	else \
+		echo "Installing gfortran..."; \
+		sudo apt-get update && sudo apt-get -y install gfortran; \
+	fi
 
 install-python313:
 	@if ! command -v uv >/dev/null 2>&1; then \
@@ -28,7 +33,7 @@ venv313: install-python313
 	if command -v uv >/dev/null 2>&1; then UV_BIN="$$(command -v uv)"; fi; \
 	"$$UV_BIN" venv --python 3.13 --seed --clear .venv313
 
-install313-sci: venv313
+install313-sci: install-gfortran venv313
 	@UV_BIN="$${HOME}/.local/bin/uv"; \
 	if command -v uv >/dev/null 2>&1; then UV_BIN="$$(command -v uv)"; fi; \
 	"$$UV_BIN" pip install --python .venv313/bin/python --upgrade pip; \
