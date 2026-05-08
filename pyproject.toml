@@ -1,13 +1,13 @@
 [build-system]
-requires = ["scikit-build-core", "numpy", "meson"]
+requires = ["scikit-build-core", "numpy", "meson", "setuptools-scm>=8"]
 build-backend = "scikit_build_core.build"
 
 [project]
 name = "pyhwm2014"
-version = "1.1.0"
 description = "HWM14 neutral winds model"
 readme = "README.rst"
 requires-python = ">=3.13"
+dynamic = ["version"]
 license = {text = "MIT"}
 authors = [
     {name = "Ronald Ilma", email = "rilma@example.com"}
@@ -55,6 +55,9 @@ all = ["pyhwm2014[plot,dev,docs]"]
 cmake.version = ">=3.15"
 cmake.build-type = "Release"
 wheel.packages = ["pyhwm2014"]
+metadata.version.provider = "scikit_build_core.metadata.setuptools_scm"
+
+[tool.setuptools_scm]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
