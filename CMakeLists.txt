@@ -57,9 +57,11 @@ add_custom_command(
 # Create a target that depends on the extension
 add_custom_target(hwm14_ext ALL DEPENDS ${HWM14_EXTENSION})
 
-# Install the generated .so file
-file(GLOB_RECURSE HWMSO "${CMAKE_CURRENT_BINARY_DIR}/*.so")
-install(FILES ${HWMSO} DESTINATION pyhwm2014 OPTIONAL)
+# Install the generated .so file. The previous file(GLOB_RECURSE) ran at
+# configure time (before the build produced the .so) and looked in the wrong
+# directory (BINARY_DIR vs PACKAGE_DIR), so install(FILES ...) silently
+# received an empty list and the OPTIONAL flag swallowed the error.
+install(PROGRAMS ${HWM14_EXTENSION} DESTINATION pyhwm2014)
 
 # Install data files
 install(FILES

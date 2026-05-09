@@ -8,5 +8,11 @@ from .core import HWM14, HWM142D, hwm14_vectorized
 from .data import HWMPATH
 from .plotting import HWM14Plot, HWM142DPlot
 
-__all__ = ["HWM14", "HWM142D", "HWM14Plot", "HWM142DPlot", "HWMPATH", "hwm14_vectorized"]
-__version__ = "1.1.0"
+__all__ = ["HWM14", "HWM142D", "HWM14Plot", "HWM142DPlot", "HWMPATH"]
+
+from importlib.metadata import PackageNotFoundError, version
+
+try:
+    __version__ = version("pyhwm2014")
+except PackageNotFoundError:
+    __version__ = "0.0.0"
