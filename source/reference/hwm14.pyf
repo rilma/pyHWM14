@@ -34,6 +34,21 @@ python module hwm14 ! in
             real(kind=4) dimension(2),intent(in) :: ap
             real(kind=4) dimension(2),intent(out) :: w
         end subroutine hwm14
+        subroutine hwm14_batch(n,iyd,sec,alt,glat,glon,stl,f107a,f107,ap,w_merid,w_zonal) ! in :hwm14:hwm14.f90
+            use hwm
+            integer(kind=4) intent(in) :: n
+            integer(kind=4) intent(in) :: iyd
+            real(kind=4) dimension(n),intent(in) :: sec
+            real(kind=4) dimension(n),intent(in) :: alt
+            real(kind=4) dimension(n),intent(in) :: glat
+            real(kind=4) dimension(n),intent(in) :: glon
+            real(kind=4) intent(in) :: stl
+            real(kind=4) intent(in) :: f107a
+            real(kind=4) intent(in) :: f107
+            real(kind=4) dimension(2),intent(in) :: ap
+            real(kind=4) dimension(n),intent(out) :: w_merid
+            real(kind=4) dimension(n),intent(out) :: w_zonal
+        end subroutine hwm14_batch
         module alf ! in :hwm14:hwm14.f90
             real(kind=8), allocatable,dimension(:) :: en
             real(kind=8), allocatable,dimension(:,:) :: bnm

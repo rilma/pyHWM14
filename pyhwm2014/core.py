@@ -796,3 +796,71 @@ class HWM142D:
 
         self.Uwind = uwind_2d
         self.Vwind = vwind_2d
+
+
+def hwm14_vectorized(
+    alt_km: np.ndarray | float,
+    glat_deg: np.ndarray | float,
+    glon_deg: np.ndarray | float,
+    utc_hours: np.ndarray | float,
+    iyd: int,
+    ap: list[int] | np.ndarray | None = None,
+    stl: float = -1.0,
+    f107a: float = -1.0,
+    f107: float = -1.0,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Compute HWM14 wind at many points in one call (batch/vectorized API).
+
+    Parameters
+    ----------
+    alt_km : array or float
+        Altitude(s) in km.
+    glat_deg : array or float
+        Geodetic latitude(s) in degrees.
+    glon_deg : array or float
+        Geodetic longitude(s) in degrees.
+    utc_hours : array or float
+        UTC time(s) in hours (0-24).
+    iyd : int
+        Year and day as yyddd (e.g. 93323 for 1993 day 323).
+    ap : list or array of length 2, optional
+        AP index [not_used, 3hr_ap]. Default [-1, 35].
+    stl, f107a, f107 : float, optional
+        Passed to HWM14 (often unused). Default -1.
+
+    Returns
+    -------
+    zonal : np.ndarray
+        Zonal wind (m/s, eastward), same shape as broadcast inputs.
+    meridional : np.ndarray
+        Meridional wind (m/s, northward), same shape.
+    """
+    if ap is None:
+        ap = [-1, 35]
+    ap = np.asarray(ap, dtype=np.float32)
+    if ap.shape != (2,):
+        raise ValueError("ap must have length 2")
+    alt_km, glat_deg, glon_deg, utc_hours = np.broadcast_arrays(
+        np.asarray(alt_km, dtype=np.float64),
+        np.asarray(glat_deg, dtype=np.float64),
+        np.asarray(glon_deg, dtype=np.float64),
+        np.asarray(utc_hours, dtype=np.float64),
+    )
+    shape = alt_km.shape
+    n = int(alt_km.size)
+    sec = (utc_hours.ravel() * 3600.0).astype(np.float32)
+    alt_f = alt_km.ravel().astype(np.float32)
+    glat_f = glat_deg.ravel().astype(np.float32)
+    glon_f = glon_deg.ravel().astype(np.float32)
+    zonal = np.empty(n, dtype=np.float64)
+    meridional = np.empty(n, dtype=np.float64)
+    if hasattr(hwm14, "hwm14_batch"):
+        w_merid, w_zonal = hwm14.hwm14_batch(iyd, sec, alt_f, glat_f, glon_f, stl, f107a, f107, ap)
+        meridional[:] = w_merid
+        zonal[:] = w_zonal
+        return zonal.reshape(shape), meridional.reshape(shape)
+    for i in range(n):
+        w = hwm14.hwm14(iyd, sec[i], alt_f[i], glat_f[i], glon_f[i], stl, f107a, f107, ap)
+        meridional[i] = float(w[0])
+        zonal[i] = float(w[1])
+    return zonal.reshape(shape), meridional.reshape(shape)
