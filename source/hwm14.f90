@@ -101,7 +101,7 @@ subroutine hwm14_batch(n, iyd, sec, alt, glat, glon, stl, f107a, f107, ap, w_mer
     do i = 1, n
         call hwm14(iyd, sec(i), alt(i), glat(i), glon(i), stl, f107a, f107, ap, w)
         w_merid(i) = w(1)
-        w_zonal(i)  = w(2)
+        w_zonal(i) = w(2)
     end do
     return
 end subroutine hwm14_batch
