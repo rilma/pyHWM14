@@ -465,11 +465,7 @@ class HWM142DPlot:
         )
 
         X, Y = meshgrid(xVal, yVal)
-        norm = (
-            Normalize(vmin=zMin, vmax=zMax)
-            if (zMin is not None and zMax is not None)
-            else Normalize()
-        )
+        norm = Normalize(vmin=zMin, vmax=zMax)
         ipc = m.pcolor(
             X,
             Y,
