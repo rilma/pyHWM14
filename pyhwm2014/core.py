@@ -855,7 +855,14 @@ def hwm14_vectorized(
     zonal = np.empty(n, dtype=np.float64)
     meridional = np.empty(n, dtype=np.float64)
     if hasattr(hwm14, "hwm14_batch"):
-        w_merid, w_zonal = hwm14.hwm14_batch(iyd, sec, alt_f, glat_f, glon_f, stl, f107a, f107, ap)
+        try:
+            w_merid, w_zonal = hwm14.hwm14_batch(
+                n, iyd, sec, alt_f, glat_f, glon_f, stl, f107a, f107, ap
+            )
+        except TypeError:
+            w_merid, w_zonal = hwm14.hwm14_batch(
+                iyd, sec, alt_f, glat_f, glon_f, stl, f107a, f107, ap
+            )
         meridional[:] = w_merid
         zonal[:] = w_zonal
         return zonal.reshape(shape), meridional.reshape(shape)
