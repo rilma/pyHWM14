@@ -409,7 +409,7 @@ class TestHWM14Vectorized:
             assert pytest.approx(m[i], rel=1e-5) == h.Vwind[i]
 
     def test_vectorized_ap_default(self) -> None:
-        """Default ap works; custom ap changes result."""
+        """Default ap matches explicitly passing the default value."""
         z1, _ = hwm14_vectorized(300.0, -11.95, -76.77, 12.0, 93323)
         z2, _ = hwm14_vectorized(300.0, -11.95, -76.77, 12.0, 93323, ap=[-1, 35])
         assert pytest.approx(float(z1), rel=1e-9) == float(z2)
