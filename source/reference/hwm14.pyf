@@ -36,7 +36,7 @@ python module hwm14 ! in
         end subroutine hwm14
         subroutine hwm14_batch(n,iyd,sec,alt,glat,glon,stl,f107a,f107,ap,w_merid,w_zonal) ! in :hwm14:hwm14.f90
             use hwm
-            integer(kind=4) intent(in) :: n
+            integer(kind=4) intent(hide),depend(sec) :: n = len(sec)
             integer(kind=4) intent(in) :: iyd
             real(kind=4) dimension(n),intent(in) :: sec
             real(kind=4) dimension(n),intent(in) :: alt
