@@ -465,15 +465,14 @@ class HWM142DPlot:
         )
 
         X, Y = meshgrid(xVal, yVal)
+        norm = Normalize(vmin=zMin, vmax=zMax)
         ipc = m.pcolor(
             X,
             Y,
             zVal.T,
             cmap=cmap,
             edgecolors="None",
-            norm=Normalize(),
-            vmax=zMax,
-            vmin=zMin,
+            norm=norm,
         )
 
         ax.set_xlim(xlim)
@@ -508,15 +507,14 @@ class HWM142DPlot:
         Y = Y.T
 
         C = zVal.T
+        norm = Normalize(vmin=zMin, vmax=zMax)
         ipn = ax.pcolor(
             X,
             Y,
             C,
             cmap=cmap,
             edgecolors="None",
-            norm=Normalize(),
-            vmax=zMax,
-            vmin=zMin,
+            norm=norm,
         )
         ax.set_xlim(xlim)
         ax.set_ylim(ylim)
