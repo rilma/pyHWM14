@@ -507,11 +507,7 @@ class HWM142DPlot:
         Y = Y.T
 
         C = zVal.T
-        norm = (
-            Normalize(vmin=zMin, vmax=zMax)
-            if (zMin is not None and zMax is not None)
-            else Normalize()
-        )
+        norm = Normalize(vmin=zMin, vmax=zMax)
         ipn = ax.pcolor(
             X,
             Y,
