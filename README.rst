@@ -46,7 +46,7 @@ The repository uses ``uv`` (a fast, modern Python package manager) for managing 
      * - ``make venv313``
          - Creates/recreates a local ``.venv313`` using Python 3.13 via ``uv``.
      * - ``make install313-sci``
-         - Installs build dependencies (scikit-build-core, cmake, ninja, meson) and project via ``uv pip``.
+         - Installs build + dev/test tooling (scikit-build-core, cmake, ninja, numpy, meson, pytest, pytest-cov, ruff, mypy, black, pre-commit), upgrades ``pip``, then installs the project via ``uv pip``.
      * - ``make install``
          - End-to-end setup shortcut (Python 3.13 + compiler + dependencies + editable install). The compiler auto-install step is Debian/Ubuntu-only.
      * - ``make test313``

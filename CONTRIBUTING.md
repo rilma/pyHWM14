@@ -86,8 +86,11 @@ All new features must include tests. Run tests locally:
 # Run all tests
 make test
 
-# Run specific test file (advanced option)
+# Run specific test file (advanced option, POSIX)
 .venv313/bin/python -m pytest tests/test_core.py -v --tb=short
+
+# Run specific test file (advanced option, Windows)
+.venv313\Scripts\python -m pytest tests/test_core.py -v --tb=short
 ```
 
 Target test coverage: **>80%**
