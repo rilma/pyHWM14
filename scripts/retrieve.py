@@ -102,9 +102,9 @@ Examples:
     args = parser.parse_args()
 
     # Validate arguments
-    if args.year and not args.day:
+    if args.year is not None and args.day is None:
         parser.error("--day is required when using --year")
-    if args.year and not args.time:
+    if args.year is not None and args.time is None:
         parser.error("--time is required when using --year")
 
     return args
