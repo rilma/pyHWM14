@@ -1,11 +1,15 @@
-"""Pytest configuration and fixtures."""
+"""
+Pytest configuration and fixtures.
+"""
 
 import pytest
 
 
 @pytest.fixture
 def hwm14_simple_height_profile():
-    """Fixture providing a simple height profile HWM14 calculation."""
+    """
+    Fixture providing a simple height profile HWM14 calculation.
+    """
     from pyhwm2014 import HWM14
 
     return HWM14(
@@ -22,7 +26,9 @@ def hwm14_simple_height_profile():
 
 @pytest.fixture
 def hwm14_latitude_profile():
-    """Fixture providing a latitude profile HWM14 calculation."""
+    """
+    Fixture providing a latitude profile HWM14 calculation.
+    """
     from pyhwm2014 import HWM14
 
     return HWM14(
@@ -40,7 +46,9 @@ def hwm14_latitude_profile():
 
 @pytest.fixture
 def hwm142d_2d_height_vs_time():
-    """Fixture providing a 2D height vs time calculation."""
+    """
+    Fixture providing a 2D height vs time calculation.
+    """
     from pyhwm2014 import HWM142D
 
     return HWM142D(

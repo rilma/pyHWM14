@@ -60,7 +60,7 @@ def calculate_wind_profile(
     year: int,
 ) -> tuple[np.ndarray, np.ndarray]:
     """Calculate wind profile at given altitude levels.
-    
+
     Parameters
     ----------
     altitude : np.ndarray
@@ -69,7 +69,7 @@ def calculate_wind_profile(
         Geographic latitude in degrees.
     year : int
         Year for the model calculation.
-    
+
     Returns
     -------
     tuple[np.ndarray, np.ndarray]

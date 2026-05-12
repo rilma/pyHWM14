@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 from pyhwm2014 import hwm14
 
-ut, stl, glon, alt, glat, f107a, f107, ap = 12, 17, -77.76, 130., -11.95, 90, 90, [2,2]
+ut, stl, glon, alt, glat, f107a, f107, ap = 12, 17, -77.76, 130.0, -11.95, 90, 90, [2, 2]
 iyd = 95150
-sec = ut * 3600.
-sec = ( stl - glon / 15. ) * 3600.
-w = hwm14.hwm14( iyd, sec, alt, glat, glon, stl, f107a, f107, ap )
+sec = ut * 3600.0
+sec = (stl - glon / 15.0) * 3600.0
+w = hwm14.hwm14(iyd, sec, alt, glat, glon, stl, f107a, f107, ap)
 print(w)
 
 #############################################################################################################

@@ -4,7 +4,7 @@ This document outlines the planned development direction for pyHWM14. Items are 
 
 ## This Version (1.1.x)
 
-- ✅ Python 3.13 support  
+- ✅ Python 3.13 support
 - ✅ Type hints throughout codebase
 - ✅ Comprehensive test coverage
 - ✅ Enhanced CI/CD pipeline with linting and security checks
@@ -98,7 +98,7 @@ Have ideas? Please:
 
 ---
 
-**Last Updated:** February 15, 2026  
+**Last Updated:** February 15, 2026
 **Next Review:** Q2 2026
 
 Would you like to discuss any of these priorities?

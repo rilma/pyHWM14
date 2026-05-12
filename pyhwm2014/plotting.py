@@ -1,4 +1,6 @@
-"""Plotting utilities for HWM14 model results."""
+"""
+Plotting utilities for HWM14 model results.
+"""
 
 from typing import TYPE_CHECKING
 
@@ -46,7 +48,9 @@ class HWM14Plot:
     """
 
     def __init__(self, profObj: "HWM14 | None" = None) -> None:
-        """Initialize plotting for HWM14 profile."""
+        """
+        Initialize plotting for HWM14 profile.
+        """
         if profObj is not None:
             self.option = profObj.option
 
@@ -89,7 +93,9 @@ class HWM14Plot:
             print("Wrong inputs!")
 
     def GetHHMMSS(self) -> None:
-        """Convert decimal hours to hours, minutes, seconds."""
+        """
+        Convert decimal hours to hours, minutes, seconds.
+        """
         hh = floor(self.ut)
         dummy = self.ut - hh
         mm = floor(dummy * 60)
@@ -99,7 +105,9 @@ class HWM14Plot:
         self.minute = int(mm)
 
     def GetTitle(self) -> None:
-        """Generate plot title with metadata."""
+        """
+        Generate plot title with metadata.
+        """
         dateStr = f"DATE: {self.year:4d}.{self.doy:03d}"
 
         try:
@@ -144,7 +152,9 @@ class HWM14Plot:
             )
 
     def HeiProfPlot(self) -> None:
-        """Plot height profile with zonal and meridional winds."""
+        """
+        Plot height profile with zonal and meridional winds.
+        """
         if figure is None:
             return
 
@@ -160,7 +170,9 @@ class HWM14Plot:
         ax.legend(loc="best")
 
     def LatProfPlot(self) -> None:
-        """Plot latitude profile with zonal and meridional winds."""
+        """
+        Plot latitude profile with zonal and meridional winds.
+        """
         if figure is None:
             return
 
@@ -176,7 +188,9 @@ class HWM14Plot:
         ax.legend(loc="best")
 
     def GMTProfPlot(self) -> None:
-        """Plot GMT profile with zonal and meridional winds."""
+        """
+        Plot GMT profile with zonal and meridional winds.
+        """
         if figure is None:
             return
 
@@ -192,7 +206,9 @@ class HWM14Plot:
         ax.legend(loc="best")
 
     def LonProfPlot(self) -> None:
-        """Plot longitude profile with zonal and meridional winds."""
+        """
+        Plot longitude profile with zonal and meridional winds.
+        """
         if figure is None:
             return
 
@@ -231,7 +247,9 @@ class HWM142DPlot:
         zMax: list[float | None] | None = None,
         zMin: list[float | None] | None = None,
     ) -> None:
-        """Initialize plotting for HWM142D 2D profiles."""
+        """
+        Initialize plotting for HWM142D 2D profiles.
+        """
         if zMax is None:
             zMax = [None, None]
         if zMin is None:
@@ -294,7 +312,9 @@ class HWM142DPlot:
             print("Wrong inputs!")
 
     def GetHHMMSS(self) -> None:
-        """Convert decimal hours to hours, minutes, seconds."""
+        """
+        Convert decimal hours to hours, minutes, seconds.
+        """
         hh = floor(self.ut)
         dummy = self.ut - hh
         mm = floor(dummy * 60)
@@ -304,7 +324,9 @@ class HWM142DPlot:
         self.minute = int(mm)
 
     def GetTitle(self) -> None:
-        """Generate plot title with metadata."""
+        """
+        Generate plot title with metadata.
+        """
         dateStr = f"DATE: {self.year:4d}.{self.doy:03d}"
 
         self.GetHHMMSS()
@@ -357,7 +379,9 @@ class HWM142DPlot:
         zMax: float | None = None,
         zMin: float | None = None,
     ) -> None:
-        """Create 2D wind vector map using Basemap."""
+        """
+        Create 2D wind vector map using Basemap.
+        """
         if Basemap is None:
             return
 
@@ -436,7 +460,9 @@ class HWM142DPlot:
         zMax: float | None = None,
         zMin: float | None = None,
     ) -> None:
-        """Create 2D scalar map using Basemap."""
+        """
+        Create 2D scalar map using Basemap.
+        """
         if Basemap is None:
             return
 
@@ -498,7 +524,9 @@ class HWM142DPlot:
         zMax: float | None = None,
         zMin: float | None = None,
     ) -> None:
-        """Create 2D scalar plot."""
+        """
+        Create 2D scalar plot.
+        """
         if figure is None:
             return
 
@@ -526,7 +554,9 @@ class HWM142DPlot:
         cbpn.set_label(zlabel)
 
     def HeiVsLTPlot(self) -> None:
-        """Plot height vs local time with U and V components."""
+        """
+        Plot height vs local time with U and V components.
+        """
         if figure is None:
             return
 
@@ -569,7 +599,9 @@ class HWM142DPlot:
         )
 
     def LatVsHeiPlot(self) -> None:
-        """Plot latitude vs height with U and V components."""
+        """
+        Plot latitude vs height with U and V components.
+        """
         if figure is None:
             return
 
@@ -612,7 +644,9 @@ class HWM142DPlot:
         )
 
     def LonVsHeiPlot(self) -> None:
-        """Plot longitude vs height with U and V components."""
+        """
+        Plot longitude vs height with U and V components.
+        """
         if figure is None:
             return
 
@@ -655,7 +689,9 @@ class HWM142DPlot:
         )
 
     def LonVsLatPlot(self) -> None:
-        """Plot longitude vs latitude with U and V components."""
+        """
+        Plot longitude vs latitude with U and V components.
+        """
         if figure is None:
             return
 

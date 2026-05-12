@@ -20,11 +20,13 @@ repos:
     hooks:
       - id: mypy
         name: mypy
-        additional_dependencies: 
+        additional_dependencies:
           - types-setuptools
           - numpy
+          - pytest
         language_version: python3.13
-        args: [--config-file=pyproject.toml]
+        pass_filenames: false
+        args: [--config-file=pyproject.toml, pyhwm2014]
 
   # General linting and security
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -41,17 +43,20 @@ repos:
         args: ['--fix=lf']
 
   # Docstring formatting
-  - repo: https://github.com/PyCQA/docformatter
-    rev: v1.7.5
+  - repo: local
     hooks:
       - id: docformatter
+        name: docformatter
+        entry: docformatter
+        language: python
+        types: [python]
         args: [--in-place, --make-summary-multi-line]
-        additional_dependencies: ['tomli']
+        additional_dependencies: [docformatter==1.7.5, tomli]
 
 ci:
   autofix_commit_msg: |
     [pre-commit.ci] auto fixes from pre-commit hooks
-    
+
     for more information, see https://pre-commit.ci
   autofix_prs: true
   autoupdate_commit_msg: '[pre-commit.ci] pre-commit autoupdate'

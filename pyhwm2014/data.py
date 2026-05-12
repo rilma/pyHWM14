@@ -1,4 +1,6 @@
-"""Data path management for HWM14 model data files."""
+"""
+Data path management for HWM14 model data files.
+"""
 
 from os import environ
 from pathlib import Path

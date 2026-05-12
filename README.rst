@@ -2,7 +2,7 @@
     :target: https://github.com/rilma/pyHWM14/actions/workflows/ci.yaml
 .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.240890.svg
    :target: http://doi.org/10.5281/zenodo.240890
-   
+
 =======
 pyHWM14
 =======
@@ -120,7 +120,7 @@ Retrieve wind values at a specific location, date/time, and altitude:
 .. code-block:: python
 
     from pyhwm2014 import HWM14
-    
+
     # Define parameters
     year = 2023
     day_of_year = 150  # Approximately May 30
@@ -129,7 +129,7 @@ Retrieve wind values at a specific location, date/time, and altitude:
     latitude = 40.0  # 40°N
     longitude = -105.0  # 105°W
     ap_index = 10  # Geomagnetic activity index
-    
+
     # Retrieve wind values
     hwm14 = HWM14(
         alt=altitude_km,
@@ -144,11 +144,11 @@ Retrieve wind values at a specific location, date/time, and altitude:
         option=1,
         verbose=False
     )
-    
+
     # Access results
     zonal_wind = hwm14.Uwind[0]  # m/s
     meridional_wind = hwm14.Vwind[0]  # m/s
-    
+
     print(f"Zonal wind: {zonal_wind:.2f} m/s")
     print(f"Meridional wind: {meridional_wind:.2f} m/s")
 
@@ -162,15 +162,15 @@ Convert Python datetime to required parameters:
 
     from datetime import datetime
     from pyhwm2014 import HWM14
-    
+
     # Your datetime
     dt = datetime(2024, 7, 15, 18, 30)  # July 15, 2024, 18:30
-    
+
     # Convert to HWM14 parameters
     year = dt.year
     day_of_year = dt.timetuple().tm_yday
     universal_time = dt.hour + dt.minute / 60.0
-    
+
     # Now use with HWM14
     hwm14 = HWM14(
         alt=250.0,
@@ -239,12 +239,12 @@ Height Profile
 
 .. code-block:: bash
 
-    >>> from pyhwm2014 import HWM14, HWM14Plot    
+    >>> from pyhwm2014 import HWM14, HWM14Plot
     >>> hwm14Obj = HWM14( altlim=[90,200], altstp=1, ap=[-1, 35], day=323,
-            option=1, ut=11.66667, verbose=False, year=1993 )            
+            option=1, ut=11.66667, verbose=False, year=1993 )
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
-    
-    
+
+
 .. image:: graphics/figure_1.png
     :scale: 100 %
 
@@ -255,7 +255,7 @@ You can also list the values on screen as follows
     >>> from pyhwm2014 import HWM14
     >>> hwm14Obj = HWM14( altlim=[90,200], altstp=10, ap=[-1, 35], day=323,
             option=1, ut=11.66667, verbose=True, year=1993 )
-    
+
     HEIGHT PROFILE
                      quiet         disturbed             total
      alt      mer      zon      mer      zon      mer      zon
@@ -278,13 +278,13 @@ Geog. Latitude Profile
 ----------------------
 
 .. code-block:: bash
-    
+
     >>> from pyhwm2014 import HWM14, HWM14Plot
     >>> hwm14Obj = HWM14( alt=130., ap=[-1, 35], day=323, glatlim=[-90.,90.],
-            glatstp=1., option=2, ut=11.66667, verbose=False, year=1993 )            
+            glatstp=1., option=2, ut=11.66667, verbose=False, year=1993 )
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
-    
-        
+
+
 .. image:: graphics/figure_2.png
     :scale: 100 %
 
@@ -296,9 +296,9 @@ GMT Profile
 
     >>> from pyhwm2014 import HWM14, HWM14Plot
     >>> hwm14Obj = HWM14( alt=130., ap=[-1, 35], day=323,
-            option=3, utlim=[0., 23.45], utstp=.25, verbose=False, year=1993 )            
+            option=3, utlim=[0., 23.45], utstp=.25, verbose=False, year=1993 )
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
-    
+
 
 .. image:: graphics/figure_3.png
     :scale: 100 %
@@ -311,7 +311,7 @@ Geog. Longitude Profile
 
     >>> from pyhwm2014 import HWM14, HWM14Plot
     >>> hwm14Obj = HWM14( alt=130., ap=[-1, 35], day=323, glonlim=[-180., 180.], glonstp=2.,
-            option=4, verbose=False, year=1993 )            
+            option=4, verbose=False, year=1993 )
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 
@@ -325,7 +325,7 @@ Height vs GMT
 .. code-block:: bash
 
     >>> from pyhwm2014 import HWM142D, HWM142DPlot
-    >>> hwm14Obj = HWM142D(altlim=[90,200], altstp=2, ap=[-1, 35], 
+    >>> hwm14Obj = HWM142D(altlim=[90,200], altstp=2, ap=[-1, 35],
             option=1, utlim=[0.,23.75], utstp=.25, verbose=False)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-75., -100], zMax=[75., 100.])
 
@@ -339,8 +339,8 @@ Height vs Geog. Latitude
 .. code-block:: bash
 
     >>> from pyhwm2014 import HWM142D, HWM142DPlot
-    >>> hwm14Obj = HWM142D(altlim=[90., 200.], altstp=2., ap=[-1, 35], 
-            glatlim=[-90., 90.], glatstp=2., option=2, verbose=False, ut=12.)            
+    >>> hwm14Obj = HWM142D(altlim=[90., 200.], altstp=2., ap=[-1, 35],
+            glatlim=[-90., 90.], glatstp=2., option=2, verbose=False, ut=12.)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-250., -100], zMax=[250., 100.])
 
 .. image:: graphics/figure_12.png
@@ -353,8 +353,8 @@ Height vs Geog. Longitude
 .. code-block:: bash
 
     >>> from pyhwm2014 import HWM142D, HWM142DPlot
-    >>> hwm14Obj = HWM142D(altlim=[90., 200.], altstp=1., ap=[-1, 35], 
-            glonlim=[-90., 90.], glonstp=2., option=4, ut=12., verbose=False)            
+    >>> hwm14Obj = HWM142D(altlim=[90., 200.], altstp=1., ap=[-1, 35],
+            glonlim=[-90., 90.], glonstp=2., option=4, ut=12., verbose=False)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-100., -100], zMax=[100., 100.])
 
 .. image:: graphics/figure_14.png
@@ -367,7 +367,7 @@ Geog. Latitude vs Geog. Longitude
 .. code-block:: bash
 
     >>> from pyhwm2014 import HWM142D, HWM142DPlot
-    >>> hwm14Obj = HWM142D(alt=130., ap=[-1, 35], glatlim=[-90., 90.], 
+    >>> hwm14Obj = HWM142D(alt=130., ap=[-1, 35], glatlim=[-90., 90.],
             glatstp=1., glonlim=[-180., 180.], glonstp=2., option=6, verbose=False)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-150., -150], zMax=[150., 150.])
 
@@ -375,17 +375,17 @@ Geog. Latitude vs Geog. Longitude
     :scale: 100 %
 
 ----------------------------------
-Horizontal Wind Field Map 
+Horizontal Wind Field Map
 ----------------------------------
 
 .. code-block:: bash
 
     >>> from pyhwm2014 import HWM142D, HWM142DPlot
-    >>> hwm14Obj = HWM142D(alt=400., ap=[-1, 35], glatlim=[-90., 90.], glatstp=10., 
+    >>> hwm14Obj = HWM142D(alt=400., ap=[-1, 35], glatlim=[-90., 90.], glatstp=10.,
             glonlim=[-180., 180.], glonstp=20., option=6, verbose=False)
-    >>> hwm14Gbj = HWM142DPlot( profObj=hwm14Obj, WF=True, zMin=[-150., -150], 
+    >>> hwm14Gbj = HWM142DPlot( profObj=hwm14Obj, WF=True, zMin=[-150., -150],
             zMax=[150., 150.] )
-    
+
 .. image:: graphics/figure_16b.png
     :scale: 100 %
 
@@ -410,4 +410,3 @@ The Fortran extension is automatically built using CMake + f2py (Meson backend) 
 This automatically invokes the build system defined in `pyproject.toml` and `CMakeLists.txt`. No manual compilation steps are needed.
 
 For details on the migration from deprecated `numpy.distutils` to the modern CMake/f2py build system, see `MIGRATION_PLAN_PY312.md`.
-

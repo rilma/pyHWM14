@@ -54,7 +54,7 @@ body:
         - NumPy version: 1.X.X
       value: |
         - OS:
-        - Python version: 
+        - Python version:
         - pyhwm2014 version:
         - NumPy version:
     validations:

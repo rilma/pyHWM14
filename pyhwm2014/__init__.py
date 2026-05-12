@@ -1,7 +1,8 @@
 """Python interface for HWM14 (Horizontal Wind Model 2014).
 
-This package provides a Python interface to the HWM14 model for calculating
-atmospheric wind speeds at various geophysical locations and conditions.
+This package provides a Python interface to the HWM14 model for
+calculating atmospheric wind speeds at various geophysical locations and
+conditions.
 """
 
 from .core import HWM14, HWM142D, hwm14_vectorized
