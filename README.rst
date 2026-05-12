@@ -41,14 +41,32 @@ The repository uses ``uv`` (a fast, modern Python package manager) for managing 
          - Purpose
      * - ``make install-python313``
          - Installs Python 3.13 with ``uv`` (if needed) and pins ``.python-version`` to 3.13.
+     * - ``make install-gfortran``
+         - Installs ``gfortran`` if missing (required for Fortran extension builds).
      * - ``make venv313``
          - Creates/recreates a local ``.venv313`` using Python 3.13 via ``uv``.
      * - ``make install313-sci``
          - Installs build dependencies (scikit-build-core, cmake, ninja, meson) and project via ``uv pip``.
+     * - ``make install``
+         - End-to-end setup shortcut (Python 3.13 + compiler + dependencies + editable install).
      * - ``make test313``
          - Runs the test suite using Python 3.13.
+     * - ``make test``
+         - Alias for ``make test313``.
      * - ``make clean``
          - Removes build/test artifacts. Use ``make clean CLEAN_VENV=1`` to also remove ``.venv313``.
+     * - ``make pre-commit-install``
+         - Installs pre-commit git hooks using ``.venv313``.
+     * - ``make pre-commit-run``
+         - Runs all pre-commit hooks across the repository.
+     * - ``make lint``
+         - Runs Ruff lint and format checks.
+     * - ``make type-check``
+         - Runs mypy on the package.
+     * - ``make check``
+         - Runs ``make lint`` then ``make type-check``.
+     * - ``make fix``
+         - Runs Ruff format/lint fixes and then mypy.
 
 **About uv**: The project uses ``uv`` (https://github.com/astral-sh/uv) for fast, reliable dependency management and Python version control. Benefits include:
 
@@ -61,17 +79,25 @@ Typical workflow:
 
 .. code-block:: bash
 
-        $ make install-python312
-        $ make install312-sci
-        $ source .venv312/bin/activate
-        $ make test312
+    $ make install
+    $ make test
+    $ make check
+    $ make pre-commit-install
+    $ make pre-commit-run
 
-    Cleanup examples:
+Cleanup examples:
 
-    .. code-block:: bash
+.. code-block:: bash
 
-        $ make clean
-        $ make clean CLEAN_VENV=1
+    $ make clean
+    $ make clean CLEAN_VENV=1
+
+Additional quality targets:
+
+- ``make lint``: Run Ruff lint + format checks for ``pyhwm2014`` and ``tests``.
+- ``make type-check``: Run mypy on ``pyhwm2014``.
+- ``make check``: Run ``lint`` and ``type-check``.
+- ``make fix``: Apply Ruff auto-format and lint fixes, then run mypy.
 
 ---------
 From PyPi
@@ -405,8 +431,8 @@ The Fortran extension is automatically built using CMake + f2py (Meson backend) 
 
 .. code-block:: bash
 
-    $ pip install -e .
+    $ make install313-sci
 
-This automatically invokes the build system defined in `pyproject.toml` and `CMakeLists.txt`. No manual compilation steps are needed.
+This automatically invokes the build system defined in ``pyproject.toml`` and ``CMakeLists.txt``. No manual compilation steps are needed.
 
-For details on the migration from deprecated `numpy.distutils` to the modern CMake/f2py build system, see `MIGRATION_PLAN_PY312.md`.
+For Python 3.12 or earlier support, use git tag ``v1.1.0``.

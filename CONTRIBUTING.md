@@ -18,15 +18,11 @@ Thank you for your interest in contributing to pyHWM14! This document provides g
 git clone https://github.com/rilma/pyHWM14.git
 cd pyHWM14
 
-# Create development environment with Python 3.13
-make venv313
+# One-command setup (installs Python 3.13 via uv, gfortran, deps, editable package)
+make install
 
-# Activate virtual environment
-source .venv313/bin/activate  # Linux/macOS
-# or .venv313\Scripts\activate on Windows
-
-# Install in development mode with all extras
-pip install -e ".[dev,plot,docs]"
+# Optional: install git hooks for local checks on commit
+make pre-commit-install
 ```
 
 ## Development Workflow
@@ -84,10 +80,10 @@ def calculate_wind_profile(
 All new features must include tests. Run tests locally:
 ```bash
 # Run all tests
-make test313
+make test
 
 # Run specific test file (advanced option)
-uv run pytest tests/test_core.py -v
+.venv313/bin/python -m pytest tests/test_core.py -v --tb=short
 ```
 
 Target test coverage: **>80%**
@@ -169,7 +165,7 @@ Before submitting a PR, run:
 
 ```bash
 # Run all tests
-make test313
+make test
 
 # Format and lint (auto-fixes)
 make fix
@@ -178,7 +174,10 @@ make fix
 make type-check
 
 # All checks (local CI)
-make check && make test313
+make check
+
+# Pre-commit hooks (same checks used during commit)
+make pre-commit-run
 ```
 
 ## Reporting Issues
