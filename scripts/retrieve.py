@@ -322,7 +322,7 @@ def main():
         # Determine which retrieval mode to use
         if args.lat_range:
             # Latitude profile
-            if not args.longitude:
+            if args.longitude is None:
                 print("Error: --lon is required for latitude profile", file=sys.stderr)
                 sys.exit(1)
             if args.altitude:
@@ -341,7 +341,7 @@ def main():
                 sys.exit(1)
         elif args.lon_range:
             # Longitude profile
-            if not args.latitude:
+            if args.latitude is None:
                 print("Error: --lat is required for longitude profile", file=sys.stderr)
                 sys.exit(1)
             if args.altitude:
@@ -360,7 +360,7 @@ def main():
                 sys.exit(1)
         elif args.alt_range:
             # Height profile
-            if not args.latitude or not args.longitude:
+            if args.latitude is None or args.longitude is None:
                 print("Error: --lat and --lon are required for height profile", file=sys.stderr)
                 sys.exit(1)
             results = retrieve_height_profile(
@@ -375,7 +375,7 @@ def main():
             )
         else:
             # Single point
-            if not args.latitude or not args.longitude:
+            if args.latitude is None or args.longitude is None:
                 print(
                     "Error: --lat and --lon are required for single point retrieval",
                     file=sys.stderr,
