@@ -435,4 +435,4 @@ The Fortran extension is automatically built using CMake + f2py (Meson backend) 
 
 This automatically invokes the build system defined in ``pyproject.toml`` and ``CMakeLists.txt``. No manual compilation steps are needed.
 
-For Python 3.12 or earlier support, use git tag ``v1.1.0``.
+For Python 3.11 or earlier support, use git tag ``v1.1.0``.
