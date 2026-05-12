@@ -18,8 +18,12 @@ Thank you for your interest in contributing to pyHWM14! This document provides g
 git clone https://github.com/rilma/pyHWM14.git
 cd pyHWM14
 
-# One-command setup (installs Python 3.13 via uv, gfortran, deps, editable package)
+# Debian/Ubuntu only: one-command setup
+# Installs Python 3.13 via uv, gfortran (via apt-get), dependencies, and the editable package
 make install
+
+# macOS/Windows: install gfortran manually first using your platform's package manager,
+# then run the project's Python/dependency setup steps as described in the README.
 
 # Optional: install git hooks for local checks on commit
 make pre-commit-install
