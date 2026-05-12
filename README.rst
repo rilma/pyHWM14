@@ -42,13 +42,13 @@ The repository uses ``uv`` (a fast, modern Python package manager) for managing 
      * - ``make install-python313``
          - Installs Python 3.13 with ``uv`` (if needed) and pins ``.python-version`` to 3.13.
      * - ``make install-gfortran``
-         - Installs ``gfortran`` if missing (required for Fortran extension builds).
+         - Installs ``gfortran`` if missing using ``sudo apt-get`` (Debian/Ubuntu). On macOS/Windows, install a Fortran compiler manually first.
      * - ``make venv313``
          - Creates/recreates a local ``.venv313`` using Python 3.13 via ``uv``.
      * - ``make install313-sci``
          - Installs build dependencies (scikit-build-core, cmake, ninja, meson) and project via ``uv pip``.
      * - ``make install``
-         - End-to-end setup shortcut (Python 3.13 + compiler + dependencies + editable install).
+         - End-to-end setup shortcut (Python 3.13 + compiler + dependencies + editable install). The compiler auto-install step is Debian/Ubuntu-only.
      * - ``make test313``
          - Runs the test suite using Python 3.13.
      * - ``make test``
