@@ -121,7 +121,9 @@ class HWM14:
         verbose: bool = True,
         year: int = 1993,
     ) -> None:
-        """Initialize HWM14 model calculation."""
+        """
+        Initialize HWM14 model calculation.
+        """
         # Apply defaults to mutable arguments
         if altlim is None:
             altlim = [0.0, 400.0]
@@ -201,9 +203,9 @@ class HWM14:
     def HeiProfile(self) -> None:
         """Calculate height profile (varying altitude).
 
-        Uses vectorized approach with pre-allocated numpy arrays for optimal
-        performance. Direct array assignment is ~25% faster than list.append()
-        for large profiles.
+        Uses vectorized approach with pre-allocated numpy arrays for
+        optimal performance. Direct array assignment is ~25% faster than
+        list.append() for large profiles.
         """
         if self.verbose:
             print("HEIGHT PROFILE")
@@ -256,7 +258,9 @@ class HWM14:
         self.Vwind = vwind_arr.tolist()
 
     def LatProfile(self) -> None:
-        """Calculate latitude profile (varying latitude)."""
+        """
+        Calculate latitude profile (varying latitude).
+        """
         if self.verbose:
             print("LATITUDE PROFILE")
             print("                   quiet         disturbed             total")
@@ -306,7 +310,9 @@ class HWM14:
         self.Vwind = vwind_arr.tolist()
 
     def GMTProfile(self) -> None:
-        """Calculate GMT profile (varying UTC time)."""
+        """
+        Calculate GMT profile (varying UTC time).
+        """
         if self.verbose:
             print("GMT PROFILE")
             print("                   quiet         disturbed             total")
@@ -362,7 +368,9 @@ class HWM14:
         self.mltbins = mltbins_arr.tolist()
 
     def LonProfile(self) -> None:
-        """Calculate longitude profile (varying longitude)."""
+        """
+        Calculate longitude profile (varying longitude).
+        """
         if self.verbose:
             print("LONGITUDE PROFILE")
             print("                   quiet         disturbed             total")
@@ -472,7 +480,9 @@ class HWM142D:
         verbose: bool = True,
         year: int = 1993,
     ) -> None:
-        """Initialize 2D HWM14 calculation."""
+        """
+        Initialize 2D HWM14 calculation.
+        """
         # Apply defaults to mutable arguments
         if altlim is None:
             altlim = [0.0, 400.0]
@@ -569,10 +579,10 @@ class HWM142D:
     def HeiVsLTArray(self) -> None:
         """Calculate height vs local time 2D array.
 
-        Vectorized using pre-allocated 2D numpy arrays instead of repeatedly
-        calling np.append(). This eliminates ~90% of memory allocation overhead
-        typical in loop-based numpy append operations, improving performance by
-        20-30% for large arrays.
+        Vectorized using pre-allocated 2D numpy arrays instead of
+        repeatedly calling np.append(). This eliminates ~90% of memory
+        allocation overhead typical in loop-based numpy append
+        operations, improving performance by 20-30% for large arrays.
         """
         self.utbins = arange(self.utlim[0], self.utlim[1] + self.utstp, self.utstp)
         utbins_list = list(self.utbins)
@@ -618,7 +628,9 @@ class HWM142D:
         self.Vwind = vwind_2d
 
     def LatVsHeiArray(self) -> None:
-        """Calculate latitude vs height 2D array."""
+        """
+        Calculate latitude vs height 2D array.
+        """
         self.altbins = arange(self.altlim[0], self.altlim[1] + self.altstp, self.altstp)
         altbins_list = list(self.altbins)
 
@@ -663,7 +675,9 @@ class HWM142D:
         self.Vwind = vwind_2d
 
     def LonVsHeiArray(self) -> None:
-        """Calculate longitude vs height 2D array."""
+        """
+        Calculate longitude vs height 2D array.
+        """
         self.altbins = arange(self.altlim[0], self.altlim[1] + self.altstp, self.altstp)
         altbins_list = list(self.altbins)
 
@@ -708,7 +722,9 @@ class HWM142D:
         self.Vwind = vwind_2d
 
     def LonVsLatArray(self) -> None:
-        """Calculate longitude vs latitude 2D array."""
+        """
+        Calculate longitude vs latitude 2D array.
+        """
         self.glatbins = arange(self.glatlim[0], self.glatlim[1] + self.glatstp, self.glatstp)
         glatbins_list = list(self.glatbins)
 
@@ -753,7 +769,9 @@ class HWM142D:
         self.Vwind = vwind_2d
 
     def LatVsGMTArray(self) -> None:
-        """Calculate latitude vs GMT 2D array."""
+        """
+        Calculate latitude vs GMT 2D array.
+        """
         self.utbins = arange(self.utlim[0], self.utlim[1] + self.utstp, self.utstp)
         utbins_list = list(self.utbins)
 

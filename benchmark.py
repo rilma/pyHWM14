@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-"""Performance benchmark for vectorized wind calculations."""
+"""
+Performance benchmark for vectorized wind calculations.
+"""
 
 import time
-import numpy as np
+
 from pyhwm2014 import HWM14, HWM142D
 
 
 def benchmark_1d_profiles():
-    """Benchmark 1D profile calculations."""
+    """
+    Benchmark 1D profile calculations.
+    """
     print("=" * 70)
     print("1D PROFILE BENCHMARKS")
     print("=" * 70)
@@ -93,7 +97,9 @@ def benchmark_1d_profiles():
 
 
 def benchmark_2d_arrays():
-    """Benchmark 2D array calculations."""
+    """
+    Benchmark 2D array calculations.
+    """
     print("\n" + "=" * 70)
     print("2D ARRAY BENCHMARKS")
     print("=" * 70)
@@ -164,7 +170,9 @@ def benchmark_2d_arrays():
 
 
 def main():
-    """Run all benchmarks."""
+    """
+    Run all benchmarks.
+    """
     print("\n" + "=" * 70)
     print("pyHWM14 PERFORMANCE BENCHMARKS - VECTORIZED IMPLEMENTATION")
     print("=" * 70)

@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-"""
-Example script demonstrating how to retrieve zonal and meridional wind values
-from the HWM14 model for specific parameters.
+"""Example script demonstrating how to retrieve zonal and meridional wind
+values from the HWM14 model for specific parameters.
 
-This script shows various ways to use pyHWM14 to get wind values at specific
-date/time, location, and altitude.
+This script shows various ways to use pyHWM14 to get wind values at
+specific date/time, location, and altitude.
 """
 
 from datetime import datetime
@@ -13,9 +12,8 @@ from pyhwm2014 import HWM14
 
 
 def example_single_point():
-    """
-    Retrieve wind values at a single point in space and time.
-    
+    """Retrieve wind values at a single point in space and time.
+
     This is the most common use case - getting wind values for a specific
     location, date/time, and altitude.
     """
@@ -52,7 +50,7 @@ def example_single_point():
         glon=longitude,
         ap=[-1, ap_index],
         option=1,
-        verbose=False
+        verbose=False,
     )
 
     # Extract wind values
@@ -68,9 +66,9 @@ def example_single_point():
 
 
 def example_height_profile():
-    """
-    Retrieve wind values at multiple altitudes for a single location and time.
-    
+    """Retrieve wind values at multiple altitudes for a single location and
+    time.
+
     This creates a vertical profile of winds.
     """
     print("\n" + "=" * 70)
@@ -107,7 +105,7 @@ def example_height_profile():
         glon=longitude,
         ap=[-1, ap_index],
         option=1,  # Height profile option
-        verbose=False
+        verbose=False,
     )
 
     print("\nResults:")
@@ -160,7 +158,7 @@ def example_with_datetime():
         glon=longitude,
         ap=[-1, ap_index],
         option=1,
-        verbose=False
+        verbose=False,
     )
 
     print("\nResults:")
@@ -206,7 +204,7 @@ def example_multiple_locations():
         ut=universal_time,
         ap=[-1, ap_index],
         option=2,  # Latitude profile option
-        verbose=False
+        verbose=False,
     )
 
     print("\nResults:")

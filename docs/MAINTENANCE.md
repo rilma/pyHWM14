@@ -28,14 +28,14 @@ This guide documents the maintenance and release process for pyHWM14, intended f
    - Example:
      ```markdown
      ## [1.2.0] - 2026-02-15
-     
+
      ### Added
      - Support for Python 3.14
      - New `interpolate()` method for smoother wind profiles
-     
+
      ### Fixed
      - Bug #42: Incorrect wind calculation at equator
-     
+
      ### Changed
      - Improved performance by 15% through vectorization
      ```
@@ -123,7 +123,7 @@ Dependabot automatically checks for updates:
    - Close after 1-2 weeks if no response
    - Use template:
      ```markdown
-     @user This issue has been inactive for 3 months. 
+     @user This issue has been inactive for 3 months.
      Please provide more details or we'll close it to keep the tracker clean.
      ```
 
@@ -225,7 +225,7 @@ python -c "from pyhwm2014 import HWM14; print('✓ Import successful')"
    git checkout -b hotfix/issue-XXX
    # Make minimal fix
    git commit -m "fix: [critical issue]"
-   
+
    # Tag as patch version
    git tag v1.1.1
    git push origin v1.1.1
@@ -268,5 +268,5 @@ For questions about maintenance:
 
 ---
 
-**Last Updated:** February 2026  
+**Last Updated:** February 2026
 **Maintained By:** Ronald Ilma

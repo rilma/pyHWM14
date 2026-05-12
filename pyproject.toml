@@ -6,7 +6,7 @@ build-backend = "scikit_build_core.build"
 name = "pyhwm2014"
 description = "HWM14 neutral winds model"
 readme = "README.rst"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dynamic = ["version"]
 license = {text = "MIT"}
 authors = [
@@ -20,6 +20,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Atmospheric Science",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
@@ -30,10 +31,10 @@ dependencies = [
 [project.optional-dependencies]
 plot = ["matplotlib>=3.8", "seaborn>=0.12"]
 dev = [
-    "pytest>=7.4", 
-    "pytest-cov>=4.1", 
-    "mypy>=1.7", 
-    "ruff>=0.1", 
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "mypy>=1.7",
+    "ruff>=0.1",
     "black>=23.12",
     "pre-commit>=3.0",
     "pip-audit>=2.0",
@@ -68,7 +69,7 @@ markers = [
 ]
 
 [tool.mypy]
-python_version = "3.13"
+python_version = "3.12"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
@@ -90,16 +91,20 @@ module = [
 ignore_missing_imports = true
 
 [tool.ruff]
-target-version = "py313"
+target-version = "py312"
 line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "C4"]
 ignore = ["E501"]  # Line too long (black handles this)
 
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = ["F841", "B006", "B007"]
+"tests/test_core.py" = ["UP038"]
+
 [tool.black]
 line-length = 100
-target-version = ["py313"]
+target-version = ["py312"]
 include = '\.pyi?$'
 
 [tool.coverage.run]
@@ -117,4 +122,3 @@ exclude_lines = [
     "if TYPE_CHECKING:",
 ]
 precision = 2
-

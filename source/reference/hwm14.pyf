@@ -1,7 +1,7 @@
 !    -*- f90 -*-
 ! Note: the context of this file is case sensitive.
 
-python module hwm14 ! in 
+python module hwm14 ! in
     interface  ! in :hwm14
         module hwm ! in :hwm14:hwm14.f90
             integer(kind=4), optional :: nmaxgeo=0
@@ -254,7 +254,7 @@ python module hwm14 ! in
             character*128 :: datafile
             integer :: unitid
         end subroutine findandopen
-    end interface 
+    end interface
 end python module hwm14
 
 ! This file was auto-generated with f2py (version:2).
