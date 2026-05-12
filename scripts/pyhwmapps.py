@@ -119,7 +119,7 @@ class HWM14_2DProf(HWM142D):
                     Z = self.Vwind
                     vmin, vmax = -100, 100
                     title = ""
-                    cblabel = "Meridonal (V), m/s "
+                    cblabel = "Meridional (V), m/s "
 
                 Z_masked = masked_where(isnan(Z), Z)
                 ipc = pn.pcolor(
