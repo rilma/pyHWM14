@@ -19,6 +19,9 @@ on:
           - testpypi
           - pypi
 
+permissions:
+  contents: read
+
 jobs:
   resolve-release:
     name: Resolve release target
