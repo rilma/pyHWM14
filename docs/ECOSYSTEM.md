@@ -39,8 +39,8 @@
          └──────┬──────────┘
                 │
          ┌──────▼──────────────────────┐
-         │ YES: Auto-publish to PyPI   │
-         │ (on git tag v*.*.*)         │
+         │ YES: Run release workflow   │
+         │ (on git tag v*)             │
          └──────┬───────────────────────┘
                 │
          ┌──────▼──────────────┐
@@ -78,12 +78,11 @@
    └─ All checks pass again ✅
 
 4. Release (when ready)
-   └─ Update version in pyproject.toml
    └─ Update CHANGELOG.md
-   └─ Commit: chore: bump version to 1.2.0
+   └─ Commit: chore: prepare release v1.2.0
    └─ Push to main
-   └─ Tag: git tag v1.2.0 && git push origin v1.2.0
-   └─ GitHub Actions builds and publishes to PyPI 🚀
+   └─ Tag: git tag -a v1.2.0 -m "Release v1.2.0" && git push origin v1.2.0
+   └─ Release workflow builds, validates, and publishes to PyPI 🚀
 ```
 
 ---
@@ -213,7 +212,8 @@ Total: ~1 hour/month (with automation handling most work)
 
 | File | Purpose |
 |------|---------|
-| `.github/workflows/ci.yaml` | Automated testing & deployment |
+| `.github/workflows/ci.yaml` | Automated lint/type/test/security |
+| `.github/workflows/release-pypi.yaml` | Trusted publishing (PyPI/TestPyPI) |
 | `.pre-commit-config.yaml` | Local code quality checks |
 | `pyproject.toml` | Project metadata & dependencies |
 | `.github/pull_request_template.md` | PR checklist |
@@ -232,19 +232,18 @@ make check
 
 **Before releasing:**
 ```bash
-# Update version & changelog
-sed -i 's/version = .*/version = "1.2.0"/' pyproject.toml
-# Edit CHANGELOG.md: move [Unreleased] to [1.2.0]
+# Update changelog
+# Edit CHANGELOG.md: move [Unreleased] items to [1.2.0]
 
 # Final checks
 make test313 && make check
 
 # Commit & tag
-git add pyproject.toml CHANGELOG.md
-git commit -m "chore: bump version to 1.2.0"
+git add CHANGELOG.md
+git commit -m "chore: prepare release v1.2.0"
 git push origin main
-git tag v1.2.0 && git push origin v1.2.0
-# GitHub Actions handles the rest!
+git tag -a v1.2.0 -m "Release v1.2.0" && git push origin v1.2.0
+# Release workflow handles build/publish verification
 ```
 
 **When reviewing a PR:**
