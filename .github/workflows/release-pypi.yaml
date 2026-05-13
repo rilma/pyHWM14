@@ -90,6 +90,9 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v4
+
       - name: Install Linux build prerequisites
         run: |
           sudo apt-get update
@@ -97,8 +100,7 @@ jobs:
 
       - name: Install build tooling
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install build twine
+          uv pip install --system build twine
 
       - name: Build source distribution
         run: python -m build --sdist
@@ -114,8 +116,8 @@ jobs:
           EXPECTED_VERSION: ${{ needs.resolve-release.outputs.version }}
         run: |
           python -m venv /tmp/release-smoke
-          /tmp/release-smoke/bin/python -m pip install --upgrade pip
-          /tmp/release-smoke/bin/python -m pip install dist/*.whl
+          uv pip install --python /tmp/release-smoke/bin/python --upgrade pip
+          uv pip install --python /tmp/release-smoke/bin/python dist/*.whl
           /tmp/release-smoke/bin/python - <<'PY'
           import os
           import pyhwm2014
@@ -173,6 +175,9 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v4
+
       - name: Verify package can be installed and imported
         env:
           TARGET_REPOSITORY: ${{ needs.resolve-release.outputs.target_repository }}
@@ -181,13 +186,13 @@ jobs:
           set -euo pipefail
 
           python -m venv /tmp/post-publish-check
-          /tmp/post-publish-check/bin/python -m pip install --upgrade pip
+          uv pip install --python /tmp/post-publish-check/bin/python --upgrade pip
 
           for i in 1 2 3 4 5; do
             if [ "${TARGET_REPOSITORY}" = "pypi" ]; then
-              /tmp/post-publish-check/bin/python -m pip install --upgrade "pyhwm2014==${EXPECTED_VERSION}" && break
+              uv pip install --python /tmp/post-publish-check/bin/python --upgrade "pyhwm2014==${EXPECTED_VERSION}" && break
             else
-              /tmp/post-publish-check/bin/python -m pip install --upgrade \
+              uv pip install --python /tmp/post-publish-check/bin/python --upgrade \
                 --index-url https://test.pypi.org/simple/ \
                 --extra-index-url https://pypi.org/simple/ \
                 "pyhwm2014==${EXPECTED_VERSION}" && break
