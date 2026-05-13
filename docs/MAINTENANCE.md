@@ -69,6 +69,17 @@ This guide documents the maintenance and release process for pyHWM14, intended f
    python -c "import pyhwm2014; print(pyhwm2014.__version__)"
    ```
 
+### Release Authority & Permissions
+
+- **Canonical trigger:** git tag `v*` (for example `v1.2.0`, `v1.2.0rc1`)
+- **Allowed source:** tag commit must be reachable from `main` (enforced by workflow)
+- **Authentication:** PyPI Trusted Publishing (OIDC), no long-lived API token required
+- **Workflow permissions:** `contents: read`, `id-token: write` only on publish job
+- **Recommended controls:**
+  - Protect `main` branch
+  - Restrict who can create/push release tags
+  - Use GitHub Environments (`pypi`, `testpypi`) with maintainer approvals if needed
+
 ## Dependency Management
 
 ### Monthly: Review Dependabot PRs
