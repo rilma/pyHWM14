@@ -16,12 +16,7 @@ This guide documents the maintenance and release process for pyHWM14, intended f
    make check
    ```
 
-3. **Update version in `pyproject.toml`:**
-   ```toml
-   version = "1.2.0"  # Update version number
-   ```
-
-4. **Create/update CHANGELOG.md:**
+3. **Create/update CHANGELOG.md:**
    - Move items from "Unreleased" to current version
    - Follow [keepachangelog.com](https://keepachangelog.com) format
    - Include: Added, Fixed, Changed, Deprecated, Removed sections
@@ -40,25 +35,33 @@ This guide documents the maintenance and release process for pyHWM14, intended f
      - Improved performance by 15% through vectorization
      ```
 
-5. **Commit changes:**
+4. **Commit changes:**
    ```bash
-   git add pyproject.toml CHANGELOG.md
-   git commit -m "chore: bump version to 1.2.0"
+   git add CHANGELOG.md
+   git commit -m "chore: prepare release v1.2.0"
    git push origin main
+   ```
+
+5. **Create annotated/signed release tag from the target commit on `main`:**
+   ```bash
+   git tag -a v1.2.0 -m "Release v1.2.0"
+   # or signed:
+   # git tag -s v1.2.0 -m "Release v1.2.0"
    ```
 
 ### Creating a Release
 
-1. **Create a git tag matching version:**
+1. **Push the release tag:**
    ```bash
-   git tag v1.2.0
    git push origin v1.2.0
    ```
 
 2. **GitHub Actions will automatically:**
-   - Run full CI pipeline (lint, test, security checks)
-   - Build and publish package to PyPI
-   - Create GitHub Release with CHANGELOG content
+   - Run dedicated release workflow (`.github/workflows/release-pypi.yaml`)
+   - Build source and wheel distributions
+   - Validate package metadata and wheel installability
+   - Publish to PyPI via Trusted Publishing (OIDC)
+   - Run post-publish install/import verification
 
 3. **Verify PyPI deployment:**
    ```bash
@@ -179,17 +182,36 @@ Dependabot automatically checks for updates:
 
 ### PyPI Publishing (Automatic)
 
-When you push a tag `v*.*.*`, GitHub Actions:
-1. Builds the wheel and source distribution
-2. Publishes to PyPI via GitHub Actions
-3. Creates GitHub Release with CHANGELOG
+When you push a tag `v*`, GitHub Actions release workflow:
+1. Resolves release version from the git tag (`vX.Y.Z` → `X.Y.Z`) using dynamic versioning
+2. Verifies the tag commit is reachable from `main`
+3. Builds wheel + source distribution
+4. Runs artifact checks (`twine check`) and wheel smoke test
+5. Publishes to PyPI with Trusted Publishing (OIDC)
+6. Verifies install/import from package index
 
 **Manual PyPI upload** (if needed):
 ```bash
+# Emergency fallback only (not the default path)
 python -m pip install build twine
 python -m build
 python -m twine upload dist/*
 ```
+
+### TestPyPI Dry Run (Recommended Before Major Releases)
+
+Use manual workflow dispatch:
+1. Open **Actions → Publish Python Package**
+2. Run workflow with:
+   - `release_tag`: e.g. `v1.2.0rc1`
+   - `target_repository`: `testpypi`
+3. Verify install:
+   ```bash
+   python -m pip install \
+     --index-url https://test.pypi.org/simple/ \
+     --extra-index-url https://pypi.org/simple/ \
+     pyhwm2014==1.2.0rc1
+   ```
 
 ### Testing the Release
 
@@ -253,7 +275,7 @@ make test313 && make check
 make fix
 
 # Create release
-git tag v1.2.0 && git push origin v1.2.0
+git tag -a v1.2.0 -m "Release v1.2.0" && git push origin v1.2.0
 
 # Check for stale Python versions
 python --version  # Ensure you're running supported version

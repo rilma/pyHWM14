@@ -29,35 +29,38 @@ pytest tests/ --cov=pyhwm2014 && mypy pyhwm2014 && ruff check pyhwm2014 tests
 
 ### Pre-Release (1-2 hours)
 ```bash
-# 1. Update version
-# Edit pyproject.toml: version = "1.2.0"
-
-# 2. Run full CI locally
+# 1. Run full CI locally
 pytest tests/ --cov=pyhwm2014 --cov-report=term-missing
 mypy pyhwm2014
 ruff check pyhwm2014 tests
 
-# 3. Update CHANGELOG.md
+# 2. Update CHANGELOG.md
 # Move [Unreleased] items to new version with date
 
-# 4. Commit and push
-git add pyproject.toml CHANGELOG.md
-git commit -m "chore: bump version to 1.2.0"
+# 3. Commit and push
+git add CHANGELOG.md
+git commit -m "chore: prepare release v1.2.0"
 git push origin main
 ```
 
 ### Release (5 minutes)
 ```bash
-# 1. Create tag
-git tag v1.2.0
+# 1. Create annotated/signed tag
+git tag -a v1.2.0 -m "Release v1.2.0"
+# or: git tag -s v1.2.0 -m "Release v1.2.0"
 
-# 2. Push tag (triggers automatic PyPI deployment)
+# 2. Push tag (triggers trusted publishing workflow)
 git push origin v1.2.0
 
 # 3. Verify PyPI (wait ~2 min for build)
 pip install --upgrade pyhwm2014
 python -c "import pyhwm2014; print(pyhwm2014.__version__)"
 ```
+
+### Optional TestPyPI Dry Run
+Use **Actions → Publish Python Package** with:
+- `release_tag`: `vX.Y.Z` or prerelease tag (`vX.Y.Zrc1`)
+- `target_repository`: `testpypi`
 
 ## Monthly Maintenance
 
@@ -110,7 +113,8 @@ Add comment requesting update, close after 1-2 weeks if no response.
 | [MAINTENANCE.md](MAINTENANCE.md) | Full maintenance & release guide (this role) |
 | [ROADMAP.md](ROADMAP.md) | Project direction & priorities |
 | [../CHANGELOG.md](../CHANGELOG.md) | User-facing release notes |
-| `.github/workflows/ci.yaml` | Automated tests and deployment |
+| `.github/workflows/ci.yaml` | Automated lint/type/test/security checks |
+| `.github/workflows/release-pypi.yaml` | Trusted publishing release workflow |
 | `.pre-commit-config.yaml` | Local code quality checks |
 | `pyproject.toml` | Project metadata and dependencies |
 | `.github/ISSUE_TEMPLATE/` | Issue templates for reporters |
@@ -132,7 +136,7 @@ Add comment requesting update, close after 1-2 weeks if no response.
 ## Automation Checklist
 
 ✅ **Already Configured:**
-- GitHub Actions CI/CD (lint, test, security, deploy)
+- GitHub Actions CI + release workflows (lint, test, security, publish)
 - Pre-commit hooks (local code quality)
 - Dependabot (dependency updates)
 - Type checking (mypy strict mode)

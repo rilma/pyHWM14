@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pre-commit hook configuration for automated code quality checks
 - Coverage reporting in CI pipeline via Codecov
 - Security vulnerability scanning with pip-audit
+- Dedicated release workflow for trusted publishing to PyPI/TestPyPI from version tags
 
 ### Fixed
 - (Pending)
@@ -22,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated GitHub Actions versions (v3 → v4, v4 → v5)
 - Improved CI workflow organization (separate lint, test, security jobs)
+- Release documentation now follows dynamic `setuptools_scm` versioning (tag-driven, no manual pyproject version edits)
 
 ### Deprecated
 - (None at this time)
