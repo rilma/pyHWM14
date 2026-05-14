@@ -1,7 +1,5 @@
-.. image:: https://github.com/rilma/pyHWM14/actions/workflows/ci.yaml/badge.svg
-    :target: https://github.com/rilma/pyHWM14/actions/workflows/ci.yaml
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.240890.svg
-   :target: http://doi.org/10.5281/zenodo.240890
+`CI Status <https://github.com/rilma/pyHWM14/actions/workflows/ci.yaml>`_ |
+`DOI: 10.5281/zenodo.240890 <http://doi.org/10.5281/zenodo.240890>`_
 
 =======
 pyHWM14
@@ -271,8 +269,7 @@ Height Profile
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 
-.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_1.png
-    :scale: 100 %
+`View figure_1.png <https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_1.png>`_
 
 You can also list the values on screen as follows
 
@@ -311,8 +308,7 @@ Geog. Latitude Profile
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 
-.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_2.png
-    :scale: 100 %
+`View figure_2.png <https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_2.png>`_
 
 ------------------
 GMT Profile
@@ -326,8 +322,7 @@ GMT Profile
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 
-.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_3.png
-    :scale: 100 %
+`View figure_3.png <https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_3.png>`_
 
 -----------------------
 Geog. Longitude Profile
@@ -341,8 +336,7 @@ Geog. Longitude Profile
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 
-.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_4.png
-    :scale: 100 %
+`View figure_4.png <https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_4.png>`_
 
 -----------------------
 Height vs GMT
@@ -355,8 +349,7 @@ Height vs GMT
             option=1, utlim=[0.,23.75], utstp=.25, verbose=False)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-75., -100], zMax=[75., 100.])
 
-.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_11.png
-    :scale: 100 %
+`View figure_11.png <https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_11.png>`_
 
 -------------------------
 Height vs Geog. Latitude
@@ -369,8 +362,7 @@ Height vs Geog. Latitude
             glatlim=[-90., 90.], glatstp=2., option=2, verbose=False, ut=12.)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-250., -100], zMax=[250., 100.])
 
-.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_12.png
-    :scale: 100 %
+`View figure_12.png <https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_12.png>`_
 
 -------------------------
 Height vs Geog. Longitude
@@ -383,8 +375,7 @@ Height vs Geog. Longitude
             glonlim=[-90., 90.], glonstp=2., option=4, ut=12., verbose=False)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-100., -100], zMax=[100., 100.])
 
-.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_14.png
-    :scale: 100 %
+`View figure_14.png <https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_14.png>`_
 
 ----------------------------------
 Geog. Latitude vs Geog. Longitude
@@ -397,8 +388,7 @@ Geog. Latitude vs Geog. Longitude
             glatstp=1., glonlim=[-180., 180.], glonstp=2., option=6, verbose=False)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-150., -150], zMax=[150., 150.])
 
-.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_16.png
-    :scale: 100 %
+`View figure_16.png <https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_16.png>`_
 
 ----------------------------------
 Horizontal Wind Field Map
@@ -412,8 +402,7 @@ Horizontal Wind Field Map
     >>> hwm14Gbj = HWM142DPlot( profObj=hwm14Obj, WF=True, zMin=[-150., -150],
             zMax=[150., 150.] )
 
-.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_16b.png
-    :scale: 100 %
+`View figure_16b.png <https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_16b.png>`_
 
 
 References
