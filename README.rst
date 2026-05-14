@@ -271,7 +271,7 @@ Height Profile
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 
-.. image:: graphics/figure_1.png
+.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_1.png
     :scale: 100 %
 
 You can also list the values on screen as follows
@@ -311,7 +311,7 @@ Geog. Latitude Profile
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 
-.. image:: graphics/figure_2.png
+.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_2.png
     :scale: 100 %
 
 ------------------
@@ -326,7 +326,7 @@ GMT Profile
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 
-.. image:: graphics/figure_3.png
+.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_3.png
     :scale: 100 %
 
 -----------------------
@@ -341,7 +341,7 @@ Geog. Longitude Profile
     >>> hwm14Gbj = HWM14Plot( profObj=hwm14Obj )
 
 
-.. image:: graphics/figure_4.png
+.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_4.png
     :scale: 100 %
 
 -----------------------
@@ -355,7 +355,7 @@ Height vs GMT
             option=1, utlim=[0.,23.75], utstp=.25, verbose=False)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-75., -100], zMax=[75., 100.])
 
-.. image:: graphics/figure_11.png
+.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_11.png
     :scale: 100 %
 
 -------------------------
@@ -369,7 +369,7 @@ Height vs Geog. Latitude
             glatlim=[-90., 90.], glatstp=2., option=2, verbose=False, ut=12.)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-250., -100], zMax=[250., 100.])
 
-.. image:: graphics/figure_12.png
+.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_12.png
     :scale: 100 %
 
 -------------------------
@@ -383,7 +383,7 @@ Height vs Geog. Longitude
             glonlim=[-90., 90.], glonstp=2., option=4, ut=12., verbose=False)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-100., -100], zMax=[100., 100.])
 
-.. image:: graphics/figure_14.png
+.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_14.png
     :scale: 100 %
 
 ----------------------------------
@@ -397,7 +397,7 @@ Geog. Latitude vs Geog. Longitude
             glatstp=1., glonlim=[-180., 180.], glonstp=2., option=6, verbose=False)
     >>> hwm14Gbj = HWM142DPlot(profObj=hwm14Obj, zMin=[-150., -150], zMax=[150., 150.])
 
-.. image:: graphics/figure_16.png
+.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_16.png
     :scale: 100 %
 
 ----------------------------------
@@ -412,7 +412,7 @@ Horizontal Wind Field Map
     >>> hwm14Gbj = HWM142DPlot( profObj=hwm14Obj, WF=True, zMin=[-150., -150],
             zMax=[150., 150.] )
 
-.. image:: graphics/figure_16b.png
+.. image:: https://raw.githubusercontent.com/rilma/pyHWM14/main/graphics/figure_16b.png
     :scale: 100 %
 
 
